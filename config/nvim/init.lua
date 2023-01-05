@@ -172,6 +172,8 @@ vim.o.cmdheight = 2
 -- popup menu height
 vim.o.pumheight = 10
 
+vim.wo.colorcolumn = "80"
+
 -- other options commented --
 -- vim.o.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
 -- vim.o.fileencoding = 'utf-8' -- encoding written to a file
@@ -227,7 +229,7 @@ vim.keymap.set('n', 'x', '"_x', { silent = true, desc = 'deleting a single chara
 
 -- Visual
 vim.keymap.set('v', 'J', ':m >+1<CR>gv=gv', { silent = true, desc = 'moving text down in visual mode' })
-vim.keymap.set('v', 'J', ':m <-2<CR>gv=gv', { silent = true, desc = 'moving text up in visual mode' })
+vim.keymap.set('v', 'K', ':m <-2<CR>gv=gv', { silent = true, desc = 'moving text up in visual mode' })
 
 vim.keymap.set('v', '<', '<gv', { silent = true, desc = 'indent less' })
 vim.keymap.set('v', '>', '>gv', { silent = true, desc = 'indent more' })
