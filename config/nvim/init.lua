@@ -122,7 +122,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- highlights search matches
-vim.o.hlsearch = true
+vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -228,9 +228,8 @@ vim.keymap.set('n', 'J', 'mzJ`z', { silent = true, desc = 'removes and appends n
 vim.keymap.set('n', 'x', '"_x', { silent = true, desc = 'deleting a single character without copying to register' })
 
 -- Visual
-vim.keymap.set('v', 'J', ':m >+1<CR>gv=gv', { silent = true, desc = 'moving text down in visual mode' })
-vim.keymap.set('v', 'K', ':m <-2<CR>gv=gv', { silent = true, desc = 'moving text up in visual mode' })
-
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true, desc = 'move text down in visual mode'})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = 'move text up in visual mode'})
 vim.keymap.set('v', '<', '<gv', { silent = true, desc = 'indent less' })
 vim.keymap.set('v', '>', '>gv', { silent = true, desc = 'indent more' })
 
