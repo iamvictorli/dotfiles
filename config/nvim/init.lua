@@ -121,8 +121,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
+-- highlights search matches
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -192,6 +192,47 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- window navigation
+vim.keymap.set('n', '<C-h>', '<C-w>h', { silent = true, desc = 'go to left window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { silent = true, desc = 'go to lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { silent = true, desc = 'go to upper window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { silent = true, desc = 'go to right window' })
+
+-- window resize
+vim.keymap.set('n', '<leader>h', ':vertical resize -2<CR>', { silent = true, desc = 'decrease window width' })
+vim.keymap.set('n', '<leader>j', ':resize +2<CR>', { silent = true, desc = 'increase window height' })
+vim.keymap.set('n', '<leader>k', ':resize -2<CR>', { silent = true, desc = 'decrease window height' })
+vim.keymap.set('n', '<leader>l', ':vertical resize +2<CR>', { silent = true, desc = 'increase window height' })
+vim.keymap.set('n', '<leader>we', '<C-w>=', { silent = true, desc = 'make [W]indow [E]qual splits' })
+
+-- buffer navigation
+vim.keymap.set('n', '<leader>b', ':bnext<CR>', { silent = true, desc = 'move to next [B]uffer' })
+vim.keymap.set('n', '<leader>B', ':bprevious<CR>', { silent = true, desc = 'move to previous [B]uffer' })
+
+-- yanks
+vim.keymap.set('n', 'Y', 'y$', { silent = true, desc = 'yanks the rest of the line' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { silent = true, desc = '[Y]anks to system clipboard' })
+
+vim.keymap.set('n', 'gV', '`[v`]', { silent = true, desc = 'highlights last inserted text' })
+
+vim.keymap.set('n', '<leader>nh', ':nohl<CR>', { silent = true, desc = 'clear [N]o search [H]ighlight' })
+
+vim.keymap.set('n', 'n', 'nzzzv', { silent = true, desc = 'keeps cursor centered when pressing n' })
+vim.keymap.set('n', 'N', 'Nzzzv', { silent = true, desc = 'keeps cursor centered when pressing N' })
+
+vim.keymap.set('n', 'J', 'mzJ`z', { silent = true, desc = 'removes and appends next line to current cursor line' })
+
+vim.keymap.set('n', 'x', '"_x', { silent = true, desc = 'deleting a single character without copying to register' })
+
+-- Visual
+vim.keymap.set('v', 'J', ':m >+1<CR>gv=gv', { silent = true, desc = 'moving text down in visual mode' })
+vim.keymap.set('v', 'J', ':m <-2<CR>gv=gv', { silent = true, desc = 'moving text up in visual mode' })
+
+vim.keymap.set('v', '<', '<gv', { silent = true, desc = 'indent less' })
+vim.keymap.set('v', '>', '>gv', { silent = true, desc = 'indent more' })
+
+vim.keymap.set('x', '<leader>p', [["_dP]], { silent = true, desc = 'pasting text does not override register' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -455,6 +496,7 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
+-- TODO: set description
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
