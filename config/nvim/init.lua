@@ -212,16 +212,17 @@ vim.keymap.set('n', '<leader>we', '<C-w>=', { silent = true, desc = 'make [W]ind
 vim.keymap.set('n', '<leader>b', ':bnext<CR>', { silent = true, desc = 'move to next [B]uffer' })
 vim.keymap.set('n', '<leader>B', ':bprevious<CR>', { silent = true, desc = 'move to previous [B]uffer' })
 
+-- navigation
+vim.keymap.set('n', 'n', 'nzzzv', { silent = true, desc = 'keeps cursor centered when pressing n' })
+vim.keymap.set('n', 'N', 'Nzzzv', { silent = true, desc = 'keeps cursor centered when pressing N' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true, desc = 'stays on middle screen while <C-d>'})
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true, desc = 'stays on middle screen while <C-u>'})
+
 -- yanks
 vim.keymap.set('n', 'Y', 'y$', { silent = true, desc = 'yanks the rest of the line' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { silent = true, desc = '[Y]anks to system clipboard' })
 
 vim.keymap.set('n', 'gV', '`[v`]', { silent = true, desc = 'highlights last inserted text' })
-
-vim.keymap.set('n', '<leader>nh', ':nohl<CR>', { silent = true, desc = 'clear [N]o search [H]ighlight' })
-
-vim.keymap.set('n', 'n', 'nzzzv', { silent = true, desc = 'keeps cursor centered when pressing n' })
-vim.keymap.set('n', 'N', 'Nzzzv', { silent = true, desc = 'keeps cursor centered when pressing N' })
 
 vim.keymap.set('n', 'J', 'mzJ`z', { silent = true, desc = 'removes and appends next line to current cursor line' })
 
@@ -233,7 +234,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = 'move text 
 vim.keymap.set('v', '<', '<gv', { silent = true, desc = 'indent less' })
 vim.keymap.set('v', '>', '>gv', { silent = true, desc = 'indent more' })
 
-vim.keymap.set('x', '<leader>p', [["_dP]], { silent = true, desc = 'pasting text does not override register' })
+vim.keymap.set('x', '<leader>p', [["_dP]], { silent = true, desc = '[P]asting text does not override register' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
