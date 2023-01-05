@@ -127,6 +127,15 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
+-- Show relative line numbers
+vim.o.relativenumber = true
+
+-- highlight current line
+vim.o.cursorline = true
+
+-- number of lines above or below cursor
+vim.o.scrolloff = 8
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -150,6 +159,24 @@ vim.cmd [[colorscheme tokyonight]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- splitting a window will put the new window right of the current one
+vim.o.splitright = true
+
+-- splitting a window will put the new window below the current one 
+vim.o.splitbelow = true
+
+-- more space in the neovim command for displaying messages
+vim.o.cmdheight = 2
+
+-- popup menu height
+vim.o.pumheight = 10
+
+-- other options commented --
+-- vim.o.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
+-- vim.o.fileencoding = 'utf-8' -- encoding written to a file
+-- vim.o.writebackup = false -- if a file is being editted by another program (or was written to file when editting with another program), it is not allowed to be editted
+-- vim.o.lazyredraw = true -- redraw only when we need to
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -558,9 +585,9 @@ cmp.setup {
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }), -- scroll empty
+    ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
