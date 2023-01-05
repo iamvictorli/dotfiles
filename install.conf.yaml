@@ -1,0 +1,20 @@
+- defaults:
+    link:
+        create: true
+        relink: true
+
+- link:
+    # home
+    ~/.zshrc: home/zshrc
+    # ssh
+    ~/.ssh/config:
+        path: ssh/config
+        create: true
+    # nvim
+    ~/.config/nvim:
+        glob: true
+        path: config/nvim/*
+        create: true
+    # other
+    ~/.config/alacritty/alacritty.yml: config/alacritty/alacritty.yml
+    ~/.config/starship.toml: config/starship.toml
