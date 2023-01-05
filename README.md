@@ -11,7 +11,7 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2)
 
-- [tmux](https://github.com/tmux/tmux)
+- [tmux](https://github.com/tmux/tmux) with [tmux.conf](https://github.com/gpakosz/.tmux)
 
 - [lazygit](https://github.com/jesseduffield/lazygit), simple terminal UI for git commands, requires git to be installed first
 
