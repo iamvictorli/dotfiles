@@ -435,12 +435,12 @@ vim.keymap.set('n', '<leader>sgf', require('telescope.builtin').git_files, { des
 vim.keymap.set('n', '<leader>sgc', require('telescope.builtin').git_commits, { desc = '[S]earch [G]it [C]commits' }) -- <CR> to checkout commit
 vim.keymap.set('n', '<leader>sgs', require('telescope.builtin').git_status, { desc = '[S]earch [G]it [S]tatus' })
 vim.keymap.set('n', '<leader>sgS', require('telescope.builtin').git_stash, { desc = '[S]earch [G]it [S]tash' }) -- <CR> to apply stash
-vim.keymap.set('n', '<leader>sco', require('telescope.builtin').commands, { desc = '[S]earch [C][O]mmands' }) -- <CR> runs command
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' }) -- <CR> runs command
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sp', function ()
+vim.keymap.set('n', '<leader>pp', function ()
   require('telescope').extensions.file_browser.file_browser({
     respect_gitignore = false,
     hidden = true,
@@ -449,8 +449,8 @@ vim.keymap.set('n', '<leader>sp', function ()
     initial_mode = "normal",
     layout_config = { height = 40 },
   })
-end, { desc = '[S]earch [P]roject' })
-vim.keymap.set('n', '<leader>scd', function ()
+end, { desc = '[P]roject [P]ath' })
+vim.keymap.set('n', '<leader>rp', function ()
   require('telescope').extensions.file_browser.file_browser({
     path = "%:p:h",
     cwd = vim.fn.expand('%:p:h'),
@@ -461,7 +461,7 @@ vim.keymap.set('n', '<leader>scd', function ()
     initial_mode = "normal",
     layout_config = { height = 40 },
   })
-end, { desc = '[S]earch [C]urrent working [D]irectory' })
+end, { desc = '[R]elative [P]ath' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
