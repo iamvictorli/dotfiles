@@ -62,6 +62,9 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  -- File browser for telescope
+  use { "nvim-telescope/telescope-file-browser.nvim" }
+
   -- Vim surround plugin
   use 'tpope/vim-surround'
 
@@ -213,7 +216,7 @@ vim.keymap.set('n', '<leader>h', ':vertical resize -2<CR>', { silent = true, des
 vim.keymap.set('n', '<leader>j', ':resize +2<CR>', { silent = true, desc = 'increase window height' })
 vim.keymap.set('n', '<leader>k', ':resize -2<CR>', { silent = true, desc = 'decrease window height' })
 vim.keymap.set('n', '<leader>l', ':vertical resize +2<CR>', { silent = true, desc = 'increase window height' })
-vim.keymap.set('n', '<leader>se', '<C-w>=', { silent = true, desc = 'make [W]indow [E]qual splits' })
+vim.keymap.set('n', '<leader>we', '<C-w>=', { silent = true, desc = 'make [W]indow [E]qual splits' })
 
 -- buffer navigation
 vim.keymap.set('n', '<leader>b', ':bnext<CR>', { silent = true, desc = 'move to next [B]uffer' })
@@ -399,12 +402,19 @@ require('telescope').setup {
       },
     },
     pickers = {},
-    extensions = {},
+    extensions = {
+      filebrowser = {
+        theme = 'dropdown',
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
+      }
+    },
   },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'file_browser')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').oldfiles, { desc = '[S]earch [R]ecently old files' })
@@ -425,11 +435,33 @@ vim.keymap.set('n', '<leader>sgf', require('telescope.builtin').git_files, { des
 vim.keymap.set('n', '<leader>sgc', require('telescope.builtin').git_commits, { desc = '[S]earch [G]it [C]commits' }) -- <CR> to checkout commit
 vim.keymap.set('n', '<leader>sgs', require('telescope.builtin').git_status, { desc = '[S]earch [G]it [S]tatus' })
 vim.keymap.set('n', '<leader>sgS', require('telescope.builtin').git_stash, { desc = '[S]earch [G]it [S]tash' }) -- <CR> to apply stash
-vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' }) -- <CR> runs command
+vim.keymap.set('n', '<leader>sco', require('telescope.builtin').commands, { desc = '[S]earch [C][O]mmands' }) -- <CR> runs command
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sp', function ()
+  require('telescope').extensions.file_browser.file_browser({
+    respect_gitignore = false,
+    hidden = true,
+    grouped = true,
+    previewer = false,
+    initial_mode = "normal",
+    layout_config = { height = 40 },
+  })
+end, { desc = '[S]earch [P]roject' })
+vim.keymap.set('n', '<leader>scd', function ()
+  require('telescope').extensions.file_browser.file_browser({
+    path = "%:p:h",
+    cwd = vim.fn.expand('%:p:h'),
+    respect_gitignore = false,
+    hidden = true,
+    grouped = true,
+    previewer = false,
+    initial_mode = "normal",
+    layout_config = { height = 40 },
+  })
+end, { desc = '[S]earch [C]urrent working [D]irectory' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -562,9 +594,6 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 --  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
   astro = {},
   bashls = {},
   cssls = {},
@@ -585,7 +614,6 @@ local servers = {
   },
   svelte = {},
   tailwindcss = {},
-  terraformlsp = {},
   tsserver = {},
   vuels = {},
   yamlls = {},
