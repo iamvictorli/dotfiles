@@ -86,6 +86,9 @@ require("packer").startup(function(use)
 	-- highlights colors
 	use("norcalli/nvim-colorizer.lua")
 
+	-- github copilot
+	use("github/copilot.vim")
+
 	-- -- interesting plugins to checkout
 	-- https://github.com/mfussenegger/nvim-dap
 	-- https://github.com/jose-elias-alvarez/typescript.nvim
@@ -714,27 +717,9 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, {
-			"i",
-			"s",
-		}),
+    -- disable completion with tab for github copilot
+    ['<Tab>'] = nil,
+    ['<S-Tab>'] = nil,
 	},
 	sources = {
 		{ name = "nvim_lsp" },
