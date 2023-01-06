@@ -31,6 +31,8 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 
+- [ripgrep](https://github.com/BurntSushi/ripgrep), fast regex text searching in directories
+
 ## Mac Settings
 
 - System preferences > Accessibility > Display > Reduce Motion. Toggle on
