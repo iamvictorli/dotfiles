@@ -87,12 +87,14 @@ require("packer").startup(function(use)
 	use("norcalli/nvim-colorizer.lua")
 
 	-- github copilot
+  -- :Copilot setup
 	use("github/copilot.vim")
+  
+	use("numToStr/Navigator.nvim")
 
 	-- -- interesting plugins to checkout
 	-- https://github.com/mfussenegger/nvim-dap
 	-- https://github.com/jose-elias-alvarez/typescript.nvim
-	-- https://github.com/numToStr/Navigator.nvim
 	-- https://github.com/kevinhwang91/nvim-ufo
 	-- https://github.com/akinsho/bufferline.nvim
 	-- https://github.com/nvim-tree/nvim-tree.lua
@@ -218,10 +220,11 @@ vim.keymap.set("n", "sv", ":vsp<CR>", { silent = true, desc = "[S]plit [V]ertica
 vim.keymap.set("n", "sc", "<C-w>c", { silent = true, desc = "[S]plit [C]lose window" })
 
 -- window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true, desc = "go to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true, desc = "go to lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true, desc = "go to upper window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true, desc = "go to right window" })
+require("Navigator").setup()
+vim.keymap.set("n", "<C-h>", "<CMD>NavigatorLeft<CR>", { silent = true, desc = "go to left window or tmux pane" })
+vim.keymap.set("n", "<C-j>", "<CMD>NavigatorDown<CR>", { silent = true, desc = "go to lower window or tmux pane" })
+vim.keymap.set("n", "<C-k>", "<CMD>NavigatorUp<CR>", { silent = true, desc = "go to upper window or tmux pane" })
+vim.keymap.set("n", "<C-l>", "<CMD>NavigatorRight<CR>", { silent = true, desc = "go to right window or tmux pane" })
 
 -- window resize
 vim.keymap.set("n", "<leader>h", ":vertical resize -2<CR>", { silent = true, desc = "decrease window width" })
