@@ -195,6 +195,10 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.keymap.set('n', 'ss', ':sp<CR>', { silent = true, desc = "[S]plit[S] window" })
+vim.keymap.set('n', 'sv', ':vsp<CR>', { silent = true, desc = "[S]plit [V]ertically window" })
+vim.keymap.set('n', 'sc', '<C-w>c', { silent = true, desc = "[S]plit [C]lose window" })
+
 -- window navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h', { silent = true, desc = 'go to left window' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { silent = true, desc = 'go to lower window' })
@@ -206,7 +210,7 @@ vim.keymap.set('n', '<leader>h', ':vertical resize -2<CR>', { silent = true, des
 vim.keymap.set('n', '<leader>j', ':resize +2<CR>', { silent = true, desc = 'increase window height' })
 vim.keymap.set('n', '<leader>k', ':resize -2<CR>', { silent = true, desc = 'decrease window height' })
 vim.keymap.set('n', '<leader>l', ':vertical resize +2<CR>', { silent = true, desc = 'increase window height' })
-vim.keymap.set('n', '<leader>we', '<C-w>=', { silent = true, desc = 'make [W]indow [E]qual splits' })
+vim.keymap.set('n', '<leader>se', '<C-w>=', { silent = true, desc = 'make [W]indow [E]qual splits' })
 
 -- buffer navigation
 vim.keymap.set('n', '<leader>b', ':bnext<CR>', { silent = true, desc = 'move to next [B]uffer' })
@@ -557,7 +561,6 @@ local servers = {
   -- pyright = {},
   astro = {},
   bashls = {},
-  cmake = {},
   cssls = {},
   cssmodules_ls = {},
   dockerls = {},
@@ -567,7 +570,6 @@ local servers = {
   html = {},
   jsonls = {},
   prismals = {},
-  rust_analyzer = {},
   sqlls = {},
   sumneko_lua = {
     Lua = {
@@ -577,7 +579,7 @@ local servers = {
   },
   svelte = {},
   tailwindcss = {},
-  terraformls = {},
+  terraformlsp = {},
   tsserver = {},
   vuels = {},
   yamlls = {},
