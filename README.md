@@ -10,6 +10,7 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 - Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2), [instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim#pre-built-archives-1)
+
 ```
 curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz
 tar xzf nvim-macos.tar.gz
@@ -32,7 +33,7 @@ tar xzf nvim-macos.tar.gz
 
 - [zoxide](https://github.com/ajeetdsouza/zoxide), smarter `cd`
 
-- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli`. requires node
+- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
 
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 
@@ -73,4 +74,3 @@ tar xzf nvim-macos.tar.gz
 ## Fonts
 
 - [Hack Nerd Font](https://www.nerdfonts.com/font-downloads)
-
