@@ -29,6 +29,8 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli`. requires node
 
+- [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
+
 ## Mac Settings
 
 - System preferences > Accessibility > Display > Reduce Motion. Toggle on
