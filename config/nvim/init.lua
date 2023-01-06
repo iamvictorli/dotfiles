@@ -72,6 +72,9 @@ require('packer').startup(function(use)
   -- formatting & linting
   use 'jose-elias-alvarez/null-ls.nvim'
 
+  -- highlights colors
+  use 'norcalli/nvim-colorizer.lua'
+
   -- -- interesting plugins to checkout
   -- https://github.com/akinsho/bufferline.nvim
   -- https://github.com/nvim-tree/nvim-tree.lua
@@ -252,6 +255,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ PLUGINS ]]
+
+-- colorizer
+require 'colorizer'.setup()
 
 -- autopairs
 require('nvim-autopairs').setup({
