@@ -87,6 +87,10 @@ require("packer").startup(function(use)
 	use("norcalli/nvim-colorizer.lua")
 
 	-- -- interesting plugins to checkout
+	-- https://github.com/mfussenegger/nvim-dap
+	-- https://github.com/jose-elias-alvarez/typescript.nvim
+	-- https://github.com/numToStr/Navigator.nvim
+	-- https://github.com/kevinhwang91/nvim-ufo
 	-- https://github.com/akinsho/bufferline.nvim
 	-- https://github.com/nvim-tree/nvim-tree.lua
 	-- https://github.com/nvim-tree/nvim-web-devicons
@@ -96,9 +100,6 @@ require("packer").startup(function(use)
 	-- https://github.com/goolord/alpha-nvim
 	-- https://github.com/folke/which-key.nvim
 	-- https://github.com/moll/vim-bbye
-	-- https://github.com/mfussenegger/nvim-dap
-	-- https://github.com/jose-elias-alvarez/typescript.nvim
-	-- https://github.com/numToStr/Navigator.nvim
 
 	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
 	local has_plugins, plugins = pcall(require, "custom.plugins")
