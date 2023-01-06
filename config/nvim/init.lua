@@ -1,3 +1,4 @@
+-- From https://github.com/nvim-lua/kickstart.nvim. current commit is 4916072854d01d0503821b7f3061daeb381f0441
 -- Install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local is_bootstrap = false
@@ -775,8 +776,8 @@ null_ls.setup({
 	end,
 })
 
-vim.api.nvim_create_user_command('DisableLspFormatting', function ()
-  vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
+vim.api.nvim_create_user_command("DisableLspFormatting", function()
+	vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
 end, { nargs = 0 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

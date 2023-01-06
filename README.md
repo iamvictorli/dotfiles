@@ -9,7 +9,12 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
-- Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2)
+- Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2), [instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim#pre-built-archives-1)
+```
+curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz
+tar xzf nvim-macos.tar.gz
+./nvim-macos/bin/nvim
+```
 
 - [tmux](https://github.com/tmux/tmux) with [tmux.conf](https://github.com/gpakosz/.tmux)
 
