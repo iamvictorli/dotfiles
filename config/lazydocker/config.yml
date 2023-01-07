@@ -1,0 +1,17 @@
+theme:
+  lightTheme: false
+  activeBorderColor:
+    - "#a6d189" # Green
+    - bold
+  inactiveBorderColor:
+    - "#c6d0f5" # Text
+  optionsTextColor:
+    - "#8caaee" # Blue
+stats:
+  graphs:
+    - caption: CPU (%)
+      statPath: DerivedStats.CPUPercentage
+      color: "#a6d189" # Green
+    - caption: Memory (%)
+      statPath: DerivedStats.MemoryPercentage
+      color: "#8caaee" # Blue
