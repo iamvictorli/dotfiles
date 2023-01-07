@@ -87,9 +87,9 @@ require("packer").startup(function(use)
 	use("norcalli/nvim-colorizer.lua")
 
 	-- github copilot
-  -- :Copilot setup
+	-- :Copilot setup
 	use("github/copilot.vim")
-  
+
 	use("numToStr/Navigator.nvim")
 
 	-- -- interesting plugins to checkout
@@ -192,7 +192,12 @@ vim.o.cmdheight = 2
 -- popup menu height
 vim.o.pumheight = 10
 
+-- highlighted column on line 80
 vim.wo.colorcolumn = "80"
+
+-- Undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m"]])
+vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- other options commented --
 -- vim.o.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
@@ -274,26 +279,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- [[ PLUGINS ]]
 
-require('catppuccin').setup({
-  flavour = "frappe",
-  background = {
-    dark = "frappe",
-  },
-  dim_inactive = {
-    enabled = true,
-    shade = "dark",
-    percentage = 0.15,
-  },
-  cmp = true,
-  fidget = true,
-  gitsigns = true,
-  mason = true,
-  telescope = true,
-  treesitter = true,
-  indent_blankline = {
-    enabled = true,
-    colored_indent_levels = false,
-  }
+require("catppuccin").setup({
+	flavour = "frappe",
+	background = {
+		dark = "frappe",
+	},
+	dim_inactive = {
+		enabled = true,
+		shade = "dark",
+		percentage = 0.15,
+	},
+	cmp = true,
+	fidget = true,
+	gitsigns = true,
+	mason = true,
+	telescope = true,
+	treesitter = true,
+	indent_blankline = {
+		enabled = true,
+		colored_indent_levels = false,
+	},
 })
 
 -- colorizer
@@ -710,9 +715,9 @@ mason_lspconfig.setup_handlers({
 
 -- Turn on lsp status information
 require("fidget").setup({
-  window = {
-    blend = 0,
-  }
+	window = {
+		blend = 0,
+	},
 })
 
 -- nvim-cmp setup
@@ -746,9 +751,9 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-    -- disable completion with tab for github copilot
-    ['<Tab>'] = nil,
-    ['<S-Tab>'] = nil,
+		-- disable completion with tab for github copilot
+		["<Tab>"] = nil,
+		["<S-Tab>"] = nil,
 	},
 	sources = {
 		{ name = "nvim_lsp" },
