@@ -78,3 +78,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 ## Fonts
 
 - [Hack Nerd Font](https://www.nerdfonts.com/font-downloads)
+
+## Interesting programs I may or may not pickup
+
+- [nnn](https://github.com/jarun/nnn)
+- [vimium c](https://github.com/gdh1995/vimium-c)
