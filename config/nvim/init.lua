@@ -58,7 +58,7 @@ require("packer").startup(function(use)
 	use("tpope/vim-rhubarb")
 	use("lewis6991/gitsigns.nvim")
 
-	use("folke/tokyonight.nvim") -- Tokyonight theme
+	use("catppuccin/nvim") -- Catppuccin theme
 	use("nvim-lualine/lualine.nvim") -- Fancier statusline
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
 	use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
@@ -175,7 +175,7 @@ vim.wo.signcolumn = "yes"
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme catppuccin-frappe]])
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
@@ -274,6 +274,28 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- [[ PLUGINS ]]
 
+require('catppuccin').setup({
+  flavour = "frappe",
+  background = {
+    dark = "frappe",
+  },
+  dim_inactive = {
+    enabled = true,
+    shade = "dark",
+    percentage = 0.15,
+  },
+  cmp = true,
+  fidget = true,
+  gitsigns = true,
+  mason = true,
+  telescope = true,
+  treesitter = true,
+  indent_blankline = {
+    enabled = true,
+    colored_indent_levels = false,
+  }
+})
+
 -- colorizer
 require("colorizer").setup()
 
@@ -299,7 +321,7 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
-		theme = "tokyonight",
+		theme = "catppuccin",
 		component_separators = "|",
 		section_separators = "",
 	},
@@ -524,7 +546,7 @@ require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		disable = { "" }, -- list of languages that will be disabled
-		additional_vim_regex_highlighting = true,
+		additional_vim_regex_highlighting = false,
 	},
 	indent = { enable = true, disable = { "yaml" } },
 	incremental_selection = {
@@ -687,7 +709,11 @@ mason_lspconfig.setup_handlers({
 })
 
 -- Turn on lsp status information
-require("fidget").setup()
+require("fidget").setup({
+  window = {
+    blend = 0,
+  }
+})
 
 -- nvim-cmp setup
 local luasnip = require("luasnip")

@@ -17,7 +17,7 @@ tar xzf nvim-macos.tar.gz
 ./nvim-macos/bin/nvim
 ```
 
-- [tmux](https://github.com/tmux/tmux) with [tmux.conf](https://github.com/gpakosz/.tmux)
+- [tmux](https://github.com/tmux/tmux)
 
 - [lazygit](https://github.com/jesseduffield/lazygit), simple terminal UI for git commands, requires git to be installed first
 

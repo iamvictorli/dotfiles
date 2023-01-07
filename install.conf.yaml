@@ -1,20 +1,29 @@
 - defaults:
     link:
-        create: true
-        relink: true
+      create: true
+      relink: true
 
 - link:
-    # home
+    # zsh
     ~/.zshrc: home/zshrc
+    # tmux
+    ~/.tmux.conf: home/tmux.conf
     # ssh
     ~/.ssh/config:
-        path: ssh/config
-        create: true
+      path: ssh/config
+      create: true
     # nvim
     ~/.config/nvim:
-        glob: true
-        path: config/nvim/*
-        create: true
+      glob: true
+      path: config/nvim/*
+      create: true
     # other
     ~/.config/alacritty/alacritty.yml: config/alacritty/alacritty.yml
     ~/.config/starship.toml: config/starship.toml
+    ~/Library/Application Support/lazygit/config.yml: config/lazygit/config.yml
+
+- shell:
+    - [
+        rm -rf ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm,
+        Installing TPM. <prefix>I to install tpm packages,
+      ]
