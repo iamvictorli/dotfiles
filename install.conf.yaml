@@ -6,6 +6,8 @@
 - link:
     # zsh
     ~/.zshrc: home/zshrc
+    # zsh syntax highlighting colors
+    ~/.zsh-syntax-highlighting.zsh: home/zsh-syntax-highlighting.zsh
     # tmux
     ~/.tmux.conf: home/tmux.conf
     # ssh
