@@ -9,7 +9,7 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
-- Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2), [instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim#pre-built-archives-1)
+- Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2)
 
 ```
 curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz
@@ -17,23 +17,27 @@ tar xzf nvim-macos.tar.gz
 ./nvim-macos/bin/nvim
 ```
 
-- [tmux](https://github.com/tmux/tmux)
+- [nvm](https://github.com/nvm-sh/nvm), node version manager. set default node version
+
+- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
+
+- [starship prompts](https://starship.rs/), minimal customizable prompts
+
+- [homebrew](https://brew.sh/), package manager for macOS
+
+```
+brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep
+```
+
+- [tmux](https://github.com/tmux/tmux), terminal multiplexer
 
 - [lazygit](https://github.com/jesseduffield/lazygit), simple terminal UI for git commands, requires git to be installed first
 
 - [lazydocker](https://github.com/jesseduffield/lazydocker), the lazyier way to manage docker, requires docker to be installed first
 
-- [homebrew](https://brew.sh/), package manager for macOS
-
-- [nvm](https://github.com/nvm-sh/nvm), node version manager. set default node version
-
-- [starship prompts](https://starship.rs/), minimal customizable prompts
-
 - [exa](https://github.com/ogham/exa), replacement for `ls`
 
 - [zoxide](https://github.com/ajeetdsouza/zoxide), smarter `cd`
-
-- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
 
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 

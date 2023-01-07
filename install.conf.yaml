@@ -27,5 +27,6 @@
 - shell:
     - [
         rm -rf ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm,
-        Installing TPM. <prefix>I to install tpm packages,
+        Installing TPM. <prefix>I to install TPM packages,
       ]
+    - [echo, Install nvim packages via :PackerInstall]
