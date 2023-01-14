@@ -83,3 +83,5 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - [nnn](https://github.com/jarun/nnn)
 - [vimium c](https://github.com/gdh1995/vimium-c)
+- [lf](https://github.com/gokcehan/lf)
+- [helix](https://github.com/helix-editor/helix)
