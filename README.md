@@ -75,6 +75,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - Keyboard > Delay until Repeat. Shortest. Slider to largest
 
+- Accessibility > Vision > Display > Pointer > Pointer Size. Largest. Slider to largest
+
 ## Keyboard modifier keys
 
 <details>
