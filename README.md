@@ -71,6 +71,10 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - Dock > Show recent applications in Dock. Toggle off
 
+- Keyboard > Key Repeat. Fastest. Slider to largest
+
+- Keyboard > Delay until Repeat. Shortest. Slider to largest
+
 ## Programs
 
 - [vlc](https://www.videolan.org/vlc/) - Best media player
