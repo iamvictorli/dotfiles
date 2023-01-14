@@ -75,6 +75,18 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - Keyboard > Delay until Repeat. Shortest. Slider to largest
 
+## Keyboard modifier keys
+
+<details>
+<summary>Apple Internal Keyboard</summary>
+<img src="https://github.com/iamvictorli/dotfiles/blob/main/assets/apple_internal_keyboard.png?raw=true" alt="Apple Internal Keyboard screenshot" />
+</details>
+
+<details>
+<summary>Custom Mechanical Keyboard</summary>
+<img src="https://github.com/iamvictorli/dotfiles/blob/main/assets/custom_mech_keyboard.png?raw=true" alt="Custom Mechanical Keyboard screenshot" />
+</details>
+
 ## Programs
 
 - [vlc](https://www.videolan.org/vlc/) - Best media player
@@ -85,7 +97,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 ## Interesting programs I may or may not pickup
 
-- [nnn](https://github.com/jarun/nnn)
-- [vimium c](https://github.com/gdh1995/vimium-c)
-- [lf](https://github.com/gokcehan/lf)
-- [helix](https://github.com/helix-editor/helix)
+- [nnn](https://github.com/jarun/nnn) terminal file manager
+- [vimium c](https://github.com/gdh1995/vimium-c) vim key bindings for the browser
+- [lf](https://github.com/gokcehan/lf) another terminal file manager
+- [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
+- [fnm](https://github.com/Schniz/fnm) fast and simple node version manager
