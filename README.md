@@ -77,6 +77,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - Accessibility > Vision > Display > Pointer > Pointer Size. Largest. Slider to largest
 
+- Desktop & Screen Saver > [Wallpaper](https://raw.githubusercontent.com/catppuccin/wallpapers/main/minimalistic/flamingo_unicat.png)
+
 ## Keyboard modifier keys
 
 <details>
@@ -93,7 +95,7 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 - [vlc](https://www.videolan.org/vlc/) - Best media player
 
-## Fonts
+## Font
 
 - [Hack Nerd Font](https://www.nerdfonts.com/font-downloads)
 
