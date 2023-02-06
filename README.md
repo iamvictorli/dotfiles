@@ -106,3 +106,4 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [lf](https://github.com/gokcehan/lf) another terminal file manager
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [fnm](https://github.com/Schniz/fnm) fast and simple node version manager
+- [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
