@@ -17,7 +17,7 @@ tar xzf nvim-macos.tar.gz
 ./nvim-macos/bin/nvim
 ```
 
-- [nvm](https://github.com/nvm-sh/nvm), node version manager. set default node version
+- [fnm](https://github.com/Schniz/fnm), fast and simple node version manager. faster than [nvm](https://github.com/nvm-sh/nvm)
 
 - [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
 
