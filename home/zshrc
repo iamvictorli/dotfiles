@@ -108,30 +108,6 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# export a default region so you don't need to reference it all the time:
-export AWS_DEFAULT_REGION="us-east-1"
-## create aliases for the aws cli command
-# straight AWS CLI
-alias awscurrent="AWS_PROFILE=current aws"
-alias awsdev="AWS_PROFILE=development aws"
-alias awsprod="AWS_PROFILE=production aws"
-alias awstools="AWS_PROFILE=tools aws"
-alias awsstaging="AWS_PROFILE=staging aws"
-# kubernetes commands
-alias configkdev="AWS_PROFILE=development aws eks update-kubeconfig --name development --alias development"
-alias kdev="AWS_PROFILE=development kubectl --context development"
-alias configkstaging="AWS_PROFILE=staging aws eks update-kubeconfig --name staging --alias staging"
-alias kstaging="AWS_PROFILE=staging kubectl --context staging"
-alias configkprod="AWS_PROFILE=production aws eks update-kubeconfig --name production --alias production"
-alias kprod="AWS_PROFILE=production kubectl --context production"
-alias configktools="AWS_PROFILE=tools aws eks update-kubeconfig --name tools --alias tools"
-alias ktools="AWS_PROFILE=tools kubectl --context tools"
-# stern commands
-alias sternstaging="AWS_PROFILE=staging stern --context staging"
-alias sterndev="AWS_PROFILE=development stern --context development"
-alias sternprod="AWS_PROFILE=production stern --context production"
-alias sterntools="AWS_PROFILE=tools stern --context tools"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -150,3 +126,8 @@ alias nvim="~/nvim-macos/bin/nvim"
 
 eval "$(starship init zsh)"
 eval "$(fnm env --use-on-cd)"
+
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"

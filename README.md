@@ -104,5 +104,6 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [nnn](https://github.com/jarun/nnn) terminal file manager
 - [vimium c](https://github.com/gdh1995/vimium-c) vim key bindings for the browser
 - [lf](https://github.com/gokcehan/lf) another terminal file manager
+- [yazi](https://github.com/sxyazi/yazi) another terminal file manager written in rust
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
