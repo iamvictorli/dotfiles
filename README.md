@@ -3,16 +3,20 @@
 My dotfiles for Neovim, zsh, tmux, and alacritty, optimized for web development
 on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
+## Installation
+
+`git clone git@github.com:iamvictorli/dotfiles.git && cd dotfiles && ./install`
+
 ## Terminal
 
 I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
-- Neovim on [0.8.2](https://github.com/neovim/neovim/releases/tag/v0.8.2)
+- Neovim on [0.11.2](https://github.com/neovim/neovim/releases/tag/v0.11.2)
 
 ```
-curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-macos.tar.gz
+curl -LO https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-macos.tar.gz
 tar xzf nvim-macos.tar.gz
 ./nvim-macos/bin/nvim
 ```
@@ -26,14 +30,16 @@ tar xzf nvim-macos.tar.gz
 - [homebrew](https://brew.sh/), package manager for macOS
 
 ```
-brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep
+brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font
 ```
+
+- [yazi](https://github.com/sxyazi/yazi), terminal file manager
 
 - [tmux](https://github.com/tmux/tmux), terminal multiplexer
 
 - [lazygit](https://github.com/jesseduffield/lazygit), simple terminal UI for git commands, requires git to be installed first
 
-- [lazydocker](https://github.com/jesseduffield/lazydocker), the lazyier way to manage docker, requires docker to be installed first
+- [lazydocker](https://github.com/jesseduffield/lazydocker), the lazier way to manage docker, requires docker to be installed first
 
 - [exa](https://github.com/ogham/exa), replacement for `ls`
 
@@ -42,6 +48,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep), fast regex text searching in directories
+
+- [fzf](https://github.com/junegunn/fzf), command line fuzzy finder
 
 ## Mac Settings
 
@@ -97,13 +105,10 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 ## Font
 
-- [Hack Nerd Font](https://www.nerdfonts.com/font-downloads)
+- [JetBrainsMono Nerd Font](https://www.programmingfonts.org/#jetbrainsmono)
 
 ## Interesting programs I may or may not pickup
 
-- [nnn](https://github.com/jarun/nnn) terminal file manager
 - [vimium c](https://github.com/gdh1995/vimium-c) vim key bindings for the browser
-- [lf](https://github.com/gokcehan/lf) another terminal file manager
-- [yazi](https://github.com/sxyazi/yazi) another terminal file manager written in rust
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux

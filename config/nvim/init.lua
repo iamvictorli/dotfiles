@@ -30,9 +30,9 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
-end)
+-- vim.schedule(function()
+-- 	vim.o.clipboard = "unnamedplus"
+-- end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -160,10 +160,10 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "[P]asting text does not ove
 -- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -875,30 +875,35 @@ require("lazy").setup({
 		opts = {
 			notify_on_error = false,
 			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return nil
-				else
-					return {
-						timeout_ms = 500,
-						lsp_format = "fallback",
-					}
+				-- Only use ESLint’s --fix for JS/TS; fall back elsewhere
+				local ft = vim.bo[bufnr].filetype
+				-- specify which filetypes get ESLint
+				local eslint_fmts = {
+					javascript = true,
+					javascriptreact = true,
+					typescript = true,
+					typescriptreact = true,
+				}
+				if eslint_fmts[ft] then
+					return { timeout_ms = 500, lsp_format = false }
 				end
+				return {
+					timeout_ms = 500,
+					lsp_format = "fallback",
+				}
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
+				-- for JS/TS, use eslint_d with --fix
+				javascript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
