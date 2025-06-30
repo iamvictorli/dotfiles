@@ -113,3 +113,4 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git, diff, https://x.com/rauchg/status/1831421759666676165, https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
+- [mise](https://github.com/jdx/mise), better tool management for dev environments

@@ -23,7 +23,6 @@
     ~/.config/alacritty/alacritty.toml: config/alacritty/alacritty.toml
     ~/.config/starship.toml: config/starship.toml
     ~/Library/Application Support/lazygit/config.yml: config/lazygit/config.yml
-    # ~/Library/Application Support/lazydocker/config.yml: config/lazydocker/config.yml
 
 - shell:
     - [
