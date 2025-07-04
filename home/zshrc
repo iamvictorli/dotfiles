@@ -150,11 +150,11 @@ alias lzd="lazydocker"
 alias lg="lazygit"
 alias nvim="~/nvim-macos/bin/nvim"
 
-eval "$(starship init zsh)"
-eval "$(fnm env --use-on-cd)"
-
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export PATH="~/nvim-macos/bin:$PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+
+eval "$(starship init zsh)"
+eval "$(fnm env --use-on-cd)"
