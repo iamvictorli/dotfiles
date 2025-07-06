@@ -104,6 +104,12 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
@@ -686,11 +692,7 @@ require("lazy").setup({
 					---@param bufnr? integer some lsp support methods only in specific files
 					---@return boolean
 					local function client_supports_method(client, method, bufnr)
-						if vim.fn.has("nvim-0.11") == 1 then
-							return client:supports_method(method, bufnr)
-						else
-							return client.supports_method(method, { bufnr = bufnr })
-						end
+						return client:supports_method(method, bufnr)
 					end
 
 					-- The following two autocommands are used to highlight references of the
@@ -1215,23 +1217,35 @@ require("lazy").setup({
 		end,
 	},
 
-	-- for mini.comment
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		lazy = true,
-		opts = {
-			enable_autocmd = false,
-		},
-	},
-
 	{
 		"numToStr/Navigator.nvim",
 		config = function()
-			require("Navigator").setup()
+			require("Navigator").setup({ disable_on_zoom = false, mux = "auto" })
 			vim.keymap.set("n", "<C-h>", "<CMD>NavigatorLeft<CR>", { desc = "go to left window or tmux pane" })
 			vim.keymap.set("n", "<C-l>", "<CMD>NavigatorRight<CR>", { desc = "go to right window or tmux pane" })
 			vim.keymap.set("n", "<C-k>", "<CMD>NavigatorUp<CR>", { desc = "go to upper window or tmux pane" })
 			vim.keymap.set("n", "<C-j>", "<CMD>NavigatorDown<CR>", { desc = "go to lower window or tmux pane" })
+		end,
+	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function()
+			require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+			vim.fn["mkdp#util#install"]()
+		end,
+		keys = {
+			{
+				"<leader>md",
+				ft = "markdown",
+				"<cmd>MarkdownPreviewToggle<cr>",
+				desc = "Markdown Preview",
+			},
+		},
+		config = function()
+			vim.cmd([[do FileType]])
 		end,
 	},
 
