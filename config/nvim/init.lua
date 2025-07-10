@@ -185,6 +185,7 @@ vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 vim.keymap.set("n", "<leader>-", "<C-W>v", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>_", "<C-W>s", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -210,6 +211,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.hl.on_yank()
+	end,
+})
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	group = vim.api.nvim_create_augroup("lazyvim_checktime", { clear = true }),
+	callback = function()
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
 	end,
 })
 
@@ -532,36 +543,6 @@ require("lazy").setup({
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
-			vim.keymap.set(
-				"n",
-				"<leader>sgb",
-				require("telescope.builtin").git_branches,
-				{ desc = "[S]earch [G]it [B]ranches" }
-			) -- <CR> to checkout branch
-			vim.keymap.set(
-				"n",
-				"<leader>sgf",
-				require("telescope.builtin").git_files,
-				{ desc = "[S]earch [G]it [F]iles" }
-			) -- <CR> to check file
-			vim.keymap.set(
-				"n",
-				"<leader>sgc",
-				require("telescope.builtin").git_commits,
-				{ desc = "[S]earch [G]it [C]commits" }
-			) -- <CR> to checkout commit
-			vim.keymap.set(
-				"n",
-				"<leader>sgs",
-				require("telescope.builtin").git_status,
-				{ desc = "[S]earch [G]it [S]tatus" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>sgS",
-				require("telescope.builtin").git_stash,
-				{ desc = "[S]earch [G]it [S]tash" }
-			) -- <CR> to apply stash
 			vim.keymap.set("n", "<leader>sc", require("telescope.builtin").commands, { desc = "[S]earch [C]ommands" }) -- <CR> runs command
 			vim.keymap.set("n", "<leader>pp", function()
 				require("telescope").extensions.file_browser.file_browser({
