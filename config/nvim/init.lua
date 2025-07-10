@@ -1,4 +1,5 @@
 -- from https://github.com/nvim-lua/kickstart.nvim/tree/3338d3920620861f8313a2745fd5d2be39f39534
+-- some inspiration from https://www.lazyvim.org/configuration/general
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -84,9 +85,31 @@ vim.o.confirm = true
 
 -- Extra, not sure where I found them
 vim.o.cmdheight = 2 -- more space in the neovim command for displaying messages
-vim.o.pumheight = 10 -- popup menu height
-vim.o.termguicolors = true -- Set colorscheme
 -- vim.o.hlsearch = false -- Set highlight on search
+
+-- From: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+vim.o.expandtab = true -- Use spaces instead of tabs
+vim.opt.fillchars = {
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
+}
+vim.o.pumblend = 10 -- Popup blend
+vim.o.pumheight = 10 -- popup menu height
+vim.o.shiftwidth = 2 -- Size of an indent
+vim.o.sidescrolloff = 8 -- Columns of context
+vim.o.smartindent = true -- Insert indents automatically
+vim.opt.spelllang = { "en" }
+vim.o.splitkeep = "screen"
+vim.o.tabstop = 2 -- Number of spaces tabs count for
+vim.o.termguicolors = true -- Set colorscheme
+vim.o.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+vim.o.wildmode = "longest:full,full" -- Command-line completion mode
+vim.o.winminwidth = 5 -- Minimum window width
+vim.o.wrap = false -- Disable line wrap
 
 -- other options commented --
 -- vim.opt.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
@@ -102,6 +125,7 @@ vim.o.termguicolors = true -- Set colorscheme
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to previous [D]iagnostic message" })
@@ -112,8 +136,8 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Word Wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Down", expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Up", expr = true, silent = true })
 
 -- Window Splits
 vim.keymap.set("n", "sh", ":sp<CR>", { desc = "[S]plit [H]orizontally window" })
@@ -126,10 +150,6 @@ vim.keymap.set("n", "sx", "<C-w>c", { desc = "[S]plit [C]lose window" })
 -- vim.keymap.set("n", "<leader>k", ":resize -2<CR>", { desc = "decrease window height" })
 -- vim.keymap.set("n", "<leader>l", ":vertical resize +2<CR>", { desc = "increase window height" })
 -- vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "make [W]indow [E]qual splits" })
-
--- Buffer Navigation
--- vim.keymap.set("n", "<leader>b", ":bnext<CR>", { desc = "move to next [B]uffer" })
--- vim.keymap.set("n", "<leader>B", ":bprevious<CR>", { desc = "move to previous [B]uffer" })
 
 -- Navigation
 vim.keymap.set("n", "n", "nzzzv", { desc = "keeps cursor centered when pressing n" })
@@ -155,6 +175,16 @@ vim.keymap.set("v", ">", ">gv", { desc = "indent more" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "[P]asting text does not override register" })
 
+-- save file
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-c>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- new file
+vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- windows
+vim.keymap.set("n", "<leader>-", "<C-W>v", { desc = "Split Window Below", remap = true })
+vim.keymap.set("n", "<leader>_", "<C-W>s", { desc = "Split Window Right", remap = true })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -168,21 +198,6 @@ vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
