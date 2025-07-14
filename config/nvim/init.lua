@@ -109,7 +109,7 @@ vim.o.termguicolors = true -- Set colorscheme
 vim.o.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 vim.o.wildmode = "longest:full,full" -- Command-line completion mode
 vim.o.winminwidth = 5 -- Minimum window width
-vim.o.wrap = false -- Disable line wrap
+vim.o.wrap = true -- line wrap
 
 -- other options commented --
 -- vim.opt.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
