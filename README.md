@@ -30,6 +30,7 @@ tar xzf nvim-macos.tar.gz
 - [homebrew](https://brew.sh/), package manager for macOS
 
 ```
+# Replace with Brewfile
 brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font
 ```
 
@@ -101,7 +102,11 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 
 ## Programs
 
+- [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)
 - [vlc](https://www.videolan.org/vlc/) - Best media player
+- [Tailscale](https://tailscale.com/download)
+- [TextSniper](https://textsniper.app/), could be replaced with Raycast
+- [1password](https://1password.com/)
 
 ## Font
 
@@ -115,3 +120,10 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git, diff, https://x.com/rauchg/status/1831421759666676165, https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
 - [brewfile](https://docs.brew.sh/Brew-Bundle-and-Brewfile), A Brewfile is a plain-text manifest (written in a simple Ruby DSL) that lists everything you want Homebrew to “bundle” for you—taps, formulae, casks, Mac App Store apps, fonts, and even macOS defaults. Think of it like a Gemfile or package.json for your Homebrew setup.
+- [Ghostty](https://github.com/ghostty-org/ghostty), Another terminal emulator, can replace tmux as well?
+- [Raycast](https://www.raycast.com/), replaces command prompt, comes with clipboard history, window management, and more
+
+## Paid Products
+
+- [TablePlus](https://tableplus.com/)
+- [ProxyMan](https://proxyman.com/)
