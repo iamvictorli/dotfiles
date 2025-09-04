@@ -17,7 +17,8 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 ```
 curl -LO https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-macos.tar.gz
-tar xzf nvim-macos.tar.gz
+xattr -c ./nvim-macos-x86_64.tar.gz
+tar xzvf nvim-macos-x86_64.tar.gz
 ./nvim-macos/bin/nvim
 ```
 
