@@ -31,7 +31,7 @@ tar xzf nvim-macos.tar.gz
 
 ```
 # Replace with Brewfile
-brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font
+brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
 ```
 
 - [yazi](https://github.com/sxyazi/yazi), terminal file manager
@@ -51,6 +51,8 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [ripgrep](https://github.com/BurntSushi/ripgrep), fast regex text searching in directories
 
 - [fzf](https://github.com/junegunn/fzf), command line fuzzy finder
+
+- [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git diff, https://x.com/rauchg/status/1831421759666676165, https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
 
 ## Mac Settings
 
@@ -117,7 +119,6 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [vimium c](https://github.com/gdh1995/vimium-c) vim key bindings for the browser
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
-- [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git, diff, https://x.com/rauchg/status/1831421759666676165, https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
 - [brewfile](https://docs.brew.sh/Brew-Bundle-and-Brewfile), A Brewfile is a plain-text manifest (written in a simple Ruby DSL) that lists everything you want Homebrew to “bundle” for you—taps, formulae, casks, Mac App Store apps, fonts, and even macOS defaults. Think of it like a Gemfile or package.json for your Homebrew setup.
 - [Ghostty](https://github.com/ghostty-org/ghostty), Another terminal emulator, can replace tmux as well?

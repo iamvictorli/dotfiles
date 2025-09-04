@@ -150,6 +150,10 @@ alias lzd="lazydocker"
 alias lg="lazygit"
 alias nvim="~/nvim-macos/bin/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+# View staged files with delta
+alias gds="git diff --staged --color=always | delta --paging=always"
+# View unstaged files with delta
+alias gdu="git diff --color=always | delta --paging=always"
 
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export PATH="~/nvim-macos/bin:$PATH"
