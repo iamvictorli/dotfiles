@@ -1,7 +1,6 @@
 # dotfiles
 
-My dotfiles for Neovim, zsh, tmux, and alacritty, optimized for web development
-on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
+My dotfiles for Neovim, zsh, tmux, and alacritty on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## Installation
 
@@ -32,7 +31,7 @@ tar xzvf nvim-macos-x86_64.tar.gz
 
 ```
 # Replace with Brewfile
-brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
+brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffield/lazydocker/lazydocker zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
 ```
 
 - [yazi](https://github.com/sxyazi/yazi), terminal file manager
@@ -42,8 +41,6 @@ brew install tmux lazygit jesseduffield/lazydocker/lazydocker exa zoxide fd ripg
 - [lazygit](https://github.com/jesseduffield/lazygit), simple terminal UI for git commands, requires git to be installed first
 
 - [lazydocker](https://github.com/jesseduffield/lazydocker), the lazier way to manage docker, requires docker to be installed first
-
-- [exa](https://github.com/ogham/exa), replacement for `ls`
 
 - [zoxide](https://github.com/ajeetdsouza/zoxide), smarter `cd`
 

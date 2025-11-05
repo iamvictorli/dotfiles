@@ -6,27 +6,35 @@
 - link:
     # zsh
     ~/.zshrc: home/zshrc
-    # zsh syntax highlighting colors
-    ~/.zsh-syntax-highlighting.zsh: home/zsh-syntax-highlighting.zsh
+
     # tmux
     ~/.tmux.conf: home/tmux.conf
+
     # ssh
     ~/.ssh/config:
       path: ssh/config
       create: true
+
     # nvim
     ~/.config/nvim:
       glob: true
       path: config/nvim/*
       create: true
-    # other
+
+    # lazyvim
+    ~/.config/lazyvim:
+      glob: true
+      path: config/lazyvim/*
+      create: true
+
+    # alacritty
     ~/.config/alacritty/alacritty.toml: config/alacritty/alacritty.toml
+
+    # starship
     ~/.config/starship.toml: config/starship.toml
+
+    # lazygit
     ~/Library/Application Support/lazygit/config.yml: config/lazygit/config.yml
 
-- shell:
-    - [
-        rm -rf ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm,
-        Installing TPM. <prefix>I to install TPM packages,
-      ]
-    - [echo, Install nvim packages via :PackerInstall]
+    # yazi
+    ~/.config/yazi/theme.toml: config/yazi/theme.toml
