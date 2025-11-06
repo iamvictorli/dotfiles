@@ -12,7 +12,7 @@ I use [Alacritty](https://alacritty.org/) as my terminal emulator.
 
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
-- Neovim on [0.11.2](https://github.com/neovim/neovim/releases/tag/v0.11.2)
+- Neovim on [0.11.2](https://github.com/neovim/neovim/releases/tag/v0.11.2), slowly migrating to [lazyvim](https://www.lazyvim.org/)
 
 ```
 curl -LO https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-macos.tar.gz
