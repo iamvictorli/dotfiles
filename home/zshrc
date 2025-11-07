@@ -170,3 +170,8 @@ eval "$(starship init zsh)"
 
 # https://github.com/Schniz/fnm?tab=readme-ov-file#zsh
 eval "$(fnm env --use-on-cd --shell zsh)"
+
+# Older MacOS for using tmux-256color
+# https://github.com/htop-dev/htop/issues/251#issuecomment-2827349081
+# https://gpanders.com/blog/the-definitive-guide-to-using-tmux-256color-on-macos/ 
+export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
