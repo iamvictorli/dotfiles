@@ -54,3 +54,6 @@ style  = "Bold Italic"
 
 [font]
 size = 15.0
+
+[window]
+option_as_alt = "Both" # Make Option Key in MacOS behave as alt
