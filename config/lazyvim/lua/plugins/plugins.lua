@@ -8,14 +8,6 @@ return {
   -- disabled plugins
   { "akinsho/bufferline.nvim", enabled = false },
 
-  -- use Navigator for navigating around nvim and tmux
-  {
-    "numToStr/Navigator.nvim",
-    config = function()
-      require("Navigator").setup({ disable_on_zoom = false, mux = "auto" })
-    end,
-  },
-
   -- Markdown Preview
   {
     "iamcco/markdown-preview.nvim",
