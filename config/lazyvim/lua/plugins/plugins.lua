@@ -18,14 +18,19 @@ return {
     end,
   },
 
-  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.docker" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
+  -- https://www.lazyvim.org/plugins/colorscheme#tokyonightnvim
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = {
+      style = "storm",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
 
   -- add more treesitter parsers
   {
