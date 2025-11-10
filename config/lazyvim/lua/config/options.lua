@@ -4,3 +4,6 @@
 
 -- Disables Clipboard Sync
 vim.opt.clipboard = ""
+
+-- disables all snacks animations
+vim.g.snacks_animate = false
