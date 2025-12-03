@@ -36,5 +36,15 @@
     # lazygit
     ~/Library/Application Support/lazygit/config.yml: config/lazygit/config.yml
 
+    # vscode
+    ~/Library/Application Support/Code/User/settings.json: config/vscode/settings.json
+    ~/Library/Application Support/Code/User/snippets/global.code-snippets: config/vscode/global.code-snippets
+    ~/.vscode/extensions/extensions.json: config/vscode/extensions.json
+
+    # cursor
+    ~/Library/Application Support/Cursor/User/settings.json: config/cursor/settings.json
+    ~/Library/Application Support/Cursor/User/snippets/global.code-snippets: config/cursor/global.code-snippets
+    ~/.cursor/extensions/extensions.json: config/cursor/extensions.json
+
     # yazi
     ~/.config/yazi/theme.toml: config/yazi/theme.toml
