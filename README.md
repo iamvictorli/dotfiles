@@ -1,6 +1,6 @@
 # dotfiles
 
-My dotfiles for Neovim, zsh, tmux, and alacritty on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
+My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## Installation
 
@@ -8,7 +8,7 @@ My dotfiles for Neovim, zsh, tmux, and alacritty on macOS. Managed with [Dotbot]
 
 ## Terminal
 
-I use [Alacritty](https://alacritty.org/) as my terminal emulator.
+I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
 - [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
@@ -121,7 +121,6 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
 - [brewfile](https://docs.brew.sh/Brew-Bundle-and-Brewfile), A Brewfile is a plain-text manifest (written in a simple Ruby DSL) that lists everything you want Homebrew to “bundle” for you—taps, formulae, casks, Mac App Store apps, fonts, and even macOS defaults. Think of it like a Gemfile or package.json for your Homebrew setup.
-- [Ghostty](https://github.com/ghostty-org/ghostty), Another terminal emulator, can replace tmux as well?
 - [Raycast](https://www.raycast.com/), replaces command prompt, comes with clipboard history, window management, and more
 - [OrbStack](https://orbstack.dev/), replaces Docker Desktop
 - [IINA](https://iina.io/), another media player, but for macos, can replace vlc
