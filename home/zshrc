@@ -156,6 +156,10 @@ alias gdu="git diff --color=always | delta --paging=always"
 alias lzd="lazydocker"
 alias lg="lazygit"
 
+# better "ls" with eza
+alias ll="eza -l -g --icons --git"
+alias llt="eza -1 --icons --tree --git-ignore"
+
 # Not entirely sure where these came from
 # Remove after new installation
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"

@@ -31,7 +31,7 @@ tar xzvf nvim-macos-x86_64.tar.gz
 
 ```
 # Replace with Brewfile
-brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffield/lazydocker/lazydocker zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
+brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffield/lazydocker/lazydocker eza zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
 ```
 
 - [yazi](https://github.com/sxyazi/yazi), terminal file manager
@@ -42,6 +42,8 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 
 - [lazydocker](https://github.com/jesseduffield/lazydocker), the lazier way to manage docker, requires docker to be installed first
 
+- [eza](https://github.com/eza-community/eza), replacement for `ls`
+
 - [zoxide](https://github.com/ajeetdsouza/zoxide), smarter `cd`
 
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
@@ -50,7 +52,7 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 
 - [fzf](https://github.com/junegunn/fzf), command line fuzzy finder
 
-- [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git diff, https://x.com/rauchg/status/1831421759666676165, https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
+- [delta](https://github.com/dandavison/delta), A syntax-highlighting pager for git diff, <https://x.com/rauchg/status/1831421759666676165>, <https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta>
 
 ## Mac Settings
 
