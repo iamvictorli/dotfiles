@@ -27,6 +27,9 @@
       path: config/lazyvim/*
       create: true
 
+    # ghostty
+    ~/.config/ghostty/config: config/ghostty/config
+
     # alacritty
     ~/.config/alacritty/alacritty.toml: config/alacritty/alacritty.toml
 
