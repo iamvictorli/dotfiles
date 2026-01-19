@@ -105,10 +105,11 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 ## Programs
 
 - [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)
-- [vlc](https://www.videolan.org/vlc/) - Best media player
+- [IINA](https://iina.io/), modern media player for MacOS
 - [Tailscale](https://tailscale.com/download)
-- [TextSniper](https://textsniper.app/), could be replaced with Raycast
+- [TextSniper](https://textsniper.app/)
 - [1password](https://1password.com/)
+- [Yaak](https://yaak.app/)
 
 ## Font
 
@@ -123,7 +124,6 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 - [brewfile](https://docs.brew.sh/Brew-Bundle-and-Brewfile), A Brewfile is a plain-text manifest (written in a simple Ruby DSL) that lists everything you want Homebrew to “bundle” for you—taps, formulae, casks, Mac App Store apps, fonts, and even macOS defaults. Think of it like a Gemfile or package.json for your Homebrew setup.
 - [Raycast](https://www.raycast.com/), replaces command prompt, comes with clipboard history, window management, and more
 - [OrbStack](https://orbstack.dev/), replaces Docker Desktop
-- [IINA](https://iina.io/), another media player, but for macos, can replace vlc
 
 ## Paid Products
 
