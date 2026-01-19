@@ -4,35 +4,31 @@ My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [Dotbot](h
 
 ## Installation
 
+Install dotbot and symlink:
+
 `git clone git@github.com:iamvictorli/dotfiles.git && cd dotfiles && ./install`
+
+Install with `Brewfile`:
+
+`brew bundle install`
+
+Cleanup anything not in the `Brewfile`:
+
+`brew bundle cleanup --force`
 
 ## Terminal
 
 I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
+- [homebrew](https://brew.sh/), package manager for macOS
+
 - [ohmyzsh](https://ohmyz.sh/) with zsh shell.
-
-- Neovim on [0.11.2](https://github.com/neovim/neovim/releases/tag/v0.11.2), slowly migrating to [lazyvim](https://www.lazyvim.org/)
-
-```
-curl -LO https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-macos.tar.gz
-xattr -c ./nvim-macos-x86_64.tar.gz
-tar xzvf nvim-macos-x86_64.tar.gz
-./nvim-macos/bin/nvim
-```
 
 - [fnm](https://github.com/Schniz/fnm), fast and simple node version manager. faster than [nvm](https://github.com/nvm-sh/nvm)
 
 - [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
 
 - [starship prompts](https://starship.rs/), minimal customizable prompts
-
-- [homebrew](https://brew.sh/), package manager for macOS
-
-```
-# Replace with Brewfile
-brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffield/lazydocker/lazydocker eza zoxide fd ripgrep fzf yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font git-delta
-```
 
 - [yazi](https://github.com/sxyazi/yazi), terminal file manager
 
@@ -121,8 +117,6 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
-- [brewfile](https://docs.brew.sh/Brew-Bundle-and-Brewfile), A Brewfile is a plain-text manifest (written in a simple Ruby DSL) that lists everything you want Homebrew to “bundle” for you—taps, formulae, casks, Mac App Store apps, fonts, and even macOS defaults. Think of it like a Gemfile or package.json for your Homebrew setup.
-- [Raycast](https://www.raycast.com/), replaces command prompt, comes with clipboard history, window management, and more
 - [OrbStack](https://orbstack.dev/), replaces Docker Desktop
 
 ## Interesting Paid Products I may or may not pickup

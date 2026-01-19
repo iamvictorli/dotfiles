@@ -47,7 +47,7 @@ background-opacity = 1.0
 
 # Cursor style
 cursor-style = block
-cursor-style-blink = true
+cursor-style-blink = false
 shell-integration-features = no-cursor
 
 # Clipboard settings
