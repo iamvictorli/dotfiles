@@ -10,7 +10,7 @@ My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [Dotbot](h
 
 I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
-- [ohmyzsh](https://ohmyz.sh/) as my shell, which some custom plugins. plugin includes [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [ohmyzsh](https://ohmyz.sh/) with zsh shell.
 
 - Neovim on [0.11.2](https://github.com/neovim/neovim/releases/tag/v0.11.2), slowly migrating to [lazyvim](https://www.lazyvim.org/)
 
@@ -125,7 +125,7 @@ brew install zsh-autosuggestions zsh-syntax-highlighting tmux lazygit jesseduffi
 - [Raycast](https://www.raycast.com/), replaces command prompt, comes with clipboard history, window management, and more
 - [OrbStack](https://orbstack.dev/), replaces Docker Desktop
 
-## Paid Products
+## Interesting Paid Products I may or may not pickup
 
 - [TablePlus](https://tableplus.com/)
 - [ProxyMan](https://proxyman.com/)

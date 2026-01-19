@@ -21,12 +21,6 @@
       path: config/nvim/*
       create: true
 
-    # lazyvim
-    ~/.config/lazyvim:
-      glob: true
-      path: config/lazyvim/*
-      create: true
-
     # ghostty
     ~/.config/ghostty/config: config/ghostty/config
 

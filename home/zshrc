@@ -142,10 +142,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 # https://github.com/sindresorhus/trash-cli?tab=readme-ov-file#tip
 alias rm=trash
 
-export PATH="~/nvim-macos/bin:$PATH"
-alias nvim="~/nvim-macos/bin/nvim"
-alias lvim="NVIM_APPNAME=lazyvim ~/nvim-macos/bin/nvim"
-
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # View staged files with delta
