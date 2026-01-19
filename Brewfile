@@ -46,11 +46,11 @@ brew "zsh-syntax-highlighting"
 
 # Casks
 cask "1password"
-cask "docker-desktop"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
 cask "iina"
+cask "orbstack"
 cask "raycast"
 cask "tailscale-app"
 cask "yaak"

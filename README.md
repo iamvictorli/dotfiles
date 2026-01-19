@@ -160,7 +160,6 @@ I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
-- [OrbStack](https://orbstack.dev/), replaces Docker Desktop
 
 ## Interesting Paid Products I may or may not pickup
 
