@@ -1,20 +1,63 @@
 # dotfiles
 
-My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [Dotbot](https://github.com/anishathalye/dotbot).
+My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Installation
 
-Install dotbot and symlink:
+1. Install [Homebrew](https://brew.sh/):
 
-`git clone git@github.com:iamvictorli/dotfiles.git && cd dotfiles && ./install`
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-Install with `Brewfile`:
+2. Clone the repo:
 
-`brew bundle install`
+```bash
+git clone git@github.com:iamvictorli/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+```
 
-Cleanup anything not in the `Brewfile`:
+3. Install packages from Brewfile:
 
-`brew bundle cleanup --force`
+```bash
+brew bundle install
+```
+
+4. Run the install script (installs oh-my-zsh, stows dotfiles, installs Node.js via fnm, installs trash-cli):
+
+```bash
+./install
+```
+
+5. (Optional) Cleanup packages not in Brewfile:
+
+```bash
+brew bundle cleanup --force
+```
+
+### Stow individual packages
+
+```bash
+cd ~/dotfiles
+stow zsh          # Just zsh config
+stow nvim         # Just nvim config
+stow -D zsh       # Unstow (remove symlinks)
+```
+
+### Available packages
+
+| Package    | Description             |
+| ---------- | ----------------------- |
+| `zsh`      | Shell configuration     |
+| `tmux`     | Terminal multiplexer    |
+| `ssh`      | SSH configuration       |
+| `nvim`     | Neovim configuration    |
+| `ghostty`  | Ghostty terminal        |
+| `starship` | Starship prompt         |
+| `lazygit`  | Lazygit configuration   |
+| `vscode`   | VS Code settings        |
+| `cursor`   | Cursor settings         |
+| `yazi`     | Yazi file manager theme |
 
 ## Terminal
 
@@ -26,7 +69,7 @@ I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
 - [fnm](https://github.com/Schniz/fnm), fast and simple node version manager. faster than [nvm](https://github.com/nvm-sh/nvm)
 
-- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`. requires node
+- [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`.
 
 - [starship prompts](https://starship.rs/), minimal customizable prompts
 

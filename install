@@ -2,14 +2,65 @@
 
 set -e
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-
-DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+# Check if stow is installed
+if ! command -v stow &> /dev/null; then
+    echo "GNU Stow is not installed. Install it with: brew install stow"
+    exit 1
+fi
+
+# Install oh-my-zsh if not already installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+    echo "oh-my-zsh already installed"
+fi
+
+# List of packages to stow
+PACKAGES=(
+    zsh
+    tmux
+    ssh
+    nvim
+    ghostty
+    starship
+    lazygit
+    vscode
+    cursor
+    yazi
+)
+
+echo "Stowing dotfiles..."
+
+for package in "${PACKAGES[@]}"; do
+    if [ -d "$package" ]; then
+        echo "  Stowing $package..."
+        stow -v --target="$HOME" "$package"
+    else
+        echo "  Skipping $package (not found)"
+    fi
+done
+
+echo "Stowing complete!"
+
+# Install Node.js via fnm if available
+if command -v fnm &> /dev/null; then
+    echo "Installing latest LTS Node.js via fnm..."
+    fnm install --lts
+    fnm default lts-latest
+else
+    echo "fnm not found. Install it with: brew install fnm"
+fi
+
+# Install global npm packages
+if command -v npm &> /dev/null; then
+    echo "Installing global npm packages..."
+    npm install --global trash-cli@4.0.0
+else
+    echo "npm not found. Skipping global npm packages."
+fi
+
+echo "Done!"
