@@ -55,7 +55,6 @@ stow -D zsh       # Unstow (remove symlinks)
 | `ghostty`  | Ghostty terminal        |
 | `starship` | Starship prompt         |
 | `lazygit`  | Lazygit configuration   |
-| `vscode`   | VS Code settings        |
 | `cursor`   | Cursor settings         |
 | `yazi`     | Yazi file manager theme |
 
