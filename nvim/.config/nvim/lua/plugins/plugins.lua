@@ -8,6 +8,37 @@ return {
   -- disabled plugins
   { "akinsho/bufferline.nvim", enabled = false },
 
+  -- which-key configuration
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        -- Override <leader>w from "windows" group to "Save"
+        { "<leader>w", "<cmd>w<cr>", desc = "Save current buffer", icon = { icon = "", color = "cyan" } },
+        { "<leader>wm", hidden = true },
+        { "<leader>wd", hidden = true },
+        -- Override <leader>q from "quit/session" group to "Quit"
+        { "<leader>q", "<cmd>q<cr>", desc = "Quit current buffer", icon = { icon = "󰗼", color = "red" } },
+        { "<leader>qq", hidden = true },
+        { "<leader>qd", hidden = true },
+        { "<leader>ql", hidden = true },
+        { "<leader>qs", hidden = true },
+        { "<leader>qS", hidden = true },
+        -- Window management under <leader>uw
+        { "<leader>uw", group = "window" },
+        { "<leader>uwo", "<C-w>o", desc = "Close all other windows" },
+        { "<leader>uw=", "<C-w>=", desc = "Equally high and wide" },
+        {
+          "<leader>uw<space>",
+          function()
+            require("which-key").show({ keys = "<c-w>", loop = true })
+          end,
+          desc = "Window Hydra Mode",
+        },
+      },
+    },
+  },
+
   -- Markdown Preview
   {
     "iamcco/markdown-preview.nvim",
