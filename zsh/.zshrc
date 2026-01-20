@@ -17,13 +17,20 @@ _cache_init() {
   source "$cache_file"
 }
 
-# Cached compinit - only regenerate once per day
+# Lazy-load compinit - only runs on first Tab press
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+_lazy_compinit() {
+  if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+  zle -A expand-or-complete _complete_orig  # restore original Tab
+  unfunction _lazy_compinit
+  zle expand-or-complete  # run completion for this Tab press
+}
+zle -A expand-or-complete _complete_orig  # save original
+zle -N expand-or-complete _lazy_compinit  # override Tab
 
 export EDITOR='nvim'
 
@@ -82,6 +89,6 @@ alias llt="eza -1 --icons --tree --git-ignore"
 _cache_init starship "$(which starship)" 'starship init zsh'
 
 # https://github.com/Schniz/fnm?tab=readme-ov-file#zsh
-eval "$(fnm env --use-on-cd --shell zsh)"
+_cache_init fnm "$(which fnm)" 'fnm env --use-on-cd --shell zsh'
 
 _cache_init fzf "$(which fzf)" 'fzf --zsh'
