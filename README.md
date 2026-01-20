@@ -23,7 +23,7 @@ cd ~/dotfiles
 brew bundle install
 ```
 
-4. Run the install script (installs oh-my-zsh, stows dotfiles, installs Node.js via fnm, installs trash-cli):
+4. Run the install script (stows dotfiles, installs Node.js via fnm, installs trash-cli):
 
 ```bash
 ./install
@@ -65,8 +65,6 @@ I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
 - [homebrew](https://brew.sh/), package manager for macOS
 
-- [ohmyzsh](https://ohmyz.sh/) with zsh shell.
-
 - [fnm](https://github.com/Schniz/fnm), fast and simple node version manager. faster than [nvm](https://github.com/nvm-sh/nvm)
 
 - [trash-cli](https://github.com/sindresorhus/trash-cli), safeguard `rm`. Version 5 sometimes runs into node issues, stick with version 4 `npm install --global trash-cli@v4.0.0`.
@@ -82,8 +80,6 @@ I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 - [lazydocker](https://github.com/jesseduffield/lazydocker), the lazier way to manage docker, requires docker to be installed first
 
 - [eza](https://github.com/eza-community/eza), replacement for `ls`
-
-- [zoxide](https://github.com/ajeetdsouza/zoxide), smarter `cd`
 
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 

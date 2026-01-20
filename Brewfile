@@ -40,12 +40,12 @@ brew "tree"
 brew "wget"
 brew "yarn"
 brew "yazi"
-brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
 # Casks
 cask "1password"
+cask "codex"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"

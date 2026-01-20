@@ -1,1 +1,5 @@
 .DS_Store
+
+# zsh
+zsh/.cache/
+zsh/.zcompdump*
