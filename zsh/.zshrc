@@ -83,6 +83,19 @@ alias gdu="git diff --color=always | delta --paging=always"
 alias lzd="lazydocker"
 alias lg="lazygit"
 alias oc='opencode'
+alias ks='tmux kill-server'
+alias scratch='nvim -c "setlocal buftype=nofile"'
+
+# vim: open current dir if no args
+vim() {
+  if [[ $# -eq 0 ]]; then
+    nvim .
+  else
+    nvim "$@"
+  fi
+}
+
+alias code='vim'
 
 # better "ls" with eza
 alias ll="eza -l -g --icons --git"
@@ -90,7 +103,8 @@ alias llt="eza -1 --icons --tree --git-ignore"
 
 _cache_init starship "$(which starship)" 'starship init zsh'
 
-# https://github.com/Schniz/fnm?tab=readme-ov-file#zsh
 _cache_init fnm "$(which fnm)" 'fnm env --use-on-cd --shell zsh'
 
 _cache_init fzf "$(which fzf)" 'fzf --zsh'
+
+source "${${(%):-%x}:A:h}/tmux.zsh"
