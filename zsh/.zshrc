@@ -95,7 +95,7 @@ vim() {
   fi
 }
 
-alias code='vim'
+alias c='vim'
 
 # better "ls" with eza
 alias ll="eza -l -g --icons --git"
