@@ -24,6 +24,11 @@ return {
         { "<leader>ql", hidden = true },
         { "<leader>qs", hidden = true },
         { "<leader>qS", hidden = true },
+        -- Window splits: replace <leader>- and <leader>| with <leader>\ and <leader><CR>
+        { "<leader>-", hidden = true },
+        { "<leader>|", hidden = true },
+        { "<leader>\\", "<C-w>vzz", desc = "Split window right" },
+        { "<leader><CR>", "<C-w>szz", desc = "Split window below" },
         -- Window management under <leader>uw
         { "<leader>uw", group = "window" },
         { "<leader>uwo", "<C-w>o", desc = "Close all other windows" },
@@ -85,6 +90,29 @@ return {
       },
     },
   },
+  -- grug-far: search and replace
+  {
+    "MagicDuck/grug-far.nvim",
+    keys = {
+      {
+        "<leader>sw",
+        function()
+          require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
+        end,
+        mode = "n",
+        desc = "Search word under cursor",
+      },
+    },
+  },
+
+  -- Disable snacks.nvim <leader>sw to allow grug-far to use it
+  {
+    "folke/snacks.nvim",
+    keys = {
+      { "<leader>sw", false },
+    },
+  },
+
   {
     "alexghergh/nvim-tmux-navigation",
     config = function()
