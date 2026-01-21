@@ -25,6 +25,7 @@ _lazy_compinit() {
   else
     compinit -C
   fi
+  compdef -d oc  # disable completions for oc alias
   zle -A expand-or-complete _complete_orig  # restore original Tab
   unfunction _lazy_compinit
   zle expand-or-complete  # run completion for this Tab press
@@ -81,6 +82,7 @@ alias gdu="git diff --color=always | delta --paging=always"
 
 alias lzd="lazydocker"
 alias lg="lazygit"
+alias oc='opencode'
 
 # better "ls" with eza
 alias ll="eza -l -g --icons --git"
