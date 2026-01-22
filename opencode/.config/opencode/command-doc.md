@@ -2,362 +2,506 @@
 
 ## Overview
 
-| Command | Description | Use Case |
-|---------|-------------|----------|
-| **code-review** | Parallel code review with 3 subagents | Review uncommitted changes, commits, or PRs/MRs |
-| **complete-next-task** | Execute next incomplete PRD task | Autonomous task completion from prd.json |
-| **prd** | Create Product Requirements Document | Define feature end state before implementation |
-| **prd-task** | Convert PRD to executable JSON | Transform markdown PRD for task automation |
-| **frontend-design** | Build production-grade UI | React/Tailwind/shadcn/Motion interfaces |
-| **index-knowledge** | Generate AGENTS.md hierarchy | Create codebase documentation for agents |
-| **opensrc** | Clone + document external repo | Fetch repo and generate AGENTS.md knowledge |
-| **build-skill** | Create/update agent skills | Define reusable SKILL.md files |
-| **agent-browser** | Browser automation via Playwright | Scraping, form filling, web interaction |
-| **session-export** | Export session to PR/MR | Add AI session summary to GitHub/GitLab |
-| **pcompact-status** | Check compaction status | View preemptive compaction settings |
-| **pcompact-toggle** | Toggle compaction on/off | Enable/disable automatic context management |
+| Command | Category | Purpose |
+|---------|----------|---------|
+| **session-export** | Git/PR | Add AI session summary to PR/MR description |
+| **code-review** | Git/PR | Review changes with 3 parallel @code-review subagents |
+| **prd** | Planning | Create PRD for a feature |
+| **prd-task** | Planning | Convert PRD markdown to executable JSON |
+| **complete-next-task** | Planning | Implement next incomplete PRD task |
+| **index-knowledge** | Documentation | Generate hierarchical AGENTS.md for codebase |
+| **opensrc** | Documentation | Clone repo + generate AGENTS.md |
+| **build-skill** | Development | Create or update agent skills |
+| **frontend-design** | Development | Build production-grade frontend (React/Tailwind/shadcn/Motion) |
+| **agent-browser** | Automation | Automate browser tasks (scraping, forms, interaction) |
+| **pcompact-toggle** | Session | Toggle preemptive compaction on/off |
+| **pcompact-status** | Session | Check compaction status (threshold, cooldown) |
+
+Commands invoked with `/command-name [args]`
 
 ---
 
-## PRD Workflow Commands
+## session-export
 
-### prd
+Add AI session summary to GitHub PR or GitLab MR description.
 
-Create a Product Requirements Document defining feature end state.
+### Use For
+- Documenting AI assistance in pull requests
+- Creating session summaries for code review context
+- Preserving conversation history in PR descriptions
 
-#### Use For
+### Don't Use For
+- Local commits without PRs
+- Non-GitHub/GitLab workflows
+- Replacing commit messages
+
+### Examples
+
+```
+# Good
+/session-export                     # Export to current branch's PR
+/session-export #42                 # Export to specific PR number
+/session-export !15                 # Export to GitLab MR
+/session-export After refactoring auth module with AI assistance
+
+# Bad
+/session-export                     # No PR exists yet
+                                    -> Create PR first, then export
+
+/session-export                     # For a one-line typo fix
+                                    -> Skip, not worth documenting
+
+/session-export Write commit msg    # Wrong tool
+                                    -> Just ask primary agent to commit
+```
+
+---
+
+## code-review
+
+Review changes with 3 parallel @code-review subagents, correlating results by severity.
+
+### Use For
+- Pre-commit review of significant changes
+- Security-sensitive code (auth, crypto, validation)
+- Complex logic before merging
+- PR review assistance
+
+### Don't Use For
+- Style nitpicks (explicitly avoided)
+- Simple typo fixes
+- Pre-existing code not in diff
+- Architecture decisions
+
+### Examples
+
+```
+# Good
+/code-review                                    # Review uncommitted changes
+/code-review Focus on auth flow                 # Guided review
+/code-review #123                               # Review PR by number
+/code-review github.com/org/repo/pull/123      # Review by URL
+/code-review Check error handling in API layer
+
+# Bad
+/code-review Fix this bug                       # Reviews only, doesn't fix
+                                                -> Ask primary agent to fix
+
+/code-review Should I refactor this?            # Architectural question
+                                                -> @oracle Should I refactor...
+
+/code-review Review entire codebase             # Too broad, not a diff
+                                                -> /code-review on specific changes
+
+/code-review Check my indentation               # Style nitpick
+                                                -> Run linter/formatter instead
+```
+
+---
+
+## prd
+
+Create a Product Requirements Document defining the end state of a feature.
+
+### Use For
 - Planning new features before implementation
-- Defining acceptance criteria upfront
-- Migrations and refactors needing clear scope
-- Complex features requiring structured breakdown
+- Documenting migration or refactor scope
+- Establishing acceptance criteria
+- Creating task breakdown for complex work
 
-#### Don't Use For
-- Quick bug fixes (just fix it)
-- Exploratory prototypes (too rigid)
-- Trivial changes (overhead > value)
+### Don't Use For
+- Quick bug fixes
+- Small, obvious changes
+- Already-implemented features
+- Code documentation
 
-#### Examples
+### Examples
 
 ```
 # Good
-/prd Add favorites system with offline sync
-/prd Migrate auth from JWT to session cookies
+/prd User favorites feature
+/prd API rate limiting system
+/prd Migrate from REST to GraphQL
+/prd Dark mode with system preference detection
+/prd Multi-tenant workspace isolation
 
 # Bad
-/prd Fix typo in README           -> just edit
-/prd Experiment with new animation -> prototype first
+/prd Fix null pointer exception              # Too small
+                                             -> Just fix it directly
+
+/prd Add a button                            # Trivial
+                                             -> Ask primary agent
+
+/prd How does authentication work?           # Research question
+                                             -> @librarian How does auth work in [lib]?
+
+/prd Document the API                        # Wrong deliverable
+                                             -> /index-knowledge or write docs directly
 ```
 
 ---
 
-### prd-task
+## prd-task
 
-Convert markdown PRD to executable JSON for autonomous task completion.
+Convert existing PRD markdown to executable JSON for autonomous task completion.
 
-**Requires:** Existing PRD (e.g., `prd-favorites.md` → argument `favorites`)
+### Use For
+- Making PRDs machine-executable
+- Enabling `/complete-next-task` workflow
+- Tracking task completion state
 
-#### Use For
-- Automating PRD execution via `/complete-next-task`
-- Breaking PRD into trackable tasks with pass/fail
-- Enabling multi-session feature development
+### Don't Use For
+- Creating PRDs (use `/prd` first)
+- Manual implementation
+- PRDs without clear task breakdown
 
-#### Don't Use For
-- PRDs not yet finalized (convert when ready)
-- Simple PRDs with 1-2 tasks (manual faster)
-
-#### Examples
+### Examples
 
 ```
 # Good
-/prd-task favorites              -> converts prd-favorites.md
-/prd-task auth-migration
+/prd-task favorites                 # Converts prd-favorites.md
+/prd-task api-ratelimit             # After PRD is finalized
+/prd-task dark-mode                 # Ready for autonomous execution
+/prd-task multi-tenant
 
 # Bad
-/prd-task                        -> needs PRD name
-/prd-task prd-favorites.md       -> just the name, not filename
+/prd-task                           # No PRD name specified
+                                    -> /prd-task <prd-name>
+
+/prd-task new-feature               # PRD doesn't exist yet
+                                    -> /prd new-feature first
+
+/prd-task vague-idea                # PRD lacks concrete tasks
+                                    -> Refine PRD with clear acceptance criteria
+
+/prd-task Build the feature         # Not a PRD name
+                                    -> /prd-task <existing-prd-name>
 ```
 
 ---
 
-### complete-next-task
+## complete-next-task
 
-Execute next incomplete task from a PRD. Implements, tests, commits.
+Complete the next incomplete task from a PRD. Implements, runs feedback loops, commits.
 
-**State location:** `.opencode/state/<prd-name>/prd.json`
+### Use For
+- Autonomous task execution from PRDs
+- Incremental feature implementation
+- Maintaining progress across sessions
+- Resuming work after breaks
 
-#### Use For
-- Autonomous feature development
-- Multi-session progress tracking
-- Enforcing feedback loops (type check, test, lint)
+### Don't Use For
+- Work without a PRD
+- Non-sequential task completion
+- Skipping verification steps
 
-#### Don't Use For
-- Initial exploration (understand codebase first)
-- Tasks requiring human decisions mid-implementation
-
-#### Process
-1. Reads progress.txt for context
-2. Finds next `passes: false` task
-3. Implements with feedback loops
-4. Updates PRD and progress
-5. Commits with VCS (auto-detects jj/git)
-
-#### Examples
+### Examples
 
 ```
 # Good
-/complete-next-task favorites
-/complete-next-task auth-migration
+/complete-next-task favorites       # Complete next task in favorites PRD
+/complete-next-task api-ratelimit   # Continue where you left off
+/complete-next-task dark-mode       # Resume after session break
+/complete-next-task multi-tenant    # Incremental progress
 
 # Bad
-/complete-next-task              -> needs PRD name
-/complete-next-task ./prd.json   -> just the name
+/complete-next-task                 # No PRD specified
+                                    -> /complete-next-task <prd-name>
+
+/complete-next-task nonexistent     # PRD doesn't exist
+                                    -> /prd <feature> then /prd-task <feature> first
+
+/complete-next-task skip to task 5  # Non-sequential
+                                    -> Complete tasks in order, or manually mark earlier as done
+
+/complete-next-task Build feature   # Not how it works
+                                    -> /prd -> /prd-task -> /complete-next-task <name>
 ```
 
 ---
 
-## Code Quality Commands
+## index-knowledge
 
-### code-review
+Generate hierarchical AGENTS.md knowledge base for the current codebase.
 
-Review code with 3 parallel @code-review subagents. Results ranked by severity.
+### Use For
+- Onboarding AI to new codebases
+- Creating agent context documentation
+- Updating docs after major refactors
+- Adding complexity scores for subdirectories
 
-**Agent:** Uses `plan` agent for orchestration.
+### Don't Use For
+- User-facing documentation
+- API documentation
+- README files
+- Changelogs
 
-#### Use For
-- Pre-merge reviews of branches/PRs
-- Security audits of sensitive changes
-- Quality gates before release
-
-#### Don't Use For
-- WIP code (too early)
-- Generated code (review source instead)
-
-#### Behavior
-- Uncommitted changes → reviews those
-- No changes → reviews last commit
-- PR/MR number provided → fetches and reviews
-
-#### Examples
+### Examples
 
 ```
 # Good
-/code-review                     -> review uncommitted
-/code-review focus on auth flow
-/code-review #42                 -> review PR 42
+/index-knowledge                    # Generate for current codebase
+/index-knowledge update             # Refresh after restructuring
+/index-knowledge src/               # Focus on specific directory
+/index-knowledge                    # Before starting major work
 
 # Bad
-/code-review entire codebase     -> too broad, use guidance
+/index-knowledge                    # On empty/trivial projects
+                                    -> Not needed for small projects
+
+/index-knowledge Write user docs    # Wrong purpose
+                                    -> Ask primary agent to write README
+
+/index-knowledge Generate API docs  # Wrong tool
+                                    -> Use typedoc/jsdoc/swagger
+
+/index-knowledge for external repo  # Not cloned locally
+                                    -> /opensrc <repo> instead
 ```
 
 ---
 
-## Frontend Commands
+## opensrc
 
-### frontend-design
+Clone a repository and generate AGENTS.md knowledge base.
 
-Build distinctive UI with React, Tailwind CSS v4, shadcn/ui, Motion.
+### Use For
+- Quick codebase exploration setup
+- Creating AI-ready analysis of OSS projects
+- Studying open-source implementations
+- Understanding library internals
 
-Loads `frontend-design` skill with patterns for avoiding generic AI aesthetics.
+### Don't Use For
+- Local repositories
+- Already-cloned repos
+- Private repos without access
 
-#### Use For
-- Production-ready components/pages
-- Consistent design system usage
-- Accessible, animated interfaces
-
-#### Don't Use For
-- Backend-only features
-- Quick prototypes not needing polish
-
-#### Examples
-
-```
-# Good
-/frontend-design Dashboard with real-time charts
-/frontend-design Settings page with tabbed navigation
-
-# Bad
-/frontend-design Make it look nice    -> too vague
-```
-
----
-
-## Documentation Commands
-
-### index-knowledge
-
-Generate hierarchical AGENTS.md knowledge base for codebase.
-
-Creates root + complexity-scored subdirectory documentation.
-
-#### Use For
-- New projects needing agent context
-- After major refactors
-- Onboarding agents to codebase
-
-#### Don't Use For
-- Trivial repos (single file)
-- External repos (use `/opensrc` instead)
-
-#### Examples
-
-```
-# Good
-/index-knowledge
-/index-knowledge focus on src/core/
-
-# Bad
-/index-knowledge node_modules/   -> don't index deps
-```
-
----
-
-### opensrc
-
-Clone external repo and enhance with AGENTS.md documentation.
-
-Combines `opensrc` fetch + `index-knowledge` generation.
-
-#### Use For
-- Understanding third-party library internals
-- Creating documented local copies of dependencies
-- Research into open source implementations
-
-#### Don't Use For
-- Repos you already have cloned
-- Quick API lookups (use Librarian agent)
-
-#### Examples
+### Examples
 
 ```
 # Good
 /opensrc vercel/ai
-/opensrc github:facebook/react
+/opensrc facebook/react
+/opensrc github.com/anthropics/sdk
+/opensrc tailwindlabs/tailwindcss
+/opensrc drizzle-team/drizzle-orm
 
 # Bad
-/opensrc                         -> needs repo
-/opensrc ./local-project         -> use index-knowledge
+/opensrc ./local-project            # Already local
+                                    -> /index-knowledge for local repos
+
+/opensrc private/repo               # No access
+                                    -> Clone manually with credentials first
+
+/opensrc react                      # Ambiguous
+                                    -> /opensrc facebook/react (full path)
+
+/opensrc How does Zustand work?     # Research question
+                                    -> @librarian How does Zustand work?
 ```
 
 ---
 
-## Skill & Automation Commands
+## build-skill
 
-### build-skill
+Create or update agent skills following the skill format.
 
-Create or update SKILL.md files for reusable agent capabilities.
+### Use For
+- Creating reusable agent capabilities
+- Packaging domain knowledge
+- Building skill libraries
+- Updating existing skills
 
-Loads `build-skill` skill with format, naming, validation rules.
+### Don't Use For
+- One-off prompts
+- Simple commands (use command files)
+- Agent definitions (use agent files)
 
-#### Use For
-- Creating new agent skills
-- Standardizing repeated workflows
-- Debugging existing skills
-
-#### Don't Use For
-- One-off tasks (no reuse value)
-- Simple aliases (use commands instead)
-
-#### Examples
+### Examples
 
 ```
 # Good
-/build-skill Create deployment skill
-/build-skill Review my-skill for issues
+/build-skill Create a kubernetes deployment skill
+/build-skill Update the frontend-design skill
+/build-skill Review my skill for issues
+/build-skill Create a database migration skill
+/build-skill Build a testing best-practices skill
 
 # Bad
-/build-skill                     -> needs task
+/build-skill Write code for me                  # Not a skill request
+                                                -> Just ask primary agent
+
+/build-skill Create an agent                    # Wrong abstraction
+                                                -> Create agent file in agent/ directory
+
+/build-skill Add a /deploy command              # Simple command
+                                                -> Create command file in command/
+
+/build-skill How do skills work?                # Documentation question
+                                                -> @opencode-expert How do skills work?
 ```
 
 ---
 
-### agent-browser
+## frontend-design
 
-Browser automation using Playwright CLI.
+Create production-grade frontend interfaces with React, Tailwind CSS v4, shadcn/ui, and Motion.
 
-#### Use For
-- Web scraping with JS rendering
+### Use For
+- Building UI components and pages
+- Creating distinctive, non-generic interfaces
+- Full-stack React applications
+- Design system implementation
+
+### Don't Use For
+- Backend-only work
+- Non-React frameworks
+- Simple HTML/CSS pages
+- Design mockups
+
+### Examples
+
+```
+# Good
+/frontend-design Dashboard with analytics cards
+/frontend-design Auth flow with social login
+/frontend-design Settings page with form validation
+/frontend-design Data table with sorting, filtering, pagination
+/frontend-design Landing page with hero and feature sections
+
+# Bad
+/frontend-design Build an API                   # Backend work
+                                                -> Ask primary agent for API
+
+/frontend-design Create Vue component           # Wrong framework
+                                                -> Ask primary agent (not specialized)
+
+/frontend-design Design wireframes              # It implements, doesn't design
+                                                -> Use Figma/design tool first
+
+/frontend-design Simple HTML page               # Overkill
+                                                -> Ask primary agent for basic HTML
+```
+
+---
+
+## agent-browser
+
+Automate browser tasks using Playwright-based CLI.
+
+### Use For
+- Web scraping with interaction
 - Form filling and submission
-- Testing web interactions
-- Screenshots and PDFs
+- Testing user flows
+- Extracting data from dynamic sites
 
-#### Don't Use For
-- Static page fetching (use webfetch)
-- API interactions (use curl/fetch)
+### Don't Use For
+- Static API calls
+- Simple HTTP requests
+- PDF generation
+- Non-browser automation
 
-#### Examples
-
-```
-# Good
-/agent-browser Scrape pricing from example.com
-/agent-browser Fill contact form with test data
-
-# Bad
-/agent-browser Download JSON API   -> use curl
-```
-
----
-
-### session-export
-
-Add AI session summary to GitHub PR or GitLab MR description.
-
-Uses `gh`/`glab` CLI to update PR/MR.
-
-#### Use For
-- Documenting AI assistance in PRs
-- Creating audit trail of AI contributions
-- Sharing session context with reviewers
-
-#### Don't Use For
-- PRs not yet created
-- Repos without GitHub/GitLab
-
-#### Examples
+### Examples
 
 ```
 # Good
-/session-export                  -> updates current PR
-/session-export #42              -> updates PR 42
+/agent-browser Scrape product prices from [url]
+/agent-browser Fill out job application form at [url]
+/agent-browser Take screenshots of competitor pages
+/agent-browser Extract table data after login
+/agent-browser Test checkout flow on staging
 
 # Bad
-/session-export to file          -> not file export
+/agent-browser Call REST API                    # No browser needed
+                                                -> Use fetch/curl directly
+
+/agent-browser Download JSON from endpoint      # Static resource
+                                                -> curl or fetch tool
+
+/agent-browser Generate PDF                     # Wrong tool
+                                                -> Use puppeteer/playwright directly for PDF
+
+/agent-browser Read local HTML file             # Not a browser task
+                                                -> Read tool for local files
 ```
 
 ---
 
-## Context Management Commands
+## pcompact-toggle
 
-### pcompact-status
+Toggle preemptive compaction on/off. Prevents context overflow at 80% capacity.
 
-Check preemptive compaction settings.
+### Use For
+- Enabling auto-summarization for long sessions
+- Disabling when you need full context retention
+- Managing context-heavy workflows
 
-#### Shows
-- Enabled/disabled state
-- Trigger threshold (80%)
-- Context limit
-- Cooldown period
-- Active compactions
+### Don't Use For
+- Manual summarization
+- Checking status
+- One-off compaction
 
-#### Examples
+### Examples
 
 ```
-/pcompact-status
+# Good
+/pcompact-toggle                    # Toggle current state
+/pcompact-toggle on                 # Enable before long session
+/pcompact-toggle off                # Disable for context-sensitive work
+/pcompact-toggle on                 # Before large refactor session
+
+# Bad
+/pcompact-toggle check              # Wrong command
+                                    -> /pcompact-status
+
+/pcompact-toggle                    # Just to see what happens
+                                    -> /pcompact-status to check first
+
+/pcompact-toggle summarize now      # Manual compaction
+                                    -> /compact for immediate summarization
+
+/pcompact-toggle 50%                # Can't set threshold
+                                    -> Threshold is fixed at 80%
 ```
 
 ---
 
-### pcompact-toggle
+## pcompact-status
 
-Toggle preemptive compaction on/off.
+Check preemptive compaction status and settings.
 
-Prevents context overflow by auto-summarizing at 80% capacity.
+### Use For
+- Checking if compaction is enabled
+- Viewing threshold settings (80%)
+- Monitoring active compactions
+- Debugging context issues
 
-#### Usage
+### Don't Use For
+- Changing settings
+- Manual compaction
+- Context inspection
+
+### Examples
 
 ```
-/pcompact-toggle        # Toggle current state
-/pcompact-toggle on     # Enable
-/pcompact-toggle off    # Disable
+# Good
+/pcompact-status                    # View current state
+/pcompact-status                    # Debug why session was summarized
+/pcompact-status                    # Check before long task
+/pcompact-status                    # Monitor during heavy session
+
+# Bad
+/pcompact-status on                 # Wrong command
+                                    -> /pcompact-toggle on
+
+/pcompact-status enable             # Wrong command
+                                    -> /pcompact-toggle on
+
+/pcompact-status compact now        # Wrong command
+                                    -> /compact
+
+/pcompact-status show context       # Wrong tool
+                                    -> Check context usage in UI
 ```
 
 ---
@@ -365,106 +509,71 @@ Prevents context overflow by auto-summarizing at 80% capacity.
 ## Decision Flow
 
 ```
-Planning a feature?
-├─ Define requirements?        -> /prd
-├─ Convert to tasks?           -> /prd-task
-└─ Execute tasks?              -> /complete-next-task
+Planning new work?
+|- Complex feature?          -> /prd then /prd-task
+|- Continue existing PRD?    -> /complete-next-task
+|- Quick task?               -> Primary agent
 
-Building UI?                   -> /frontend-design
+Building UI?                 -> /frontend-design
+Reviewing code?              -> /code-review
+Documenting codebase?        -> /index-knowledge
+Exploring OSS?               -> /opensrc
 
-Reviewing code?
-├─ Local changes/commits?      -> /code-review
-└─ PR/MR?                      -> /code-review #<number>
+Browser automation?          -> /agent-browser
+Creating skills?             -> /build-skill
+Exporting session?           -> /session-export
 
-Documentation?
-├─ Current codebase?           -> /index-knowledge
-└─ External repo?              -> /opensrc
-
-Automation?
-├─ Reusable skill?             -> /build-skill
-└─ Browser interaction?        -> /agent-browser
-
-Session management?
-├─ Export to PR/MR?            -> /session-export
-├─ Check context?              -> /pcompact-status
-└─ Toggle compaction?          -> /pcompact-toggle
+Context management?
+|- Check status?             -> /pcompact-status
+|- Toggle auto-compact?      -> /pcompact-toggle
 ```
 
 ---
 
 ## Complementary Patterns
 
-| Workflow | Command Chain |
-|----------|---------------|
-| **Feature development** | `/prd` → `/prd-task` → `/complete-next-task` (repeat) |
-| **External lib research** | `/opensrc` → read AGENTS.md → implement |
-| **PR submission** | `/code-review` → fix issues → `/session-export` |
-| **New skill creation** | `/build-skill` → test skill → `/build-skill` (iterate) |
-| **Long sessions** | `/pcompact-toggle on` → work → `/pcompact-status` |
+| Pattern | Flow |
+|---------|------|
+| Feature development | `/prd` -> `/prd-task` -> `/complete-next-task` (repeat) -> `/code-review` |
+| Codebase onboarding | `/opensrc <repo>` (remote) or `/index-knowledge` (local) |
+| PR workflow | Implement -> `/code-review` -> Fix issues -> `/session-export` |
+| Long sessions | `/pcompact-toggle on` -> Work -> `/pcompact-status` (monitor) |
+| UI implementation | `/frontend-design` -> Iterate -> `/code-review` |
+| Skill development | `/build-skill` -> Test -> Refine |
 
 ---
 
 ## Configuration Reference
 
-Commands are markdown files with YAML frontmatter.
-
-### Location
-- **Global:** `~/.config/opencode/command/`
-- **Project:** `.opencode/command/`
-
-### Frontmatter Format
+Commands are markdown files with YAML frontmatter in `command/`:
 
 ```yaml
 ---
-description: Short description shown in command list
-agent: optional-agent-name   # e.g., "plan" for orchestration
+description: One-line description shown in /help
+agent: plan                        # optional: use plan mode
 ---
+
+Command prompt content...
+
+$ARGUMENTS                         # User input placeholder
 ```
 
-### Body Format
+### Locations
 
-```markdown
-Command instructions and context.
-
-Variables:
-- $ARGUMENTS - User input after command name
-- $FILE{path} - Include file contents
-
-<user-request>
-$ARGUMENTS
-</user-request>
+```
+~/.config/opencode/command/       # Global commands
+.opencode/command/                # Project commands
 ```
 
-### Example: Skill-Loading Command
+### Invocation
 
-```markdown
----
-description: Create a PRD for a feature
----
-
-First, invoke the skill tool:
-
-\```
-skill({ name: 'prd' })
-\```
-
-Then follow the skill instructions.
-
-<user-request>
-$ARGUMENTS
-</user-request>
+```
+/command-name [arguments]
 ```
 
-### Example: Direct Execution Command
+### Special Variables
 
-```markdown
----
-description: Check preemptive compaction status
----
-
-Check if preemptive compaction is enabled.
-
-Usage: /pcompact-status
-
-$ARGUMENTS
-```
+| Variable | Description |
+|----------|-------------|
+| `$ARGUMENTS` | User input after command name |
+| `$FILE{path}` | Embed file contents |
