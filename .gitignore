@@ -5,3 +5,4 @@ zsh/.cache/
 zsh/.zcompdump*
 
 opencode/.config/opencode/node_modules/
+opensrc/

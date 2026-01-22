@@ -10,16 +10,15 @@ graph TD
     T -->|Explore/Architecture| E[EXPLORE]
     T -->|Compare| C[COMPARE]
     
-    U --> U1[opensrc.fetch]
-    U1 --> U2[tree]
-    U2 --> U3[read key files]
-    U3 --> U4{Need examples?}
-    U4 -->|Yes| U5[grep_app]
+    U --> U1{Known library?}
+    U1 -->|Yes| U2[context7.resolve-library-id]
+    U2 --> U3[context7.query-docs]
+    U3 --> U4{Need source?}
+    U4 -->|Yes| U5[opensrc.fetch → read]
+    U1 -->|No| U6[grep_app → opensrc.fetch]
     
     F --> F1{Specific repo?}
-    F1 -->|Yes| F2[opensrc.fetch]
-    F2 --> F2a[grep]
-    F2a --> F2b[read matches]
+    F1 -->|Yes| F2[opensrc.fetch → grep → read]
     F1 -->|No| F3[grep_app broad search]
     F3 --> F4[opensrc.fetch interesting repos]
     
@@ -38,7 +37,7 @@ graph TD
 
 | Keywords | Query Type | Start With |
 |----------|------------|------------|
-| "how does", "why does", "explain", "purpose of" | UNDERSTAND | opensrc |
+| "how does", "why does", "explain", "purpose of" | UNDERSTAND | context7 |
 | "find", "where is", "implementations of", "examples of" | FIND | grep_app |
 | "explore", "walk through", "architecture", "structure" | EXPLORE | opensrc |
 | "compare", "vs", "difference between" | COMPARE | opensrc |
@@ -46,16 +45,16 @@ graph TD
 ## UNDERSTAND Queries
 
 ```
-opensrc.fetch(lib) → tree → read key files
-                              │
-                              ▼
-                   Need usage examples? → grep_app
+Known library? → context7.resolve-library-id → context7.query-docs
+                 └─ Need source? → opensrc.fetch → read
+
+Unknown?      → grep_app search → opensrc.fetch top result → read
 ```
 
-**When to escalate to grep_app:**
-- "How do people typically use..."
-- "Best practices for..."
-- "Common patterns with..."
+**When to transition context7 → opensrc:**
+- Need implementation details (not just API docs)
+- Question about internals/private methods
+- Tracing code flow through library
 
 ## FIND Queries
 
@@ -94,16 +93,18 @@ Broad search?  → grep_app → analyze → opensrc.fetch interesting repos
 
 | Tool | Best For | Not For |
 |------|----------|---------|
-| **grep_app** | Broad search, usage examples, finding repos | Semantic queries |
+| **grep_app** | Broad search, unknown scope, finding repos | Semantic queries |
+| **context7** | Library APIs, best practices, common patterns | Library internals |
 | **opensrc** | Deep exploration, reading internals, tracing flow | Initial discovery |
 
 ## Anti-patterns
 
 | Don't | Do |
 |-------|-----|
-| grep_app before reading source | opensrc.fetch first for UNDERSTAND |
+| grep_app for known library docs | context7 first |
 | opensrc.fetch before knowing target | grep_app to discover |
 | Multiple small reads | opensrc.readMany batch |
 | Describe without linking | Link every file ref |
 | Text for complex relationships | Mermaid diagram |
 | Use tool names in responses | "I'll search..." not "I'll use opensrc" |
+

@@ -37,7 +37,8 @@ Deep codebase exploration across remote repositories.
 
 | Tool | Best For | Limitations |
 |------|----------|-------------|
-| **grep_app** | Find patterns across ALL public GitHub, usage examples | Literal search only |
+| **grep_app** | Find patterns across ALL public GitHub | Literal search only |
+| **context7** | Library docs, API examples, usage | Known libraries only |
 | **opensrc** | Fetch full source for deep exploration | Must fetch before read |
 
 ## Quick Decision Trees
@@ -45,10 +46,10 @@ Deep codebase exploration across remote repositories.
 ### "How does X work?"
 
 ```
-opensrc.fetch(lib) → tree → read key files
-                              │
-                              ▼
-                   Need usage examples? → grep_app
+Known library?
+├─ Yes → context7.resolve-library-id → context7.query-docs
+│        └─ Need internals? → opensrc.fetch → read source
+└─ No  → grep_app search → opensrc.fetch top result
 ```
 
 ### "Find pattern X"
@@ -100,6 +101,7 @@ const files = await opensrc.files(source.name, "**/*.ts");
 
 | Scenario | Use Instead |
 |----------|-------------|
+| Simple library API questions | context7 |
 | Finding examples across many repos | grep_app |
 | Very large monorepos (>10GB) | Clone locally |
 | Private repositories | Direct access |
