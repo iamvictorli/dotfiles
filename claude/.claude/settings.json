@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./.claude/spec_metadata.sh)",
+      "Bash(.claude/spec_metadata.sh)",
+      "Bash(bash .claude/spec_metadata.sh)"
+    ]
+  },
+  "enableAllProjectMcpServers": false,
+  "env": {
+    "MAX_THINKING_TOKENS": "32000"
+  }
+}
