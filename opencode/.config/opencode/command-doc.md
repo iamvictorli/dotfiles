@@ -9,6 +9,7 @@
 | **prd** | Planning | Create PRD for a feature |
 | **prd-task** | Planning | Convert PRD markdown to executable JSON |
 | **complete-next-task** | Planning | Implement next incomplete PRD task |
+| **task-loop** | Planning | Run complete-next-task in loop until PRD complete (CLI) |
 | **index-knowledge** | Documentation | Generate hierarchical AGENTS.md for codebase |
 | **opensrc** | Documentation | Clone repo + generate AGENTS.md |
 | **build-skill** | Development | Create or update agent skills |
@@ -216,6 +217,53 @@ Complete the next incomplete task from a PRD. Implements, runs feedback loops, c
 
 /complete-next-task Build feature   # Not how it works
                                     -> /prd -> /prd-task -> /complete-next-task <name>
+```
+
+---
+
+## task-loop
+
+**CLI tool** (not a command) - runs `/complete-next-task` in a loop until PRD complete.
+
+```bash
+task-loop <feature> [--max-iterations=N]
+```
+
+Default: 25 iterations. Stops when `<tasks>COMPLETE</tasks>` marker detected.
+
+### Use For
+- Fully autonomous feature implementation
+- Overnight/unattended PRD completion
+- Batch processing multiple tasks without interaction
+- Hands-off development workflows
+
+### Don't Use For
+- Interactive development (use `/complete-next-task`)
+- PRDs requiring human decisions mid-task
+- Exploratory/experimental work
+- When you need to review each step
+
+### Examples
+
+```
+# Good
+task-loop favorites                      # Complete entire PRD autonomously
+task-loop api-ratelimit --max-iterations=10   # Limit iterations
+task-loop dark-mode &                    # Run in background
+nohup task-loop multi-tenant > log.txt & # Unattended overnight
+
+# Bad
+task-loop                                # No feature specified
+                                         -> task-loop <prd-name>
+
+task-loop nonexistent                    # PRD doesn't exist
+                                         -> /prd <feature> && /prd-task <feature> first
+
+task-loop favorites --interactive        # No such flag, it's non-interactive
+                                         -> Use /complete-next-task for interactive
+
+task-loop --dry-run favorites            # No dry-run support
+                                         -> Review PRD tasks manually first
 ```
 
 ---
@@ -511,7 +559,8 @@ Check preemptive compaction status and settings.
 ```
 Planning new work?
 |- Complex feature?          -> /prd then /prd-task
-|- Continue existing PRD?    -> /complete-next-task
+|- Continue existing PRD?    -> /complete-next-task (interactive)
+|- Autonomous completion?    -> task-loop <prd-name> (CLI)
 |- Quick task?               -> Primary agent
 
 Building UI?                 -> /frontend-design
@@ -535,6 +584,7 @@ Context management?
 | Pattern | Flow |
 |---------|------|
 | Feature development | `/prd` -> `/prd-task` -> `/complete-next-task` (repeat) -> `/code-review` |
+| Autonomous development | `/prd` -> `/prd-task` -> `task-loop <name>` -> `/code-review` |
 | Codebase onboarding | `/opensrc <repo>` (remote) or `/index-knowledge` (local) |
 | PR workflow | Implement -> `/code-review` -> Fix issues -> `/session-export` |
 | Long sessions | `/pcompact-toggle on` -> Work -> `/pcompact-status` (monitor) |
