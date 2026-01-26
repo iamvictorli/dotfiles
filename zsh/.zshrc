@@ -3,6 +3,8 @@ export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 setopt autocd
 
+export PATH="$HOME/dotfiles:$PATH"
+
 # Cache init scripts - regenerate only when binary changes
 _cache_init() {
   local name=$1 bin=$2 cmd=$3

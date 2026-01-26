@@ -7,3 +7,6 @@ vim.opt.clipboard = ""
 
 -- disables all snacks animations
 vim.g.snacks_animate = false
+
+-- disable inlay hints by default
+vim.g.lazyvim_inlay_hints = false
