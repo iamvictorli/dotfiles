@@ -8,6 +8,14 @@ return {
   -- disabled plugins
   { "akinsho/bufferline.nvim", enabled = false },
 
+  -- disable inlay hints by default
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      inlay_hints = { enabled = false },
+    },
+  },
+
   -- which-key configuration
   {
     "folke/which-key.nvim",
