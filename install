@@ -23,6 +23,7 @@ PACKAGES=(
     cursor
     yazi
     opencode
+    codex
 )
 
 echo "Stowing dotfiles..."
