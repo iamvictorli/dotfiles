@@ -105,10 +105,17 @@ return {
     },
   },
 
-  -- Disable snacks.nvim <leader>sw to allow grug-far to use it
+  -- Disable snacks.nvim explorer (using mini-files) and <leader>sw (using grug-far)
   {
     "folke/snacks.nvim",
+    opts = {
+      explorer = { replace_netrw = false },
+    },
     keys = {
+      { "<leader>e", false },
+      { "<leader>E", false },
+      { "<leader>fe", false },
+      { "<leader>fE", false },
       { "<leader>sw", false },
     },
   },
