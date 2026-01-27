@@ -8,9 +8,10 @@ vim.opt.clipboard = ""
 -- disables all snacks animations
 vim.g.snacks_animate = false
 
--- Disable netrw (using mini-files instead)
+-- Disable netrw and snacks explorer (using mini-files instead)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.lazyvim_explorer = ""
 
 -- Keep markdown preview open when switching buffers
 vim.g.mkdp_auto_close = 0
