@@ -11,9 +11,11 @@ return {
   -- disable inlay hints by default
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      inlay_hints = { enabled = false },
-    },
+    opts = function(_, opts)
+      opts.inlay_hints = opts.inlay_hints or {}
+      opts.inlay_hints.enabled = false
+      return opts
+    end,
   },
 
   -- which-key configuration
