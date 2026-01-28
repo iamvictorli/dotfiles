@@ -6,12 +6,13 @@ tool_output_token_limit = 25000
 # With tool_output_token_limit=25000 ⇒ 273000 - (25000 + 15000) = 233000
 model_auto_compact_token_limit = 233000
 [features]
-ghost_commit = false
 unified_exec = true
 apply_patch_freeform = true
 web_search_request = true
-skills = true
 shell_snapshot = true
 
 [projects."/Users/victor/workspace"]
+trust_level = "trusted"
+
+[projects."/Users/victor/dotfiles"]
 trust_level = "trusted"
