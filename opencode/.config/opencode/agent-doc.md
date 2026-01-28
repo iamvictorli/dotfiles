@@ -4,18 +4,28 @@
 
 | Agent | Model | Purpose |
 |-------|-------|---------|
-| **Oracle** | claude-opus-4-5 + extended thinking | Senior advisor - architecture, debugging, planning |
-| **Librarian** | claude-sonnet-4-5 | Remote repo exploration (GitHub/npm/PyPI) |
-| **Review** | default, temp=0.1 | Code review - bugs, security, quality |
-| **OpenCode-Expert** | default | OpenCode config & troubleshooting |
+| **oracle** | openai/gpt-5.2-codex + extended thinking | Senior advisor - architecture, debugging, planning |
+| **librarian** | anthropic/claude-sonnet-4-5 | Remote repo exploration (GitHub/npm/PyPI) |
+| **code-reviewer** | default, temp=0.1 | Code review - bugs, security, quality |
+| **opencode-expert** | default, temp=0.1 | OpenCode config & troubleshooting |
+| **overseer** | anthropic/claude-opus-4-5 | Task management via Overseer MCP |
 
 All agents are **read-only** - they advise, primary agent acts.
 
+### Built-in Agents
+
+| Agent | Mode | Purpose |
+|-------|------|---------|
+| `build` | primary | Default primary agent |
+| `plan` | primary | Planning mode (read-only edits) |
+| `general` | subagent | General-purpose subagent |
+| `explore` | subagent | Fast codebase exploration |
+
 ---
 
-## Oracle
+## oracle
 
-Senior engineering advisor with extended thinking (31,999 budget tokens).
+Senior engineering advisor with extended thinking (31,999 budget tokens). Uses `openai/gpt-5.2-codex`.
 
 ### Use For
 - Architecture decisions with significant trade-offs
@@ -28,7 +38,7 @@ Senior engineering advisor with extended thinking (31,999 budget tokens).
 - Simple code changes (overkill, slow, expensive)
 - Exploratory coding (can't make changes)
 - Quick questions (use primary agent)
-- Third-party library questions (use Librarian)
+- Third-party library questions (use librarian)
 
 ### Examples
 
@@ -39,14 +49,14 @@ Senior engineering advisor with extended thinking (31,999 budget tokens).
 @oracle Debug this race condition in concurrent requests
 
 # Bad
-@oracle What does React useState do?    -> use Librarian
+@oracle What does React useState do?    -> use librarian
 @oracle Add a log statement             -> can't write, use primary
 @oracle Fix this typo                   -> overkill, use primary
 ```
 
 ---
 
-## Librarian
+## librarian
 
 Multi-repository codebase explorer. Fetches/analyzes code from GitHub/npm/PyPI/crates.
 
@@ -61,7 +71,7 @@ Multi-repository codebase explorer. Fetches/analyzes code from GitHub/npm/PyPI/c
 - Local project code (use grep/read directly)
 - Code changes (read-only)
 - Quick API lookups (check docs instead)
-- Architecture decisions (use Oracle)
+- Architecture decisions (use oracle)
 
 ### Examples
 
@@ -73,13 +83,13 @@ Multi-repository codebase explorer. Fetches/analyzes code from GitHub/npm/PyPI/c
 
 # Bad
 @librarian What files are in my src/?           -> local, use primary
-@librarian Should I use Redux or Zustand?       -> use Oracle for decisions
+@librarian Should I use Redux or Zustand?       -> use oracle for decisions
 @librarian Add a new API endpoint               -> can't write
 ```
 
 ---
 
-## Review
+## code-reviewer
 
 Focused code reviewer with temperature=0.1 for deterministic output.
 
@@ -90,7 +100,7 @@ Focused code reviewer with temperature=0.1 for deterministic output.
 - Pull request review assistance
 
 ### Don't Use For
-- Architecture advice (use Oracle)
+- Architecture advice (use oracle)
 - Style nitpicks (explicitly avoids zealotry)
 - Pre-existing code that wasn't modified
 - General advice (it finds bugs, not advises)
@@ -99,19 +109,19 @@ Focused code reviewer with temperature=0.1 for deterministic output.
 
 ```
 # Good
-@review Check my auth changes for security issues
-@review Review this payment processing logic
-@review Verify error handling in API endpoints
+@code-reviewer Check my auth changes for security issues
+@code-reviewer Review this payment processing logic
+@code-reviewer Verify error handling in API endpoints
 
 # Bad
-@review Is this the right architectural approach?   -> use Oracle
-@review Fix these bugs                              -> identifies only, can't fix
-@review Should I use class or function components?  -> use Oracle
+@code-reviewer Is this the right architectural approach?   -> use oracle
+@code-reviewer Fix these bugs                              -> identifies only, can't fix
+@code-reviewer Should I use class or function components?  -> use oracle
 ```
 
 ---
 
-## OpenCode-Expert
+## opencode-expert
 
 Configuration specialist with access to OpenCode source code.
 
@@ -137,9 +147,42 @@ Configuration specialist with access to OpenCode source code.
 @opencode-expert How do I create a custom agent?
 
 # Bad
-@opencode-expert Review my React component      -> use Review
-@opencode-expert How does Express routing work? -> use Librarian
-@opencode-expert Plan my API architecture       -> use Oracle
+@opencode-expert Review my React component      -> use code-reviewer
+@opencode-expert How does Express routing work? -> use librarian
+@opencode-expert Plan my API architecture       -> use oracle
+```
+
+---
+
+## overseer
+
+Task management specialist for multi-session work and project coordination.
+
+### Use For
+- Creating milestones and subtasks
+- Converting plans/specs to task hierarchies
+- Finding next ready work
+- Recording learnings
+- Tracking project progress
+
+### Don't Use For
+- Single-session simple tasks
+- Code review (use code-reviewer)
+- Architecture decisions (use oracle)
+- Library research (use librarian)
+
+### Examples
+
+```
+# Good
+@overseer Create milestone for auth system with subtasks
+@overseer What's the next ready task?
+@overseer Add learning about rate limiting to current task
+
+# Bad
+@overseer Review this code                  -> use code-reviewer
+@overseer How does Next.js routing work?    -> use librarian
+@overseer Plan API architecture             -> use oracle
 ```
 
 ---
@@ -147,10 +190,11 @@ Configuration specialist with access to OpenCode source code.
 ## Decision Flow
 
 ```
-Need deep reasoning/planning?     -> Oracle
-Need library internals?           -> Librarian
-Need bug/security review?         -> Review
-Need OpenCode help?               -> OpenCode-Expert
+Need deep reasoning/planning?     -> oracle
+Need library internals?           -> librarian
+Need bug/security review?         -> code-reviewer
+Need task/milestone management?   -> overseer
+Need OpenCode help?               -> opencode-expert
 Everything else                   -> Primary agent
 ```
 
@@ -160,9 +204,43 @@ Everything else                   -> Primary agent
 
 | Pattern | Flow |
 |---------|------|
-| Research then decide | Librarian (how does X work?) -> Oracle (should we use X?) |
-| Plan, implement, verify | Oracle (plan) -> Primary (implement) -> Review (verify) |
-| Learn then apply | OpenCode-Expert (config syntax) -> Primary (apply config) |
+| Research then decide | librarian (how does X work?) -> oracle (should we use X?) |
+| Plan, implement, verify | oracle (plan) -> Primary (implement) -> code-reviewer (verify) |
+| Learn then apply | opencode-expert (config syntax) -> Primary (apply config) |
+
+### Overseer Integration
+
+Overseer is the "memory" layer. Other agents are stateless advisors. Use Overseer to persist decisions/learnings.
+
+| Pattern | Flow | When |
+|---------|------|------|
+| Plan → Track → Build | oracle (design) -> overseer (create tasks) -> Primary (implement each) | Large features needing structure |
+| Research → Decide → Track | librarian (how does X?) -> oracle (pick approach) -> overseer (task breakdown) | Unfamiliar domain/library |
+| Build → Review → Learn | Primary (implement) -> code-reviewer (verify) -> overseer (record learning) | Tricky implementation worth remembering |
+| Session handoff | overseer (update progress) -> [end] -> overseer (what's next?) -> Primary (continue) | Multi-session work |
+| Blocked work | overseer (find ready) -> Primary (implement unblocked) -> overseer (unblock dependents) | Complex dependencies |
+
+**Examples:**
+
+```
+# Large feature
+@oracle Design auth system with JWT refresh tokens
+@overseer Convert this plan to milestone with subtasks
+@overseer What's the next ready task?
+[implement]
+@code-reviewer Check token validation logic
+@overseer Complete current task, add learning about jose library
+
+# Research-driven
+@librarian How does Stripe handle webhook verification?
+@oracle Should we use their SDK or raw crypto?
+@overseer Create tasks for payment webhook implementation
+
+# Session resume
+@overseer What tasks are in progress or ready?
+[continue work]
+@overseer Mark login-flow task complete with result "uses PKCE"
+```
 
 ---
 
@@ -172,30 +250,85 @@ Agents are markdown files with YAML frontmatter in `agent/`:
 
 ```yaml
 ---
-description: One-line description
-mode: subagent
-model: anthropic/claude-opus-4-5  # optional
-temperature: 0.1                   # optional
+# Required
+description: One-line description for @ autocomplete
+
+# Mode (default: "all" for custom agents)
+mode: subagent | primary | all
+
+# Model override (optional)
+model: provider/model-id  # e.g., anthropic/claude-sonnet-4-5
+
+# Sampling parameters (optional)
+temperature: 0.1
+top_p: 0.9
+
+# Iteration limit (optional)
+steps: 10  # max agentic iterations before forcing text-only
+
+# UI customization (optional)
+color: "#FF5733"  # hex color for agent
+hidden: false     # hide from @ menu (subagent only)
+
+# Disable built-in agent (optional)
+disable: true
+
+# Extended thinking (optional, provider-specific)
 options:
   thinking:
     type: enabled
-    budgetTokens: 31999
+    budgetTokens: 31999  # max for Anthropic models
+
+# Permissions (replaces deprecated 'tools' field)
 permission:
-  "*": deny          # default deny (whitelist)
+  "*": deny | allow | ask
   read: allow
   grep: allow
-tools:
-  write: false       # shorthand
-  edit: false
+  glob: allow
+  lsp: allow
+  webfetch: allow
+  bash:
+    "git *": allow
+    "*": deny
+  edit: deny
+  external_directory:
+    "/tmp/*": allow
+    "*": deny
 ---
 
 System prompt content...
 ```
 
+### Agent Modes
+
+| Mode | Description |
+|------|-------------|
+| `subagent` | Invoked by primary via `@agent-name`. Cannot be selected as main. |
+| `primary` | Can be selected as main working agent. |
+| `all` | Available in both contexts. Default for custom agents. |
+
+### Permission Categories
+
+| Category | Description |
+|----------|-------------|
+| `read`, `grep`, `glob`, `lsp` | Read operations |
+| `edit`, `write`, `patch`, `multiedit` | Write operations |
+| `bash` | Shell commands (supports pattern matching) |
+| `task` | Task/subagent tool |
+| `external_directory` | Access outside project |
+| `todowrite`, `todoread` | Todo management |
+| `websearch`, `codesearch` | Search tools |
+
 ### Invocation
 
+Subagents:
 ```
 @agent-name Your prompt here
 ```
+
+Primary agents:
+- TUI: `<leader>a` to list agents
+- CLI: `opencode --agent agent-name`
+- Config: `default_agent: "agent-name"`
 
 Primary agent invokes subagent, passes context, receives final message.

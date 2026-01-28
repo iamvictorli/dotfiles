@@ -2,19 +2,17 @@
 
 ## Overview
 
-| Skill | Purpose |
-|-------|---------|
-| **vcs-detect** | Detect jj vs git before VCS commands |
-| **prd** | Create RFC-ready Product Requirements Documents |
-| **prd-task** | Convert PRDs to executable JSON for autonomous tasks |
-| **session-export** | Export AI session summary to PR/MR descriptions |
-| **index-knowledge** | Generate hierarchical AGENTS.md knowledge base |
-| **librarian** | Multi-repo exploration (GitHub/npm/PyPI/crates) |
-| **frontend-design** | Tailwind v4 + shadcn/ui + Motion design system |
-| **build-skill** | Create/validate OpenCode skills |
-| **agent-browser** | Playwright-based browser automation CLI |
-| **web-design-guidelines** | Review UI against Vercel's Web Interface Guidelines |
-| **react-best-practices** | Vercel's React/Next.js optimization rules |
+| Skill               | Purpose                                               |
+| ------------------- | ----------------------------------------------------- |
+| **vcs-detect**      | Detect jj vs git before VCS commands                  |
+| **overseer**        | Manage tasks via Overseer MCP for multi-session work  |
+| **overseer-plan**   | Convert markdown plans to Overseer task hierarchies   |
+| **index-knowledge** | Generate hierarchical AGENTS.md knowledge base        |
+| **librarian**       | Multi-repo exploration (GitHub/npm/PyPI/crates)       |
+| **frontend-design** | Tailwind v4 + shadcn/ui + Motion design system        |
+| **build-skill**     | Create/validate OpenCode skills                       |
+| **agent-browser**   | Playwright-based browser automation CLI               |
+| **cloudflare**      | Cloudflare platform (Workers, Pages, D1, R2, AI, IaC) |
 
 All skills are **loaded on demand** - invoke via `/skill <name>`.
 
@@ -25,15 +23,18 @@ All skills are **loaded on demand** - invoke via `/skill <name>`.
 Detect version control system before any VCS command.
 
 ### Use For
+
 - Before any git/jj operation
 - Colocated repos (both `.jj/` and `.git/`)
 - CI scripts needing correct VCS
 
 ### Don't Use For
+
 - Non-VCS operations
 - Known VCS context
 
 ### Examples
+
 ```
 # Good
 /skill vcs-detect                        # before commit
@@ -50,95 +51,74 @@ jj commands in git-only repo             -> vcs-detect first
 
 ---
 
-## prd
+## overseer
 
-Create RFC-quality Product Requirements Documents.
+Manage tasks via Overseer MCP codemode. Persistent task tracking with rich context.
 
 ### Use For
-- New feature planning
-- Major refactors
-- Migration planning
+
+- Multi-session work tracking
+- Breaking down complex implementations
+- Context persistence for handoffs
+- Recording decisions for future reference
 
 ### Don't Use For
-- Bug fixes
-- Simple changes (<1 day)
+
+- Single atomic actions
+- Work fitting in one message exchange
+- When TodoWrite is sufficient
+
+### Key Concepts
+
+- **Tickets, not todos**: Tasks have description + context + result
+- **3-level hierarchy**: Milestone → Task → Subtask
+- **VCS integration**: `start()` creates bookmark, `complete()` squashes commits
 
 ### Examples
+
 ```
 # Good
-/skill prd create PRD for user authentication
-/skill prd plan API v2 migration
-/skill prd design notification system
-/skill prd refactor payment processing
-/skill prd multi-tenant architecture
+/skill overseer                          # start multi-session feature
+/skill overseer                          # break down complex work
+/skill overseer                          # handoff context to another session
+/skill overseer                          # track decisions across sessions
 
 # Bad
-/skill prd fix null pointer bug          -> just fix it directly
-/skill prd add logging statement         -> too small, just do it
-/skill prd update README                 -> no PRD needed
-/skill prd rename variable               -> primary agent
-/skill prd how does zustand work?        -> librarian
+/skill overseer for quick fix            -> just do it, no tracking needed
+/skill overseer for single file change   -> TodoWrite sufficient
+/skill overseer without breakdown        -> overhead exceeds value
 ```
 
 ---
 
-## prd-task
+## overseer-plan
 
-Convert markdown PRD to executable JSON.
-
-### Use For
-- After creating PRD
-- Starting autonomous completion
-- Breaking PRD into verifiable steps
-
-### Don't Use For
-- Without existing PRD
-- Simple todos
-
-### Examples
-```
-# Good
-/skill prd-task convert prd-auth.md
-/skill prd-task convert prd-notifications.md
-/skill prd-task generate tasks from prd-payments.md
-/skill prd-task break down prd-api-v2.md
-
-# Bad
-/skill prd-task plan auth feature         -> prd first, then prd-task
-/skill prd-task create task list          -> prd first
-/skill prd-task without existing PRD      -> prd first
-/skill prd-task fix bug                   -> no PRD needed, just fix
-/skill prd-task add simple feature        -> prd if >1 day work
-```
-
----
-
-## session-export
-
-Update PR/MR descriptions with AI session summary.
+Convert markdown planning documents to Overseer task hierarchies.
 
 ### Use For
-- After completing PR work
-- Documenting AI assistance
-- Team transparency
+
+- After completing a plan in plan mode
+- Converting specs/design docs to tasks
+- Creating tasks from roadmap documents
 
 ### Don't Use For
-- PRs without AI help
-- Sessions with secrets
+
+- Documents that are incomplete/exploratory
+- Non-actionable content
+- Without meaningful planning content
 
 ### Examples
+
 ```
 # Good
-/skill session-export add to PR #42
-/skill session-export update MR !15
-/skill session-export document this session
-/skill session-export append summary to PR
+/skill overseer-plan plan-auth.md
+/skill overseer-plan spec-api-v2.md --priority 2
+/skill overseer-plan roadmap.md --parent <task-id>
 
 # Bad
-/skill session-export (session has API keys)     -> never include secrets
-/skill session-export (discussed passwords)      -> redact first
-/skill session-export for manual PR              -> only AI-assisted PRs
-/skill session-export (no changes made)          -> nothing to document
+/skill overseer-plan (no markdown file)  -> need existing plan first
+/skill overseer-plan rough-notes.md      -> too exploratory
+/skill overseer-plan todo.txt            -> not structured planning doc
 ```
 
 ---
@@ -148,15 +128,18 @@ Update PR/MR descriptions with AI session summary.
 Generate hierarchical AGENTS.md knowledge base.
 
 ### Use For
+
 - New projects
 - Onboarding contributors
 - After major restructuring
 
 ### Don't Use For
+
 - Tiny projects (<10 files)
 - Well-documented codebases
 
 ### Examples
+
 ```
 # Good
 /skill index-knowledge                   # update existing
@@ -179,15 +162,18 @@ Generate hierarchical AGENTS.md knowledge base.
 Multi-repository explorer for remote sources.
 
 ### Use For
+
 - Understanding library internals
 - Finding patterns in OSS
 - Comparing implementations
 
 ### Don't Use For
+
 - Local project files
 - Making changes (read-only)
 
 ### Examples
+
 ```
 # Good
 /skill librarian how does Zustand implement subscriptions?
@@ -211,16 +197,19 @@ Multi-repository explorer for remote sources.
 Create distinctive, production-grade interfaces.
 
 ### Use For
+
 - React UI components
 - Tailwind v4 styling
 - shadcn/ui integration
 - Motion animations
 
 ### Don't Use For
+
 - Backend code
 - Non-React frameworks
 
 ### Examples
+
 ```
 # Good
 /skill frontend-design create hero with bold typography
@@ -232,9 +221,7 @@ Create distinctive, production-grade interfaces.
 # Bad
 /skill frontend-design write API endpoint        -> primary agent (backend)
 /skill frontend-design setup Express server      -> primary agent (backend)
-/skill frontend-design optimize bundle           -> react-best-practices
 /skill frontend-design build Vue component       -> primary agent (not React)
-/skill frontend-design review accessibility      -> web-design-guidelines
 ```
 
 ---
@@ -244,15 +231,18 @@ Create distinctive, production-grade interfaces.
 Create and validate OpenCode skills.
 
 ### Use For
+
 - Creating new skills
 - Reviewing skill structure
 - Debugging skill loading
 
 ### Don't Use For
+
 - Using existing skills
 - General markdown
 
 ### Examples
+
 ```
 # Good
 /skill build-skill create skill for code review
@@ -263,9 +253,8 @@ Create and validate OpenCode skills.
 
 # Bad
 /skill build-skill use librarian             -> just /skill librarian
-/skill build-skill run prd                   -> just /skill prd
+/skill build-skill run overseer              -> just /skill overseer
 /skill build-skill write README              -> primary agent
-/skill build-skill explain skill system      -> @opencode-expert
 /skill build-skill create markdown doc       -> primary agent (not a skill)
 ```
 
@@ -276,16 +265,19 @@ Create and validate OpenCode skills.
 Browser automation CLI using Playwright.
 
 ### Use For
+
 - Web scraping
 - Form filling
 - Login flows
 - Screenshot capture
 
 ### Don't Use For
+
 - Static file reading
 - API calls
 
 ### Examples
+
 ```
 # Good
 /skill agent-browser login to dashboard
@@ -304,67 +296,50 @@ Browser automation CLI using Playwright.
 
 ---
 
-## web-design-guidelines
+## Cloudflare
 
-Review UI against Vercel's Web Interface Guidelines.
-
-### Use For
-- UI code review
-- Accessibility audits
-- UX compliance
-
-### Don't Use For
-- Backend code
-- Performance (use react-best-practices)
-
-### Examples
-```
-# Good
-/skill web-design-guidelines review Button.tsx
-/skill web-design-guidelines audit Modal component
-/skill web-design-guidelines check form accessibility
-/skill web-design-guidelines review navigation UX
-/skill web-design-guidelines check src/components/
-
-# Bad
-/skill web-design-guidelines review api/route.ts     -> not UI, skip
-/skill web-design-guidelines check database schema   -> not UI
-/skill web-design-guidelines optimize re-renders     -> react-best-practices
-/skill web-design-guidelines review bundle size      -> react-best-practices
-/skill web-design-guidelines plan architecture       -> @oracle
-```
-
----
-
-## react-best-practices
-
-Vercel's React/Next.js performance rules. 45 rules, 8 categories.
+Comprehensive Cloudflare platform skill. Decision trees + detailed references.
 
 ### Use For
-- React optimization
-- Next.js perf tuning
-- Bundle reduction
-- Re-render fixes
+
+- Workers (serverless edge functions)
+- Pages (full-stack web apps)
+- Storage (KV, D1, R2, Queues)
+- AI (Workers AI, Vectorize, Agents SDK)
+- Networking (Tunnel, Spectrum)
+- Security (WAF, DDoS, Turnstile)
+- Infrastructure-as-code (Terraform, Pulumi)
 
 ### Don't Use For
-- Non-React code
-- Design/styling (use web-design-guidelines)
+
+- Non-Cloudflare platforms
+- General web development (use frontend-design)
+
+### Key Decision Trees
+
+```
+Run code?     → Workers, Pages, Durable Objects, Workflows
+Store data?   → KV, D1, R2, Queues, Vectorize
+Need AI?      → Workers AI, Vectorize, Agents SDK
+Networking?   → Tunnel, Spectrum, TURN
+Security?     → WAF, DDoS, Bot Management, Turnstile
+IaC?          → Pulumi, Terraform, API
+```
 
 ### Examples
+
 ```
 # Good
-/skill react-best-practices review data fetching
-/skill react-best-practices optimize Dashboard.tsx
-/skill react-best-practices check bundle imports
-/skill react-best-practices fix re-render issues
-/skill react-best-practices audit async patterns
+/skill cloudflare setup Workers project
+/skill cloudflare configure D1 database
+/skill cloudflare deploy to Pages
+/skill cloudflare add KV storage binding
+/skill cloudflare implement Durable Objects
 
 # Bad
-/skill react-best-practices review CSS styling       -> web-design-guidelines
-/skill react-best-practices check accessibility      -> web-design-guidelines
-/skill react-best-practices review Python code       -> not React
-/skill react-best-practices plan feature             -> @oracle / prd
-/skill react-best-practices how does SWR work?       -> librarian
+/skill cloudflare deploy to Vercel         -> not Cloudflare
+/skill cloudflare setup AWS Lambda         -> not Cloudflare
+/skill cloudflare React component          -> frontend-design
 ```
 
 ---
@@ -373,15 +348,14 @@ Vercel's React/Next.js performance rules. 45 rules, 8 categories.
 
 ```
 VCS operation?           -> vcs-detect
-Planning feature?        -> prd -> prd-task
-Document AI work?        -> session-export
+Multi-session work?      -> overseer
+Convert plan to tasks?   -> overseer-plan
 Generate docs?           -> index-knowledge
 Research libs?           -> librarian
 Build React UI?          -> frontend-design
 Create skill?            -> build-skill
 Web automation?          -> agent-browser
-Review UI?               -> web-design-guidelines
-Optimize React?          -> react-best-practices
+Cloudflare platform?     -> cloudflare
 ```
 
 ---
@@ -390,10 +364,20 @@ Optimize React?          -> react-best-practices
 
 | Pattern | Flow |
 |---------|------|
-| Feature planning | prd → prd-task → implement → session-export |
-| UI development | frontend-design → react-best-practices → web-design-guidelines |
-| Library research | librarian → understand → implement |
-| VCS workflow | vcs-detect → git/jj commands |
+| **Feature planning** | plan mode → overseer-plan → overseer → implement |
+| **UI development** | frontend-design → implement → @oracle review |
+| **Library research** | librarian → understand → implement |
+| **VCS workflow** | vcs-detect → git/jj commands |
+| **Cloudflare deploy** | cloudflare → configure → deploy |
+| **Codebase onboarding** | index-knowledge → librarian (deps) → understand |
+| **Edge-rendered UI** | frontend-design → cloudflare (Pages) → deploy |
+| **Scraping pipeline** | agent-browser → extract → process/store |
+| **Skill authoring** | librarian (research patterns) → build-skill → iterate |
+| **Complex feature** | librarian (unknown libs) → overseer → frontend-design → implement |
+| **New project bootstrap** | vcs-detect → index-knowledge → establish conventions |
+| **Cloudflare full-stack** | cloudflare (D1/KV) + frontend-design → Pages deploy |
+| **Multi-session handoff** | overseer (context) → new session → overseer (resume) |
+| **PRD task loop** | create PRD → `/complete-next-task <prd>` → repeat until done |
 
 ---
 
@@ -408,16 +392,15 @@ description: One-line description for discovery
 references:
   - references/file.md
 ---
-
 Content...
 ```
 
 ### Skill Locations
 
-| Priority | Location |
-|----------|----------|
-| 1 | `.opencode/skills/<name>/` (project) |
-| 2 | `~/.config/opencode/skills/<name>/` (global) |
+| Priority | Location                                     |
+| -------- | -------------------------------------------- |
+| 1        | `.opencode/skills/<name>/` (project)         |
+| 2        | `~/.config/opencode/skills/<name>/` (global) |
 
 ### Structure
 

@@ -4,16 +4,16 @@
 
 | Command | Category | Purpose |
 |---------|----------|---------|
-| **session-export** | Git/PR | Add AI session summary to PR/MR description |
+| **overseer** | Task Management | Manage tasks via Overseer MCP - create, list, start, complete |
+| **overseer-plan** | Task Management | Convert markdown plan/spec to Overseer tasks |
 | **code-review** | Git/PR | Review changes with 3 parallel @code-review subagents |
-| **prd** | Planning | Create PRD for a feature |
-| **prd-task** | Planning | Convert PRD markdown to executable JSON |
 | **complete-next-task** | Planning | Implement next incomplete PRD task |
 | **task-loop** | Planning | Run complete-next-task in loop until PRD complete (CLI) |
 | **index-knowledge** | Documentation | Generate hierarchical AGENTS.md for codebase |
 | **opensrc** | Documentation | Clone repo + generate AGENTS.md |
 | **build-skill** | Development | Create or update agent skills |
 | **frontend-design** | Development | Build production-grade frontend (React/Tailwind/shadcn/Motion) |
+| **cloudflare** | Development | Load Cloudflare skill for Workers, D1, R2, etc. |
 | **agent-browser** | Automation | Automate browser tasks (scraping, forms, interaction) |
 | **pcompact-toggle** | Session | Toggle preemptive compaction on/off |
 | **pcompact-status** | Session | Check compaction status (threshold, cooldown) |
@@ -22,38 +22,73 @@ Commands invoked with `/command-name [args]`
 
 ---
 
-## session-export
+## overseer
 
-Add AI session summary to GitHub PR or GitLab MR description.
+Manage tasks via Overseer MCP - create, list, start, complete, find ready work.
 
 ### Use For
-- Documenting AI assistance in pull requests
-- Creating session summaries for code review context
-- Preserving conversation history in PR descriptions
+- Task orchestration and tracking
+- Finding next ready work
+- Recording learnings for tasks
+- Creating task hierarchies with milestones
 
 ### Don't Use For
-- Local commits without PRs
-- Non-GitHub/GitLab workflows
-- Replacing commit messages
+- Simple one-off requests
+- Questions/research (use primary agent)
+- Converting plans to tasks (use `/overseer-plan`)
 
 ### Examples
 
 ```
 # Good
-/session-export                     # Export to current branch's PR
-/session-export #42                 # Export to specific PR number
-/session-export !15                 # Export to GitLab MR
-/session-export After refactoring auth module with AI assistance
+/overseer list                      # Show all tasks
+/overseer next                      # Find next ready task
+/overseer create "Implement auth"   # Create new task
+/overseer start task-123            # Start working on task
+/overseer complete task-123         # Mark task done
+/overseer learn task-123 "Use jose for JWT"  # Add learning
 
 # Bad
-/session-export                     # No PR exists yet
-                                    -> Create PR first, then export
+/overseer How do I use this?        # Research question
+                                    -> Ask primary agent
 
-/session-export                     # For a one-line typo fix
-                                    -> Skip, not worth documenting
+/overseer Convert my plan           # Wrong command
+                                    -> /overseer-plan <file>
+```
 
-/session-export Write commit msg    # Wrong tool
-                                    -> Just ask primary agent to commit
+---
+
+## overseer-plan
+
+Convert markdown planning documents into trackable Overseer task hierarchies.
+
+### Use For
+- Turning specs/plans into executable tasks
+- Creating milestone + subtask structures
+- Making plans trackable via Overseer
+
+### Don't Use For
+- Creating plans (write markdown first)
+- Simple single tasks (use `/overseer create`)
+- Managing existing tasks (use `/overseer`)
+
+### Examples
+
+```
+# Good
+/overseer-plan ./docs/auth-plan.md
+/overseer-plan ./PRD.md --priority 1
+/overseer-plan ./feature-spec.md --parent milestone-123
+
+# Bad
+/overseer-plan                      # No file specified
+                                    -> /overseer-plan <path-to-file>
+
+/overseer-plan Create auth feature  # Not a file path
+                                    -> Write plan to .md file first
+
+/overseer-plan list tasks           # Wrong command
+                                    -> /overseer list
 ```
 
 ---
@@ -100,87 +135,6 @@ Review changes with 3 parallel @code-review subagents, correlating results by se
 
 ---
 
-## prd
-
-Create a Product Requirements Document defining the end state of a feature.
-
-### Use For
-- Planning new features before implementation
-- Documenting migration or refactor scope
-- Establishing acceptance criteria
-- Creating task breakdown for complex work
-
-### Don't Use For
-- Quick bug fixes
-- Small, obvious changes
-- Already-implemented features
-- Code documentation
-
-### Examples
-
-```
-# Good
-/prd User favorites feature
-/prd API rate limiting system
-/prd Migrate from REST to GraphQL
-/prd Dark mode with system preference detection
-/prd Multi-tenant workspace isolation
-
-# Bad
-/prd Fix null pointer exception              # Too small
-                                             -> Just fix it directly
-
-/prd Add a button                            # Trivial
-                                             -> Ask primary agent
-
-/prd How does authentication work?           # Research question
-                                             -> @librarian How does auth work in [lib]?
-
-/prd Document the API                        # Wrong deliverable
-                                             -> /index-knowledge or write docs directly
-```
-
----
-
-## prd-task
-
-Convert existing PRD markdown to executable JSON for autonomous task completion.
-
-### Use For
-- Making PRDs machine-executable
-- Enabling `/complete-next-task` workflow
-- Tracking task completion state
-
-### Don't Use For
-- Creating PRDs (use `/prd` first)
-- Manual implementation
-- PRDs without clear task breakdown
-
-### Examples
-
-```
-# Good
-/prd-task favorites                 # Converts prd-favorites.md
-/prd-task api-ratelimit             # After PRD is finalized
-/prd-task dark-mode                 # Ready for autonomous execution
-/prd-task multi-tenant
-
-# Bad
-/prd-task                           # No PRD name specified
-                                    -> /prd-task <prd-name>
-
-/prd-task new-feature               # PRD doesn't exist yet
-                                    -> /prd new-feature first
-
-/prd-task vague-idea                # PRD lacks concrete tasks
-                                    -> Refine PRD with clear acceptance criteria
-
-/prd-task Build the feature         # Not a PRD name
-                                    -> /prd-task <existing-prd-name>
-```
-
----
-
 ## complete-next-task
 
 Complete the next incomplete task from a PRD. Implements, runs feedback loops, commits.
@@ -210,13 +164,13 @@ Complete the next incomplete task from a PRD. Implements, runs feedback loops, c
                                     -> /complete-next-task <prd-name>
 
 /complete-next-task nonexistent     # PRD doesn't exist
-                                    -> /prd <feature> then /prd-task <feature> first
+                                    -> Create PRD .md then /overseer-plan <file>
 
 /complete-next-task skip to task 5  # Non-sequential
                                     -> Complete tasks in order, or manually mark earlier as done
 
 /complete-next-task Build feature   # Not how it works
-                                    -> /prd -> /prd-task -> /complete-next-task <name>
+                                    -> Write plan.md -> /overseer-plan -> /complete-next-task
 ```
 
 ---
@@ -257,7 +211,7 @@ task-loop                                # No feature specified
                                          -> task-loop <prd-name>
 
 task-loop nonexistent                    # PRD doesn't exist
-                                         -> /prd <feature> && /prd-task <feature> first
+                                         -> Write plan.md then /overseer-plan first
 
 task-loop favorites --interactive        # No such flag, it's non-interactive
                                          -> Use /complete-next-task for interactive
@@ -433,6 +387,44 @@ Create production-grade frontend interfaces with React, Tailwind CSS v4, shadcn/
 
 ---
 
+## cloudflare
+
+Load Cloudflare platform skill for Workers, D1, R2, KV, Durable Objects, and more.
+
+### Use For
+- Workers/Pages development
+- D1/R2/KV storage setup
+- Durable Objects implementation
+- Cloudflare API integration
+
+### Don't Use For
+- Generic backend development
+- Non-Cloudflare platforms
+- AWS/GCP/Azure work
+
+### Examples
+
+```
+# Good
+/cloudflare Deploy a Worker with KV bindings
+/cloudflare Set up D1 database with migrations
+/cloudflare Implement rate limiting with Durable Objects
+/cloudflare Configure R2 bucket with public access
+/cloudflare --update-skill                    # Update to latest skill version
+
+# Bad
+/cloudflare Deploy to AWS Lambda              # Wrong platform
+                                              -> Ask primary agent
+
+/cloudflare Set up Express server             # Not Cloudflare-specific
+                                              -> Ask primary agent
+
+/cloudflare What is Workers?                  # Documentation question
+                                              -> @librarian or Cloudflare docs
+```
+
+---
+
 ## agent-browser
 
 Automate browser tasks using Playwright-based CLI.
@@ -558,19 +550,23 @@ Check preemptive compaction status and settings.
 
 ```
 Planning new work?
-|- Complex feature?          -> /prd then /prd-task
-|- Continue existing PRD?    -> /complete-next-task (interactive)
+|- Complex feature?          -> Write plan.md then /overseer-plan
+|- Continue existing tasks?  -> /complete-next-task (interactive)
 |- Autonomous completion?    -> task-loop <prd-name> (CLI)
 |- Quick task?               -> Primary agent
 
+Task management?
+|- List/create/start tasks?  -> /overseer
+|- Convert plan to tasks?    -> /overseer-plan
+
 Building UI?                 -> /frontend-design
+Cloudflare development?      -> /cloudflare
 Reviewing code?              -> /code-review
 Documenting codebase?        -> /index-knowledge
 Exploring OSS?               -> /opensrc
 
 Browser automation?          -> /agent-browser
 Creating skills?             -> /build-skill
-Exporting session?           -> /session-export
 
 Context management?
 |- Check status?             -> /pcompact-status
@@ -583,12 +579,14 @@ Context management?
 
 | Pattern | Flow |
 |---------|------|
-| Feature development | `/prd` -> `/prd-task` -> `/complete-next-task` (repeat) -> `/code-review` |
-| Autonomous development | `/prd` -> `/prd-task` -> `task-loop <name>` -> `/code-review` |
+| Feature development | Write plan.md -> `/overseer-plan` -> `/complete-next-task` (repeat) -> `/code-review` |
+| Autonomous development | Write plan.md -> `/overseer-plan` -> `task-loop <name>` -> `/code-review` |
+| Task tracking | `/overseer create` -> `/overseer start` -> Work -> `/overseer complete` |
 | Codebase onboarding | `/opensrc <repo>` (remote) or `/index-knowledge` (local) |
-| PR workflow | Implement -> `/code-review` -> Fix issues -> `/session-export` |
+| PR workflow | Implement -> `/code-review` -> Fix issues -> Merge |
 | Long sessions | `/pcompact-toggle on` -> Work -> `/pcompact-status` (monitor) |
 | UI implementation | `/frontend-design` -> Iterate -> `/code-review` |
+| Cloudflare work | `/cloudflare` -> Implement -> `/code-review` |
 | Skill development | `/build-skill` -> Test -> Refine |
 
 ---
