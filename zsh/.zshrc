@@ -88,7 +88,7 @@ alias gdu="git diff --color=always | delta --paging=always"
 
 alias lzd="lazydocker"
 alias lg="lazygit"
-alias oc='opencode'
+alias oc='opencode-built'
 alias ks='tmux kill-server'
 alias scratch='nvim -c "setlocal buftype=nofile"'
 
@@ -114,3 +114,30 @@ _cache_init fnm "$(which fnm)" 'fnm env --use-on-cd --shell zsh'
 _cache_init fzf "$(which fzf)" 'fzf --zsh'
 
 source "${${(%):-%x}:A:h}/tmux.zsh"
+
+opencode-built() {
+  local repo="$HOME/workspace/opencode"
+  local os arch folder bin
+
+  os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+  case "$os" in
+    darwin) os="darwin" ;;
+    linux) os="linux" ;;
+    msys*|mingw*|cygwin*) os="windows" ;;
+  esac
+
+  arch="$(uname -m)"
+  case "$arch" in
+    arm64|aarch64) arch="arm64" ;;
+    x86_64|amd64) arch="x64" ;;
+  esac
+
+  folder="opencode-${os}-${arch}"
+  bin="${repo}/packages/opencode/dist/${folder}/bin/opencode"
+
+  if [ ! -x "$bin" ]; then
+    bun run --cwd "${repo}/packages/opencode" build -- --single || return $?
+  fi
+  exec "$bin" "$@"
+}
+

@@ -3,7 +3,7 @@ tap "jesseduffield/lazydocker"
 tap "oven-sh/bun"
 
 # Formulae
-brew "anomalyco/tap/opencode"
+# brew "anomalyco/tap/opencode"
 brew "ast-grep"
 brew "cloc"
 brew "cocoapods"

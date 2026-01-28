@@ -107,4 +107,3 @@ Broad search?  → grep_app → analyze → opensrc.fetch interesting repos
 | Describe without linking | Link every file ref |
 | Text for complex relationships | Mermaid diagram |
 | Use tool names in responses | "I'll search..." not "I'll use opensrc" |
-

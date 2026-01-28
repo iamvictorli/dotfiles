@@ -1,24 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": true,
   "permission": {
     "read": {
       "*": "allow",
       "*.env": "deny",
       "*.env.*": "deny",
       "*.envrc": "deny",
-      "secrets/*": "deny"
+      "secrets/*": "deny",
+      ".dev.vars": "ask"
     },
     "external_directory": {
-      "/Users/victor/workspace/opencode/*": "allow",
-      "/Users/victor/dotfiles/opencode/.config/opencode/*": "allow",
-      "/Users/victor/.config/opencode/*": "allow"
+      "*": "ask",
+      "~/.config/opencode/*": "allow",
+      "~/dotfiles/opencode/.config/opencode/*": "allow",
+      "~/workspace/opencode/*": "allow",
     }
   },
   "theme": "tokyonight",
-  "enabled_providers": [
-    "anthropic",
-  ],
   "keybinds": {
     "leader": "ctrl+o",
     "messages_half_page_up": "ctrl+u",
@@ -46,5 +44,10 @@
       "url": "https://mcp.context7.com/mcp",
       "enabled": true
     },
+    "overseer": {
+      "type": "local",
+      "command": ["os", "mcp"],
+      "enabled": true
+    }
   }
 }
