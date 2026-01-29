@@ -141,3 +141,10 @@ opencode-built() {
   exec "$bin" "$@"
 }
 
+# opensrc-mcp
+# build for mcp: npm install && npm run build
+
+# overseer mcp
+# build for mcp:
+# 1. cd overseer and cargo build --release
+# 2. cd mcp && npm install && npm run buld

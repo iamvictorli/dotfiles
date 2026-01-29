@@ -95,26 +95,28 @@
       "url": "https://mcp.grep.app",
       "enabled": true
     },
-    "opensrc": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "opensrc-mcp"
-      ],
-      "enabled": true
-    },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "enabled": true
     },
+    "opensrc": {
+      "type": "local",
+      "command": [
+        "node",
+        "{env:HOME}/dotfiles/opensrc-mcp/dist/index.mjs"
+      ],
+      "enabled": true
+    },
     "overseer": {
       "type": "local",
       "command": [
-        "os",
-        "mcp"
+        "node",
+        "{env:HOME}/dotfiles/overseer/mcp/build/index.js"
       ],
+      "environment": {
+        "OVERSEER_CLI_PATH": "{env:HOME}/dotfiles/overseer/overseer/target/release/os"
+      },
       "enabled": true
     }
   }
