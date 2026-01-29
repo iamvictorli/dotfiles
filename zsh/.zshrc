@@ -138,8 +138,10 @@ opencode-built() {
   if [ ! -x "$bin" ]; then
     bun run --cwd "${repo}/packages/opencode" build -- --single || return $?
   fi
-  exec "$bin" "$@"
+  "$bin" "$@"
 }
+
+# rm opencode from /packages/opencode/dist and then run oc again
 
 # opensrc-mcp
 # build for mcp: npm install && npm run build
