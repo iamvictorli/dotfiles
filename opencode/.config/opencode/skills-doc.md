@@ -7,6 +7,7 @@
 | **vcs-detect**      | Detect jj vs git before VCS commands                  |
 | **overseer**        | Manage tasks via Overseer MCP for multi-session work  |
 | **overseer-plan**   | Convert markdown plans to Overseer task hierarchies   |
+| **spec-planner**    | Dialogue-driven spec development via skeptical questioning |
 | **index-knowledge** | Generate hierarchical AGENTS.md knowledge base        |
 | **librarian**       | Multi-repo exploration (GitHub/npm/PyPI/crates)       |
 | **frontend-design** | Tailwind v4 + shadcn/ui + Motion design system        |
@@ -119,6 +120,51 @@ Convert markdown planning documents to Overseer task hierarchies.
 /skill overseer-plan (no markdown file)  -> need existing plan first
 /skill overseer-plan rough-notes.md      -> too exploratory
 /skill overseer-plan todo.txt            -> not structured planning doc
+```
+
+---
+
+## spec-planner
+
+Dialogue-driven spec development through skeptical questioning and iterative refinement.
+
+### Use For
+
+- Feature planning and scoping
+- Architecture decisions requiring trade-off analysis
+- RFC/ADR/design doc creation
+- "Is this worth it?" questions
+- Work scoping before implementation
+
+### Don't Use For
+
+- Implementation (produces specs, not code)
+- Quick decisions with obvious answers
+- When requirements are already clear
+
+### Key Concepts
+
+- **Mandatory clarification phase**: Ask 3-5 pointed questions before planning
+- **Skeptical senior engineer persona**: Challenge assumptions, surface hidden complexity
+- **Scope control**: Name, park, or cost scope creep explicitly
+- **Trade-off tables**: Compare approaches on pros/cons/effort/risk
+- **Effort sizing**: S (<1hr), M (1-3hr), L (1-2 days), XL (>2 days)
+
+### Examples
+
+```
+# Good
+/skill spec-planner "spec this out"
+/skill spec-planner plan authentication system
+/skill spec-planner is this refactor worth it?
+/skill spec-planner create RFC for new API
+/skill spec-planner scope the migration work
+
+# Bad
+/skill spec-planner implement the feature      -> produces specs, not code
+/skill spec-planner fix this bug               -> just fix it
+/skill spec-planner (requirements already clear) -> skip to implementation
+/skill spec-planner trivial change             -> overhead exceeds value
 ```
 
 ---
@@ -350,6 +396,7 @@ IaC?          → Pulumi, Terraform, API
 VCS operation?           -> vcs-detect
 Multi-session work?      -> overseer
 Convert plan to tasks?   -> overseer-plan
+Spec out feature?        -> spec-planner
 Generate docs?           -> index-knowledge
 Research libs?           -> librarian
 Build React UI?          -> frontend-design
@@ -364,7 +411,7 @@ Cloudflare platform?     -> cloudflare
 
 | Pattern | Flow |
 |---------|------|
-| **Feature planning** | plan mode → overseer-plan → overseer → implement |
+| **Feature planning** | spec-planner → overseer-plan → overseer → implement |
 | **UI development** | frontend-design → implement → @oracle review |
 | **Library research** | librarian → understand → implement |
 | **VCS workflow** | vcs-detect → git/jj commands |
@@ -373,11 +420,12 @@ Cloudflare platform?     -> cloudflare
 | **Edge-rendered UI** | frontend-design → cloudflare (Pages) → deploy |
 | **Scraping pipeline** | agent-browser → extract → process/store |
 | **Skill authoring** | librarian (research patterns) → build-skill → iterate |
-| **Complex feature** | librarian (unknown libs) → overseer → frontend-design → implement |
+| **Complex feature** | spec-planner → librarian (unknown libs) → overseer → implement |
 | **New project bootstrap** | vcs-detect → index-knowledge → establish conventions |
 | **Cloudflare full-stack** | cloudflare (D1/KV) + frontend-design → Pages deploy |
 | **Multi-session handoff** | overseer (context) → new session → overseer (resume) |
 | **PRD task loop** | create PRD → `/complete-next-task <prd>` → repeat until done |
+| **Architecture decision** | spec-planner (trade-offs) → ADR → implement |
 
 ---
 

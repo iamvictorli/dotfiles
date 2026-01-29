@@ -6,6 +6,7 @@
 |---------|----------|---------|
 | **overseer** | Task Management | Manage tasks via Overseer MCP - create, list, start, complete |
 | **overseer-plan** | Task Management | Convert markdown plan/spec to Overseer tasks |
+| **plan-spec** | Planning | Dialogue-driven spec development with iterative refinement |
 | **code-review** | Git/PR | Review changes with 3 parallel @code-review subagents |
 | **complete-next-task** | Planning | Implement next incomplete PRD task |
 | **task-loop** | Planning | Run complete-next-task in loop until PRD complete (CLI) |
@@ -68,7 +69,7 @@ Convert markdown planning documents into trackable Overseer task hierarchies.
 - Making plans trackable via Overseer
 
 ### Don't Use For
-- Creating plans (write markdown first)
+- Creating plans (write markdown first, or use `/plan-spec`)
 - Simple single tasks (use `/overseer create`)
 - Managing existing tasks (use `/overseer`)
 
@@ -85,10 +86,66 @@ Convert markdown planning documents into trackable Overseer task hierarchies.
                                     -> /overseer-plan <path-to-file>
 
 /overseer-plan Create auth feature  # Not a file path
-                                    -> Write plan to .md file first
+                                    -> /plan-spec auth feature (to create spec first)
 
 /overseer-plan list tasks           # Wrong command
                                     -> /overseer list
+```
+
+---
+
+## plan-spec
+
+Dialogue-driven spec development through iterative questioning and refinement.
+
+### Use For
+- Feature planning with unclear requirements
+- Architecture decisions needing exploration
+- Refactoring evaluation (is it worth it?)
+- RFC/design doc creation
+- Work scoping before implementation
+
+### Don't Use For
+- Simple, well-defined tasks (just implement)
+- Existing specs (use `/overseer-plan` to convert)
+- Pure research (use @librarian)
+- Code review (use `/code-review`)
+
+### Workflow
+
+Follows a state machine: `CLARIFY -> DISCOVER -> DRAFT -> REFINE -> DONE`
+
+1. **CLARIFY**: Asks 3-5 clarifying questions before planning
+2. **DISCOVER**: Explores codebase with subagents, researches unfamiliar tech
+3. **DRAFT**: Produces spec using appropriate template
+4. **REFINE**: Validates completeness, resolves gaps
+5. **DONE**: Spec ready for `/overseer-plan`
+
+### Examples
+
+```
+# Good
+/plan-spec Add user favorites feature
+/plan-spec Should we migrate to tRPC?
+/plan-spec Refactor auth to use sessions
+/plan-spec Design the notification system
+/plan-spec Is this refactor worth the effort?
+
+# Bad
+/plan-spec                          # No topic specified
+                                    -> /plan-spec <feature or decision>
+
+/plan-spec Fix the login bug        # Too specific, just fix it
+                                    -> Ask primary agent to fix
+
+/plan-spec ./existing-spec.md       # Already have a spec
+                                    -> /overseer-plan ./existing-spec.md
+
+/plan-spec What is React?           # Research question
+                                    -> @librarian What is React?
+
+/plan-spec Review my PR             # Wrong command
+                                    -> /code-review
 ```
 
 ---
@@ -164,13 +221,13 @@ Complete the next incomplete task from a PRD. Implements, runs feedback loops, c
                                     -> /complete-next-task <prd-name>
 
 /complete-next-task nonexistent     # PRD doesn't exist
-                                    -> Create PRD .md then /overseer-plan <file>
+                                    -> /plan-spec <feature> then /overseer-plan
 
 /complete-next-task skip to task 5  # Non-sequential
                                     -> Complete tasks in order, or manually mark earlier as done
 
 /complete-next-task Build feature   # Not how it works
-                                    -> Write plan.md -> /overseer-plan -> /complete-next-task
+                                    -> /plan-spec -> /overseer-plan -> /complete-next-task
 ```
 
 ---
@@ -211,7 +268,7 @@ task-loop                                # No feature specified
                                          -> task-loop <prd-name>
 
 task-loop nonexistent                    # PRD doesn't exist
-                                         -> Write plan.md then /overseer-plan first
+                                         -> /plan-spec then /overseer-plan first
 
 task-loop favorites --interactive        # No such flag, it's non-interactive
                                          -> Use /complete-next-task for interactive
@@ -550,27 +607,28 @@ Check preemptive compaction status and settings.
 
 ```
 Planning new work?
-|- Complex feature?          -> Write plan.md then /overseer-plan
-|- Continue existing tasks?  -> /complete-next-task (interactive)
-|- Autonomous completion?    -> task-loop <prd-name> (CLI)
-|- Quick task?               -> Primary agent
+|- Need to develop spec?      -> /plan-spec (dialogue-driven)
+|- Have spec, need tasks?     -> /overseer-plan <file>
+|- Continue existing tasks?   -> /complete-next-task (interactive)
+|- Autonomous completion?     -> task-loop <prd-name> (CLI)
+|- Quick task?                -> Primary agent
 
 Task management?
-|- List/create/start tasks?  -> /overseer
-|- Convert plan to tasks?    -> /overseer-plan
+|- List/create/start tasks?   -> /overseer
+|- Convert plan to tasks?     -> /overseer-plan
 
-Building UI?                 -> /frontend-design
-Cloudflare development?      -> /cloudflare
-Reviewing code?              -> /code-review
-Documenting codebase?        -> /index-knowledge
-Exploring OSS?               -> /opensrc
+Building UI?                  -> /frontend-design
+Cloudflare development?       -> /cloudflare
+Reviewing code?               -> /code-review
+Documenting codebase?         -> /index-knowledge
+Exploring OSS?                -> /opensrc
 
-Browser automation?          -> /agent-browser
-Creating skills?             -> /build-skill
+Browser automation?           -> /agent-browser
+Creating skills?              -> /build-skill
 
 Context management?
-|- Check status?             -> /pcompact-status
-|- Toggle auto-compact?      -> /pcompact-toggle
+|- Check status?              -> /pcompact-status
+|- Toggle auto-compact?       -> /pcompact-toggle
 ```
 
 ---
@@ -579,8 +637,9 @@ Context management?
 
 | Pattern | Flow |
 |---------|------|
-| Feature development | Write plan.md -> `/overseer-plan` -> `/complete-next-task` (repeat) -> `/code-review` |
-| Autonomous development | Write plan.md -> `/overseer-plan` -> `task-loop <name>` -> `/code-review` |
+| Feature development (from scratch) | `/plan-spec` -> `/overseer-plan` -> `/complete-next-task` (repeat) -> `/code-review` |
+| Feature development (have spec) | Write plan.md -> `/overseer-plan` -> `/complete-next-task` (repeat) -> `/code-review` |
+| Autonomous development | `/plan-spec` -> `/overseer-plan` -> `task-loop <name>` -> `/code-review` |
 | Task tracking | `/overseer create` -> `/overseer start` -> Work -> `/overseer complete` |
 | Codebase onboarding | `/opensrc <repo>` (remote) or `/index-knowledge` (local) |
 | PR workflow | Implement -> `/code-review` -> Fix issues -> Merge |
@@ -588,6 +647,7 @@ Context management?
 | UI implementation | `/frontend-design` -> Iterate -> `/code-review` |
 | Cloudflare work | `/cloudflare` -> Implement -> `/code-review` |
 | Skill development | `/build-skill` -> Test -> Refine |
+| Architecture decision | `/plan-spec` -> Evaluate trade-offs -> Document decision |
 
 ---
 

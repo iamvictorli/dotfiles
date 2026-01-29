@@ -4,13 +4,13 @@
 
 | Agent | Model | Purpose |
 |-------|-------|---------|
-| **oracle** | openai/gpt-5.2-codex + extended thinking | Senior advisor - architecture, debugging, planning |
+| **oracle** | anthropic/claude-opus-4-5 + extended thinking | Senior advisor - architecture, debugging, planning |
 | **librarian** | anthropic/claude-sonnet-4-5 | Remote repo exploration (GitHub/npm/PyPI) |
 | **code-reviewer** | default, temp=0.1 | Code review - bugs, security, quality |
 | **opencode-expert** | default, temp=0.1 | OpenCode config & troubleshooting |
 | **overseer** | anthropic/claude-opus-4-5 | Task management via Overseer MCP |
 
-All agents are **read-only** - they advise, primary agent acts.
+All agents are **advisory** - they advise, primary agent acts. Most are read-only; librarian has broader tool access for exploration.
 
 ### Built-in Agents
 
@@ -25,7 +25,7 @@ All agents are **read-only** - they advise, primary agent acts.
 
 ## oracle
 
-Senior engineering advisor with extended thinking (31,999 budget tokens). Uses `openai/gpt-5.2-codex`.
+Senior engineering advisor with extended thinking (31,999 budget tokens). Uses `anthropic/claude-opus-4-5`.
 
 ### Use For
 - Architecture decisions with significant trade-offs
