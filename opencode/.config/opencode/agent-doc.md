@@ -5,10 +5,9 @@
 | Agent | Model | Purpose |
 |-------|-------|---------|
 | **oracle** | anthropic/claude-opus-4-5 + extended thinking | Senior advisor - architecture, debugging, planning |
-| **librarian** | anthropic/claude-sonnet-4-5 | Remote repo exploration (GitHub/npm/PyPI) |
+| **librarian** | anthropic/claude-sonnet-4-5 | Remote repo exploration + websearch/codesearch |
 | **code-reviewer** | default, temp=0.1 | Code review - bugs, security, quality |
 | **opencode-expert** | default, temp=0.1 | OpenCode config & troubleshooting |
-| **overseer** | anthropic/claude-opus-4-5 | Task management via Overseer MCP |
 
 All agents are **advisory** - they advise, primary agent acts. Most are read-only; librarian has broader tool access for exploration.
 
@@ -17,9 +16,11 @@ All agents are **advisory** - they advise, primary agent acts. Most are read-onl
 | Agent | Mode | Purpose |
 |-------|------|---------|
 | `build` | primary | Default primary agent |
-| `plan` | primary | Planning mode (read-only edits) |
+| `plan` | primary | Planning mode (restricted edits) |
 | `general` | subagent | General-purpose subagent |
 | `explore` | subagent | Fast codebase exploration |
+
+**Hidden (internal):** `title`, `summary`, `compaction`
 
 ---
 
@@ -154,46 +155,12 @@ Configuration specialist with access to OpenCode source code.
 
 ---
 
-## overseer
-
-Task management specialist for multi-session work and project coordination.
-
-### Use For
-- Creating milestones and subtasks
-- Converting plans/specs to task hierarchies
-- Finding next ready work
-- Recording learnings
-- Tracking project progress
-
-### Don't Use For
-- Single-session simple tasks
-- Code review (use code-reviewer)
-- Architecture decisions (use oracle)
-- Library research (use librarian)
-
-### Examples
-
-```
-# Good
-@overseer Create milestone for auth system with subtasks
-@overseer What's the next ready task?
-@overseer Add learning about rate limiting to current task
-
-# Bad
-@overseer Review this code                  -> use code-reviewer
-@overseer How does Next.js routing work?    -> use librarian
-@overseer Plan API architecture             -> use oracle
-```
-
----
-
 ## Decision Flow
 
 ```
 Need deep reasoning/planning?     -> oracle
 Need library internals?           -> librarian
 Need bug/security review?         -> code-reviewer
-Need task/milestone management?   -> overseer
 Need OpenCode help?               -> opencode-expert
 Everything else                   -> Primary agent
 ```
@@ -207,40 +174,6 @@ Everything else                   -> Primary agent
 | Research then decide | librarian (how does X work?) -> oracle (should we use X?) |
 | Plan, implement, verify | oracle (plan) -> Primary (implement) -> code-reviewer (verify) |
 | Learn then apply | opencode-expert (config syntax) -> Primary (apply config) |
-
-### Overseer Integration
-
-Overseer is the "memory" layer. Other agents are stateless advisors. Use Overseer to persist decisions/learnings.
-
-| Pattern | Flow | When |
-|---------|------|------|
-| Plan → Track → Build | oracle (design) -> overseer (create tasks) -> Primary (implement each) | Large features needing structure |
-| Research → Decide → Track | librarian (how does X?) -> oracle (pick approach) -> overseer (task breakdown) | Unfamiliar domain/library |
-| Build → Review → Learn | Primary (implement) -> code-reviewer (verify) -> overseer (record learning) | Tricky implementation worth remembering |
-| Session handoff | overseer (update progress) -> [end] -> overseer (what's next?) -> Primary (continue) | Multi-session work |
-| Blocked work | overseer (find ready) -> Primary (implement unblocked) -> overseer (unblock dependents) | Complex dependencies |
-
-**Examples:**
-
-```
-# Large feature
-@oracle Design auth system with JWT refresh tokens
-@overseer Convert this plan to milestone with subtasks
-@overseer What's the next ready task?
-[implement]
-@code-reviewer Check token validation logic
-@overseer Complete current task, add learning about jose library
-
-# Research-driven
-@librarian How does Stripe handle webhook verification?
-@oracle Should we use their SDK or raw crypto?
-@overseer Create tasks for payment webhook implementation
-
-# Session resume
-@overseer What tasks are in progress or ready?
-[continue work]
-@overseer Mark login-flow task complete with result "uses PKCE"
-```
 
 ---
 
@@ -311,13 +244,19 @@ System prompt content...
 
 | Category | Description |
 |----------|-------------|
-| `read`, `grep`, `glob`, `lsp` | Read operations |
-| `edit`, `write`, `patch`, `multiedit` | Write operations |
+| `read` | File reading |
+| `edit` | File editing (aliases: write, patch, multiedit) |
+| `glob`, `grep`, `list` | File search/listing |
+| `lsp` | Language server operations |
 | `bash` | Shell commands (supports pattern matching) |
 | `task` | Task/subagent tool |
+| `skill` | Skill loading |
 | `external_directory` | Access outside project |
 | `todowrite`, `todoread` | Todo management |
-| `websearch`, `codesearch` | Search tools |
+| `websearch`, `codesearch`, `webfetch` | Web/search tools |
+| `question` | User question prompts |
+| `doom_loop` | Doom loop detection |
+| `plan_enter`, `plan_exit` | Plan mode transitions |
 
 ### Invocation
 

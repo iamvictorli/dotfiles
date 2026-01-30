@@ -2,18 +2,21 @@
 
 ## Overview
 
-| Skill               | Purpose                                               |
-| ------------------- | ----------------------------------------------------- |
-| **vcs-detect**      | Detect jj vs git before VCS commands                  |
-| **overseer**        | Manage tasks via Overseer MCP for multi-session work  |
-| **overseer-plan**   | Convert markdown plans to Overseer task hierarchies   |
-| **spec-planner**    | Dialogue-driven spec development via skeptical questioning |
-| **index-knowledge** | Generate hierarchical AGENTS.md knowledge base        |
-| **librarian**       | Multi-repo exploration (GitHub/npm/PyPI/crates)       |
-| **frontend-design** | Tailwind v4 + shadcn/ui + Motion design system        |
-| **build-skill**     | Create/validate OpenCode skills                       |
-| **agent-browser**   | Playwright-based browser automation CLI               |
-| **cloudflare**      | Cloudflare platform (Workers, Pages, D1, R2, AI, IaC) |
+| Skill                    | Purpose                                                    |
+| ------------------------ | ---------------------------------------------------------- |
+| **vcs-detect**           | Detect jj vs git before VCS commands                       |
+| **overseer**             | Manage tasks via Overseer MCP for multi-session work       |
+| **overseer-plan**        | Convert markdown plans to Overseer task hierarchies        |
+| **spec-planner**         | Dialogue-driven spec development via skeptical questioning |
+| **index-knowledge**      | Generate hierarchical AGENTS.md knowledge base             |
+| **librarian**            | Multi-repo exploration (GitHub/npm/PyPI/crates)            |
+| **frontend-design**      | Tailwind v4 + shadcn/ui + Motion design system             |
+| **build-skill**          | Create/validate OpenCode skills                            |
+| **agent-browser**        | Playwright-based browser automation CLI                    |
+| **cloudflare**           | Cloudflare platform (Workers, Pages, D1, R2, AI, IaC)      |
+| **react-native-skills**  | React Native/Expo best practices for mobile apps           |
+| **react-best-practices** | Vercel React/Next.js performance (57 rules)                |
+| **composition-patterns** | React composition patterns, compound components            |
 
 All skills are **loaded on demand** - invoke via `/skill <name>`.
 
@@ -390,6 +393,137 @@ IaC?          → Pulumi, Terraform, API
 
 ---
 
+## react-native-skills
+
+React Native and Expo best practices for performant mobile apps.
+
+### Use For
+
+- Building React Native/Expo apps
+- Optimizing list/scroll performance (FlashList)
+- Implementing Reanimated animations
+- Working with native modules
+
+### Don't Use For
+
+- Web-only React apps (use react-best-practices)
+- Non-React Native mobile frameworks
+
+### Key Categories
+
+| Priority | Category         | Impact   |
+| -------- | ---------------- | -------- |
+| 1        | List Performance | CRITICAL |
+| 2        | Animation        | HIGH     |
+| 3        | Navigation       | HIGH     |
+| 4        | UI Patterns      | HIGH     |
+| 5        | State Management | MEDIUM   |
+
+### Examples
+
+```
+# Good
+/skill react-native-skills FlashList optimization
+/skill react-native-skills Reanimated gesture handling
+/skill react-native-skills native stack navigation setup
+/skill react-native-skills expo-image optimization
+
+# Bad
+/skill react-native-skills for web React   -> react-best-practices
+/skill react-native-skills for Flutter     -> wrong framework
+/skill react-native-skills Next.js pages   -> react-best-practices
+```
+
+---
+
+## react-best-practices
+
+Vercel's React/Next.js performance optimization guide (57 rules, 8 categories).
+
+### Use For
+
+- Writing new React/Next.js components
+- Performance audits and optimization
+- Data fetching patterns (client/server)
+- Bundle size reduction
+- Reviewing code for perf issues
+
+### Don't Use For
+
+- React Native apps (use react-native-skills)
+- Non-React frameworks
+
+### Key Categories
+
+| Priority | Category                  | Impact      |
+| -------- | ------------------------- | ----------- |
+| 1        | Eliminating Waterfalls    | CRITICAL    |
+| 2        | Bundle Size Optimization  | CRITICAL    |
+| 3        | Server-Side Performance   | HIGH        |
+| 4        | Client-Side Data Fetching | MEDIUM-HIGH |
+| 5        | Re-render Optimization    | MEDIUM      |
+
+### Examples
+
+```
+# Good
+/skill react-best-practices async waterfall fix
+/skill react-best-practices bundle size audit
+/skill react-best-practices server component patterns
+/skill react-best-practices SWR data fetching
+/skill react-best-practices useTransition loading states
+
+# Bad
+/skill react-best-practices React Native list  -> react-native-skills
+/skill react-best-practices Vue optimization   -> wrong framework
+/skill react-best-practices general JS perf    -> primary agent
+```
+
+---
+
+## composition-patterns
+
+React composition patterns for scalable component APIs.
+
+### Use For
+
+- Refactoring components with boolean prop proliferation
+- Building compound components
+- Designing flexible component APIs
+- React 19 migration (`use()` over `useContext()`)
+
+### Don't Use For
+
+- Simple one-off components
+- Non-React frameworks
+- Performance optimization (use react-best-practices)
+
+### Key Patterns
+
+| Priority | Category               | Impact |
+| -------- | ---------------------- | ------ |
+| 1        | Component Architecture | HIGH   |
+| 2        | State Management       | MEDIUM |
+| 3        | Implementation         | MEDIUM |
+| 4        | React 19 APIs          | MEDIUM |
+
+### Examples
+
+```
+# Good
+/skill composition-patterns refactor boolean props
+/skill composition-patterns compound component design
+/skill composition-patterns context provider pattern
+/skill composition-patterns React 19 use() migration
+
+# Bad
+/skill composition-patterns fix render perf       -> react-best-practices
+/skill composition-patterns React Native list     -> react-native-skills
+/skill composition-patterns simple button component -> just build it
+```
+
+---
+
 ## Decision Flow
 
 ```
@@ -403,6 +537,9 @@ Build React UI?          -> frontend-design
 Create skill?            -> build-skill
 Web automation?          -> agent-browser
 Cloudflare platform?     -> cloudflare
+React Native/Expo app?   -> react-native-skills
+React/Next.js perf?      -> react-best-practices
+Component composition?   -> composition-patterns
 ```
 
 ---
@@ -426,6 +563,11 @@ Cloudflare platform?     -> cloudflare
 | **Multi-session handoff** | overseer (context) → new session → overseer (resume) |
 | **PRD task loop** | create PRD → `/complete-next-task <prd>` → repeat until done |
 | **Architecture decision** | spec-planner (trade-offs) → ADR → implement |
+| **React Native app** | react-native-skills → implement → test on device |
+| **Next.js perf audit** | react-best-practices → identify issues → fix waterfalls/bundle |
+| **Component library** | composition-patterns → design API → frontend-design (styling) |
+| **React 19 migration** | composition-patterns (use() APIs) → refactor → test |
+| **Mobile + web shared** | composition-patterns (architecture) → react-native-skills + react-best-practices |
 
 ---
 
