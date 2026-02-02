@@ -2,11 +2,12 @@
 title: Hoist callbacks to the root of lists
 impact: MEDIUM
 impactDescription: Fewer re-renders and faster lists
+tags: tag1, tag2
 ---
 
 ## List performance callbacks
 
-**Impact: MEDIUM (Fewer re-renders and faster lists)**
+**Impact: HIGH (Fewer re-renders and faster lists)**
 
 When passing callback functions to list items, create a single instance of the
 callback at the root of the list. Items should then call it with a unique
@@ -40,4 +41,4 @@ return (
 )
 ```
 
-
+Reference: [Link to documentation or resource](https://example.com)

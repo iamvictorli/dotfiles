@@ -1,5 +1,5 @@
 ---
-name: react-best-practices
+name: vercel-react-best-practices
 description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
 license: MIT
 metadata:
@@ -116,36 +116,13 @@ Reference these guidelines when:
 - `advanced-init-once` - Initialize app once per app load
 - `advanced-use-latest` - useLatest for stable callback refs
 
-## In This Reference
-
-| Category | File Pattern | Purpose |
-|----------|--------------|---------|
-| Async/Waterfalls | [references/async-*.md](./references/) | Eliminating request waterfalls (CRITICAL) |
-| Bundle | [references/bundle-*.md](./references/) | Bundle size optimization (CRITICAL) |
-| Server | [references/server-*.md](./references/) | Server-side performance (HIGH) |
-| Client | [references/client-*.md](./references/) | Client-side data fetching (MEDIUM-HIGH) |
-| Rerender | [references/rerender-*.md](./references/) | Re-render optimization (MEDIUM) |
-| Rendering | [references/rendering-*.md](./references/) | Rendering performance (MEDIUM) |
-| JavaScript | [references/js-*.md](./references/) | JavaScript micro-optimizations (LOW-MEDIUM) |
-| Advanced | [references/advanced-*.md](./references/) | Advanced patterns (LOW) |
-
-## Reading Order
-
-| Task | Start With |
-|------|------------|
-| New React component | `rerender-*`, `rendering-*` |
-| Server-side work | `server-*`, `async-*` |
-| Performance audit | `async-*`, `bundle-*` (CRITICAL first) |
-| Data fetching | `client-*`, `server-*` |
-| Bundle optimization | `bundle-*` |
-
 ## How to Use
 
 Read individual rule files for detailed explanations and code examples:
 
 ```
-references/async-parallel.md
-references/bundle-barrel-imports.md
+rules/async-parallel.md
+rules/bundle-barrel-imports.md
 ```
 
 Each rule file contains:
@@ -153,3 +130,7 @@ Each rule file contains:
 - Incorrect code example with explanation
 - Correct code example with explanation
 - Additional context and references
+
+## Full Compiled Document
+
+For the complete guide with all rules expanded: `AGENTS.md`

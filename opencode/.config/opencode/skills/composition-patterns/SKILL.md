@@ -1,5 +1,5 @@
 ---
-name: composition-patterns
+name: vercel-composition-patterns
 description:
   React composition patterns that scale. Use when refactoring components with
   boolean prop proliferation, building flexible component libraries, or
@@ -10,12 +10,6 @@ license: MIT
 metadata:
   author: vercel
   version: '1.0.0'
-  organization: Engineering
-  date: January 2026
-  references:
-    - https://react.dev
-    - https://react.dev/learn/passing-data-deeply-with-context
-    - https://react.dev/reference/react/use
 ---
 
 # React Composition Patterns
@@ -74,33 +68,13 @@ Reference these guidelines when:
 
 - `react19-no-forwardref` - Don't use `forwardRef`; use `use()` instead of `useContext()`
 
-## In This Reference
-
-| File | Purpose |
-|------|---------|
-| [sections-metadata.md](./references/sections-metadata.md) | Section metadata, impacts |
-| [rule-template.md](./references/rule-template.md) | Template for new rules |
-| [architecture-*.md](./references/) | Component architecture rules |
-| [state-*.md](./references/) | State management rules |
-| [patterns-*.md](./references/) | Implementation pattern rules |
-| [react19-*.md](./references/) | React 19 API rules |
-
-## Reading Order
-
-| Task | Files |
-|------|-------|
-| Refactoring boolean props | `architecture-avoid-boolean-props.md` -> `patterns-explicit-variants.md` |
-| Building compound components | `architecture-compound-components.md` -> `state-context-interface.md` |
-| Understanding state patterns | `state-lift-state.md` -> `state-decouple-implementation.md` |
-| React 19 migration | `react19-no-forwardref.md` |
-
 ## How to Use
 
 Read individual rule files for detailed explanations and code examples:
 
 ```
-references/architecture-avoid-boolean-props.md
-references/state-context-interface.md
+rules/architecture-avoid-boolean-props.md
+rules/state-context-interface.md
 ```
 
 Each rule file contains:
@@ -110,3 +84,6 @@ Each rule file contains:
 - Correct code example with explanation
 - Additional context and references
 
+## Full Compiled Document
+
+For the complete guide with all rules expanded: `AGENTS.md`

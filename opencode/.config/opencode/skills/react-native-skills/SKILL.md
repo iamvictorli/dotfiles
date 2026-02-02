@@ -1,5 +1,5 @@
 ---
-name: react-native-skills
+name: vercel-react-native-skills
 description:
   React Native and Expo best practices for building performant mobile apps. Use
   when building React Native components, optimizing list performance,
@@ -105,8 +105,8 @@ Reference these guidelines when:
 Read individual rule files for detailed explanations and code examples:
 
 ```
-references/list-performance-virtualize.md
-references/animation-gpu-properties.md
+rules/list-performance-virtualize.md
+rules/animation-gpu-properties.md
 ```
 
 Each rule file contains:
@@ -116,4 +116,6 @@ Each rule file contains:
 - Correct code example with explanation
 - Additional context and references
 
+## Full Compiled Document
 
+For the complete guide with all rules expanded: `AGENTS.md`
