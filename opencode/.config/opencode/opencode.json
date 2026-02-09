@@ -157,11 +157,11 @@
       "type": "local",
       "command": [
         "node",
-        "{env:HOME}/dotfiles/overseer/mcp/build/index.js"
+        "{env:HOME}/dotfiles/overseer/host/dist/index.js",
+        "mcp",
+        "--cli-path",
+        "{env:HOME}/dotfiles/overseer/overseer/target/release/os"
       ],
-      "environment": {
-        "OVERSEER_CLI_PATH": "{env:HOME}/dotfiles/overseer/overseer/target/release/os"
-      },
       "enabled": true
     }
   }
