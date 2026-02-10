@@ -49,7 +49,7 @@ fi
 # Install global npm packages
 if command -v npm &> /dev/null; then
     echo "Installing global npm packages..."
-    npm install --global trash-cli@4.0.0
+    npm install --global trash-cli
 else
     echo "npm not found. Skipping global npm packages."
 fi
