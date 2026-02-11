@@ -5,10 +5,11 @@ tool_output_token_limit = 25000
 # Formula: 273000 - (tool_output_token_limit + 15000)
 # With tool_output_token_limit=25000 ⇒ 273000 - (25000 + 15000) = 233000
 model_auto_compact_token_limit = 233000
+web_search = "live"
+
 [features]
 unified_exec = true
 apply_patch_freeform = true
-web_search_request = true
 shell_snapshot = true
 
 [projects."/Users/victor/workspace"]
@@ -18,4 +19,7 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/victor/workspace/opencode"]
+trust_level = "trusted"
+
+[projects."/Users/victor/workspace/codex"]
 trust_level = "trusted"
