@@ -135,11 +135,18 @@ opencode-built() {
   folder="opencode-${os}-${arch}"
   bin="${repo}/packages/opencode/dist/${folder}/bin/opencode"
 
-  if [ ! -x "$bin" ]; then
-    bun run --cwd "${repo}/packages/opencode" build -- --single || return $?
+  if [ -x "$bin" ] && ! "$bin" --version 2>/dev/null | grep -q '^0\.0\.0-local-'; then
+    rm -f "$bin"
   fi
+
+  if [ ! -x "$bin" ]; then
+    OPENCODE_CHANNEL=local bun run --cwd "${repo}/packages/opencode" build -- --single || return $?
+  fi
+
   "$bin" "$@"
 }
+
+export PATH="$HOME/dotfiles/overseer/overseer/target/release:$PATH"
 
 # rm opencode from /packages/opencode/dist and then run oc again
 
@@ -150,3 +157,4 @@ opencode-built() {
 # build for mcp:
 # 1. cd overseer and cargo build --release
 # 2. cd mcp && npm install && npm run buld
+alias mdview="node /Users/victor/workspace/mdview/dist/index.js"
