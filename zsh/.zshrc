@@ -156,5 +156,5 @@ export PATH="$HOME/dotfiles/overseer/overseer/target/release:$PATH"
 # overseer mcp
 # build for mcp:
 # 1. cd overseer and cargo build --release
-# 2. cd mcp && npm install && npm run buld
+# 2. cd host && npm install && npm run build
 alias mdview="node /Users/victor/workspace/mdview/dist/index.js"
