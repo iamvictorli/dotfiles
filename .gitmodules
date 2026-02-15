@@ -4,3 +4,6 @@
 [submodule "opensrc-mcp"]
 	path = opensrc-mcp
 	url = https://github.com/dmmulroy/opensrc-mcp.git
+[submodule ".dotfiles"]
+	path = .dotfiles
+	url = https://github.com/dmmulroy/.dotfiles.git
