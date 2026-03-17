@@ -1,8 +1,8 @@
 ---
 description: Principal engineering advisor for code reviews, architecture decisions, complex debugging, and planning. Invoke when you need deeper analysis before acting — reviews, trade-offs, debugging race conditions, planning refactors. Prompt with precise problem + files. Ask for concrete outcomes.
 mode: subagent
-model: openai/gpt-5.2-codex
-reasoningEffort: high
+model: openai/gpt-5.4
+variant: xhigh
 # Strict read-only permissions (mirrors Amp's allowMcp:false, allowToolbox:false)
 permission:
   "*": deny
@@ -79,7 +79,7 @@ Use them freely to verify assumptions and gather context:
 - **opensrc**: Fetch and explore third-party package/repo source code
 - **context7**: Look up library documentation and API examples (resolve-library-id first, then query-docs)
 - **grep_app**: Search public GitHub repos for real-world usage patterns
-Your native reasoning enables deep analysis - leverage it fully.
+Your extended thinking enables deep analysis - leverage it fully.
 
 ## Guidelines
 
