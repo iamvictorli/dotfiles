@@ -31,7 +31,7 @@ echo "Stowing dotfiles..."
 for package in "${PACKAGES[@]}"; do
     if [ -d "$package" ]; then
         echo "  Stowing $package..."
-        stow -v --target="$HOME" "$package"
+        stow -v --restow --target="$HOME" "$package"
     else
         echo "  Skipping $package (not found)"
     fi

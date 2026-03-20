@@ -24,7 +24,7 @@ selection-background = #2e3c64
 selection-foreground = #c0caf5
 
 # Updates
-auto-update-channel = tip
+auto-update-channel = stable
 
 # Shell integrations
 quit-after-last-window-closed = true

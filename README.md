@@ -13,8 +13,8 @@ My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [GNU Stow]
 2. Clone the repo:
 
 ```bash
-git clone git@github.com:iamvictorli/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone git@github.com:iamvictorli/dotfiles.git ~/workspace/dotfiles
+cd ~/workspace/dotfiles
 ```
 
 3. Install packages from Brewfile:
@@ -38,7 +38,7 @@ brew bundle cleanup --force
 ### Stow individual packages
 
 ```bash
-cd ~/dotfiles
+cd ~/workspace/dotfiles
 stow zsh          # Just zsh config
 stow nvim         # Just nvim config
 stow -D zsh       # Unstow (remove symlinks)

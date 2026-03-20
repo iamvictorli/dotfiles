@@ -64,6 +64,6 @@ zsh/
 Uses [GNU Stow](https://www.gnu.org/software/stow/):
 
 ```sh
-cd ~/dotfiles
+cd ~/workspace/dotfiles
 stow zsh
 ```

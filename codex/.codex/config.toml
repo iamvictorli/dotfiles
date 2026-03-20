@@ -15,7 +15,7 @@ shell_snapshot = true
 [projects."/Users/victor/workspace"]
 trust_level = "trusted"
 
-[projects."/Users/victor/dotfiles"]
+[projects."/Users/victor/workspace/dotfiles"]
 trust_level = "trusted"
 
 [projects."/Users/victor/workspace/opencode"]

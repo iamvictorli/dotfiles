@@ -1,10 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "@plannotator/opencode@latest",
+  ],
   "permission": {
     "external_directory": {
       "*": "ask",
       "~/.config/opencode/**": "allow",
-      "~/dotfiles/**": "allow",
+      "~/workspace/dotfiles/**": "allow",
       "~/workspace/**": "allow",
       "~/.local/share/opencode/mcp-auth.json": "deny"
     },
@@ -121,41 +124,7 @@
       "zoxide *": "allow"
     },
     "edit": "allow",
-    "webfetch": "ask"
-  },
-  "theme": "tokyonight",
-  "keybinds": {
-    "leader": "ctrl+o",
-    "messages_half_page_up": "ctrl+u",
-    "messages_half_page_down": "ctrl+d",
-    "input_delete_to_line_start": "none",
-    "input_delete": "delete,shift+delete"
-  },
-  "plugin": [
-    "opencode-anthropic-auth"
-  ],
-  "provider": {
-    "openai": {
-      "models": {
-        "gpt-5.3-codex": {
-          "name": "GPT-5.3 Codex",
-          "tool_call": true,
-          "reasoning": true,
-          "temperature": true,
-          "attachment": false,
-          "interleaved": {
-            "field": "reasoning_content"
-          },
-          "limit": {
-            "context": 1047576,
-            "output": 65536
-          },
-          "options": {
-            "store": false
-          }
-        }
-      }
-    }
+    "webfetch": "allow"
   },
   "mcp": {
     "grep_app": {
@@ -172,20 +141,9 @@
       "type": "local",
       "command": [
         "node",
-        "{env:HOME}/dotfiles/opensrc-mcp/dist/index.mjs"
+        "{env:HOME}/workspace/dotfiles/opensrc-mcp/dist/index.mjs"
       ],
       "enabled": true
     },
-    "overseer": {
-      "type": "local",
-      "command": [
-        "node",
-        "{env:HOME}/dotfiles/overseer/host/dist/index.js",
-        "mcp",
-        "--cli-path",
-        "{env:HOME}/dotfiles/overseer/overseer/target/release/os"
-      ],
-      "enabled": true
-    }
   }
 }

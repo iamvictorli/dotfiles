@@ -5,7 +5,8 @@ zsh/.cache/
 zsh/.zcompdump*
 
 opencode/.config/opencode/node_modules/
-opensrc/
+.dotfiles/
+opensrc-mcp/
 
 # codex
 codex/.codex/*
