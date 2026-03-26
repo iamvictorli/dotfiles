@@ -1,16 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
-  "plugin": [
-    "@plannotator/opencode@latest",
-  ],
   "permission": {
     "external_directory": {
       "*": "ask",
       "~/.config/opencode/**": "allow",
-      "~/workspace/dotfiles/**": "allow",
       "~/workspace/**": "allow",
-      "~/.local/share/opencode/mcp-auth.json": "deny"
     },
     "read": {
       "*": "allow",
@@ -19,7 +14,6 @@
       "*.envrc": "deny",
       "secrets/*": "deny",
       ".dev.vars": "ask",
-      "~/.local/share/opencode/mcp-auth.json": "deny"
     },
     "bash": {
       "*": "ask",
