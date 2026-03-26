@@ -27,7 +27,7 @@ _lazy_compinit() {
   else
     compinit -C
   fi
-  compdef -d oc ocg occ ocgr # disable completions for opencode aliases
+  compdef -d oc occ # disable completions for opencode aliases
   zle -A expand-or-complete _complete_orig  # restore original Tab
   unfunction _lazy_compinit
   zle expand-or-complete  # run completion for this Tab press
@@ -88,8 +88,6 @@ alias gdu="git diff --color=always | delta --paging=always"
 
 alias lzd="lazydocker"
 alias lg="lazygit"
-alias oc='opencode-built'
-alias ocg='opencode-gui'
 alias ks='tmux kill-server'
 alias scratch='nvim -c "setlocal buftype=nofile"'
 
@@ -147,43 +145,12 @@ opencode-built() {
   "$bin" "$@"
 }
 
-opencode-gui() {
-  local repo="$HOME/workspace/opencode"
-  local app="$repo/packages/desktop/src-tauri/target/release/bundle/macos/OpenCode Dev.app"
-  local bin="$repo/packages/desktop/src-tauri/target/release/OpenCode"
-
-  [[ -d "$repo/node_modules" ]] || bun install --cwd "$repo" || return $?
-
-  if [[ ! -d "$app" && ! -x "$bin" ]]; then
-    bun run --cwd "$repo/packages/desktop" tauri build || return $?
-  fi
-
-  if [[ -d "$app" ]]; then
-    open "$app"
-    return
-  fi
-
-  "$bin" "$@"
-}
+alias oc='opencode-built'
 
 oc-clean-cli() {
   local repo="$HOME/workspace/opencode"
   command rm -rf "$repo/packages/opencode/dist"
 }
 
-oc-clean-gui() {
-  local repo="$HOME/workspace/opencode"
-  command rm -rf "$repo/packages/desktop/src-tauri/target"
-}
-
-oc-clean() {
-  oc-clean-cli
-  oc-clean-gui
-}
-
 alias occ='oc-clean-cli'
-alias ocgc='oc-clean-gui'
-alias ocx='oc-clean'
 
-# for plannatator
-export PATH="$HOME/.local/bin:$PATH"
