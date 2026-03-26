@@ -6,7 +6,7 @@
 
 ## OVERVIEW
 
-GNU Stow-managed dotfiles for macOS. Each top-level directory is a stow package symlinked to `~`.
+GNU Stow-managed dotfiles for macOS. Stowable packages live at repo root and are symlinked into `~`.
 
 ## STRUCTURE
 
@@ -23,7 +23,6 @@ dotfiles/
 ├── ghostty/             # Terminal → ~/.config/ghostty/
 ├── starship/            # Prompt → ~/.config/starship.toml
 ├── lazygit/             # Git TUI → ~/Library/Application Support/lazygit/
-├── cursor/              # Cursor IDE → ~/Library/Application Support/Cursor/
 ├── yazi/                # File manager theme → ~/.config/yazi/
 ├── ssh/                 # SSH config → ~/.ssh/config
 ├── claude/              # Claude Code → ~/.claude/
@@ -51,7 +50,7 @@ dotfiles/
 - **Editor:** nvim (aliased from `vim`, `c`)
 - **Safe delete:** `rm` aliased to `trash` (trash-cli)
 - **VCS:** Check for `.jj/` before git commands
-- **macOS paths:** lazygit/, cursor/ use `~/Library/` (non-portable)
+- **macOS paths:** `lazygit/` uses `~/Library/` (non-portable)
 
 ## ANTI-PATTERNS (THIS PROJECT)
 
