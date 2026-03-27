@@ -38,8 +38,7 @@ zle -N expand-or-complete _lazy_compinit  # override Tab
 export EDITOR='nvim'
 
 # OpenCode experimental features
-export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
-export OPENCODE_EXPERIMENTAL_PLAN_MODE=true
+export OPENCODE_EXPERIMENTAL=true
 
 # https://yazi-rs.github.io/docs/quick-start
 # y shell wrapper that provides the ability to change the current working directory when exiting Yazi
