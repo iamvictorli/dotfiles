@@ -2,7 +2,6 @@
 
 **Generated:** 2026-01-26
 **Commit:** 6ea6598
-**Branch:** ai
 
 ## OVERVIEW
 
@@ -79,12 +78,5 @@ stow -v -D zsh               # Unstow
 
 ## NOTES
 
-- `zsh/.zshrcbak` is legacy oh-my-zsh config (can delete)
 - `nvim/` contains LazyVim with `lazy-lock.json` (pinned plugins)
-- `opensrc/` in .gitignore — runtime cache for opensrc-mcp
-- `.dotfiles/` empty dir at root — purpose unclear
 
-## SUBDIRECTORY AGENTS.md
-
-- `opencode/.config/opencode/AGENTS.md` — AI coding rules, type safety, VCS
-- `opencode/.config/opencode/skills/react-best-practices/AGENTS.md` — React/Next.js perf guide
