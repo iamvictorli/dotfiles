@@ -10,24 +10,26 @@ My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [GNU Stow]
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-2. Clone the repo:
+2. Install prerequisites:
+
+```bash
+brew install git stow
+```
+
+3. Clone the repo:
 
 ```bash
 git clone git@github.com:iamvictorli/dotfiles.git ~/workspace/dotfiles
 cd ~/workspace/dotfiles
 ```
 
-3. Install packages from Brewfile:
-
-```bash
-brew bundle install
-```
-
-4. Run the install script (stows dotfiles, installs Node.js via fnm, installs trash-cli):
+4. Run the install script:
 
 ```bash
 ./install
 ```
+
+This requires Homebrew, `git`, and GNU Stow to already be installed, then stows the dotfiles, installs everything else from `Brewfile`, installs the latest LTS Node.js via `fnm`, and installs `trash-cli`.
 
 5. (Optional) Cleanup packages not in Brewfile:
 

@@ -42,6 +42,7 @@ brew "tree"
 brew "wget"
 brew "yarn"
 brew "yazi"
+brew "yt-dlp"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
