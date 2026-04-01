@@ -1,0 +1,13 @@
+[mgr]
+
+[[mgr.prepend_keymap]]
+# Commit visual selections, then use trash-cli (https://github.com/sindresorhus/trash-cli) and refresh the UI.
+on = "d"
+run = [ "escape --visual", "plugin trash-confirm" ]
+desc = "Trash selected files"
+
+[[mgr.prepend_keymap]]
+# Keep permanent deletion unavailable from the keyboard.
+on = "D"
+run = "noop"
+desc = "Disabled permanent delete"
