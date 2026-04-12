@@ -11,7 +11,7 @@ vim.g.snacks_animate = false
 -- Disable netrw and snacks explorer (using mini-files instead)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.lazyvim_explorer = ""
+vim.g.lazyvim_explorer = "snacks"
 
 -- Keep markdown preview open when switching buffers
 vim.g.mkdp_auto_close = 0
