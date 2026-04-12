@@ -142,7 +142,7 @@
       "type": "local",
       "command": [
         "node",
-        "{env:HOME}/workspace/dotfiles/opensrc-mcp/dist/index.mjs"
+        "{env:HOME}/workspace/dotfiles/tools/opensrc-mcp/dist/index.mjs"
       ],
       "enabled": true
     },

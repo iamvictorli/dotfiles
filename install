@@ -16,6 +16,76 @@ if ! command -v brew &>/dev/null; then
   fi
 fi
 
+if command -v git &>/dev/null && git -C "${BASEDIR}" rev-parse --show-toplevel &>/dev/null && [ -f "${BASEDIR}/.gitmodules" ]; then
+  echo "Syncing git submodules..."
+  git -C "${BASEDIR}" submodule sync
+  git -C "${BASEDIR}" submodule update --init
+
+  echo "Updating top-level submodules..."
+  git -C "${BASEDIR}" config --file "${BASEDIR}/.gitmodules" --get-regexp '^submodule\..*\.path$' |
+    while read -r key submodule_path; do
+      branch_key="${key%.path}.branch"
+      branch="$(git -C "${BASEDIR}" config --file "${BASEDIR}/.gitmodules" --get "${branch_key}" 2>/dev/null || true)"
+      repo="${BASEDIR}/${submodule_path}"
+
+      if [ -z "${branch}" ]; then
+        echo "  Skipping ${submodule_path} (no branch configured)"
+        continue
+      fi
+
+      if [ -n "$(git -C "${repo}" status --porcelain)" ]; then
+        echo "  Skipping ${submodule_path} (dirty)"
+        continue
+      fi
+
+      if ! git -C "${repo}" fetch origin "${branch}" --prune &>/dev/null; then
+        echo "  Skipping ${submodule_path} (fetch failed)"
+        continue
+      fi
+
+      current_branch="$(git -C "${repo}" branch --show-current 2>/dev/null || true)"
+      if [ -z "${current_branch}" ]; then
+        if git -C "${repo}" show-ref --verify --quiet "refs/heads/${branch}"; then
+          if ! git -C "${repo}" checkout "${branch}" &>/dev/null; then
+            echo "  Skipping ${submodule_path} (could not check out ${branch})"
+            continue
+          fi
+        else
+          if ! git -C "${repo}" checkout -B "${branch}" "origin/${branch}" &>/dev/null; then
+            echo "  Skipping ${submodule_path} (could not create ${branch})"
+            continue
+          fi
+        fi
+      elif [ "${current_branch}" != "${branch}" ]; then
+        echo "  Skipping ${submodule_path} (on ${current_branch}, expected ${branch})"
+        continue
+      fi
+
+      counts="$(git -C "${repo}" rev-list --left-right --count HEAD...FETCH_HEAD)"
+      IFS=$' \t' read -r ahead behind <<<"${counts}"
+
+      if [ "${ahead}" != "0" ] && [ "${behind}" != "0" ]; then
+        echo "  Skipping ${submodule_path} (diverged from origin/${branch})"
+        continue
+      fi
+
+      if [ "${ahead}" != "0" ]; then
+        echo "  Skipping ${submodule_path} (ahead of origin/${branch})"
+        continue
+      fi
+
+      if [ "${behind}" = "0" ]; then
+        echo "  ${submodule_path} is already up to date"
+        continue
+      fi
+
+      echo "  Updating ${submodule_path}..."
+      if ! git -C "${repo}" merge --ff-only FETCH_HEAD &>/dev/null; then
+        echo "  Skipping ${submodule_path} (fast-forward failed)"
+      fi
+    done
+fi
+
 echo "Installing Homebrew packages from Brewfile..."
 brew bundle install --file="${BASEDIR}/Brewfile"
 echo "Homebrew packages installed."

@@ -114,7 +114,7 @@ _cache_init fzf "$(which fzf)" 'fzf --zsh'
 source "${${(%):-%x}:A:h}/tmux.zsh"
 
 opencode-built() {
-  local repo="$HOME/workspace/tools/opencode"
+  local repo="$HOME/workspace/dotfiles/tools/opencode"
   local os arch folder bin
 
   os="$(uname -s | tr '[:upper:]' '[:lower:]')"
@@ -147,7 +147,7 @@ opencode-built() {
 alias oc='opencode-built'
 
 oc-clean-cli() {
-  local repo="$HOME/workspace/tools/opencode"
+  local repo="$HOME/workspace/dotfiles/tools/opencode"
   command rm -rf "$repo/packages/opencode/dist"
 }
 

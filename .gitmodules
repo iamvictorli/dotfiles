@@ -1,0 +1,52 @@
+[submodule "tools/LazyVim"]
+	path = tools/LazyVim
+	url = https://github.com/LazyVim/LazyVim.git
+	branch = main
+[submodule "tools/ast-grep"]
+	path = tools/ast-grep
+	url = https://github.com/ast-grep/ast-grep.git
+	branch = main
+[submodule "tools/chrome-devtools-mcp"]
+	path = tools/chrome-devtools-mcp
+	url = https://github.com/ChromeDevTools/chrome-devtools-mcp.git
+	branch = main
+[submodule "tools/delta"]
+	path = tools/delta
+	url = https://github.com/dandavison/delta.git
+	branch = main
+[submodule "tools/ghostty"]
+	path = tools/ghostty
+	url = https://github.com/ghostty-org/ghostty
+	branch = main
+[submodule "tools/helium"]
+	path = tools/helium
+	url = https://github.com/imputnet/helium.git
+	branch = main
+[submodule "tools/lazygit"]
+	path = tools/lazygit
+	url = https://github.com/jesseduffield/lazygit
+	branch = master
+[submodule "tools/lumen"]
+	path = tools/lumen
+	url = https://github.com/jnsahaj/lumen.git
+	branch = main
+[submodule "tools/neovim"]
+	path = tools/neovim
+	url = https://github.com/neovim/neovim.git
+	branch = master
+[submodule "tools/opencode"]
+	path = tools/opencode
+	url = https://github.com/anomalyco/opencode.git
+	branch = dev
+[submodule "tools/vite-plus"]
+	path = tools/vite-plus
+	url = https://github.com/voidzero-dev/vite-plus.git
+	branch = main
+[submodule "tools/yazi"]
+	path = tools/yazi
+	url = https://github.com/sxyazi/yazi.git
+	branch = main
+[submodule "opensrc-mcp"]
+	path = tools/opensrc-mcp
+	url = https://github.com/dmmulroy/opensrc-mcp.git
+	branch = main
