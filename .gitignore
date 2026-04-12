@@ -1,8 +1,8 @@
 .DS_Store
 
 # zsh
-zsh/.cache/
-zsh/.zcompdump*
+stow/zsh/.cache/
+stow/zsh/.zcompdump*
 
-opencode/.config/opencode/node_modules/
+stow/opencode/.config/opencode/node_modules/
 .dotfiles/

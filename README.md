@@ -29,7 +29,7 @@ cd ~/workspace/dotfiles
 ./install
 ```
 
-This requires Homebrew, `git`, and GNU Stow to already be installed, then stows the dotfiles, installs everything else from `Brewfile`, installs the latest LTS Node.js via `fnm`, and installs `trash-cli`.
+This requires Homebrew, `git`, and GNU Stow to already be installed, then stows the packages from `stow/`, installs everything else from `Brewfile`, installs the latest LTS Node.js via `fnm`, and installs `trash-cli`.
 
 5. (Optional) Cleanup packages not in Brewfile:
 
@@ -39,11 +39,13 @@ brew bundle cleanup --force
 
 ### Stow individual packages
 
+Stow packages live under `stow/`.
+
 ```bash
 cd ~/workspace/dotfiles
-stow zsh          # Just zsh config
-stow nvim         # Just nvim config
-stow -D zsh       # Unstow (remove symlinks)
+stow -d stow -t ~ zsh     # Just zsh config
+stow -d stow -t ~ nvim    # Just nvim config
+stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 ```
 
 ### Available packages
@@ -57,8 +59,8 @@ stow -D zsh       # Unstow (remove symlinks)
 | `ghostty`  | Ghostty terminal        |
 | `starship` | Starship prompt         |
 | `lazygit`  | Lazygit configuration   |
-| `cursor`   | Cursor settings         |
 | `yazi`     | Yazi file manager theme |
+| `opencode` | OpenCode configuration  |
 
 ## Terminal
 

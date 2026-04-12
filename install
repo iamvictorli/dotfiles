@@ -96,6 +96,13 @@ if ! command -v stow &>/dev/null; then
 fi
 
 # List of packages to stow
+STOW_DIR="${BASEDIR}/stow"
+
+if [ ! -d "${STOW_DIR}" ]; then
+  echo "Stow package directory not found: ${STOW_DIR}"
+  exit 1
+fi
+
 PACKAGES=(
   zsh
   tmux
@@ -111,9 +118,9 @@ PACKAGES=(
 echo "Stowing dotfiles..."
 
 for package in "${PACKAGES[@]}"; do
-  if [ -d "$package" ]; then
+  if [ -d "${STOW_DIR}/${package}" ]; then
     echo "  Stowing $package..."
-    stow -v --restow --target="$HOME" "$package"
+    stow -v --restow --dir="${STOW_DIR}" --target="$HOME" "$package"
   else
     echo "  Skipping $package (not found)"
   fi

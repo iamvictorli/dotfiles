@@ -153,3 +153,6 @@ oc-clean-cli() {
 
 alias occ='oc-clean-cli'
 
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
