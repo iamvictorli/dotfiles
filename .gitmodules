@@ -50,3 +50,7 @@
 	path = tools/opensrc-mcp
 	url = https://github.com/dmmulroy/opensrc-mcp.git
 	branch = main
+[submodule "tools/yt-dlp"]
+	path = tools/yt-dlp
+	url = https://github.com/yt-dlp/yt-dlp.git
+	branch = master

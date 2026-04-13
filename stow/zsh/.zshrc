@@ -110,6 +110,7 @@ _cache_init starship "$(which starship)" 'starship init zsh'
 _cache_init fnm "$(which fnm)" 'fnm env --use-on-cd --shell zsh'
 
 _cache_init fzf "$(which fzf)" 'fzf --zsh'
+bindkey '^F' fzf-cd-widget
 
 source "${${(%):-%x}:A:h}/tmux.zsh"
 
