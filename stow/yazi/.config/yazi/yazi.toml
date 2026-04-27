@@ -1,2 +1,6 @@
 [mgr]
 show_hidden = true
+
+[tasks]
+# Avoid quit warnings from unfinished video thumbnail preload tasks.
+suppress_preload = true
