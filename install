@@ -140,7 +140,7 @@ fi
 # Install global npm packages
 if command -v npm &>/dev/null; then
   echo "Installing global npm packages..."
-  npm install --global trash-cli
+  npm install --global trash-cli @mariozechner/pi-coding-agent
 else
   echo "npm not found. Skipping global npm packages."
 fi

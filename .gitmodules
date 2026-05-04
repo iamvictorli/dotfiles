@@ -54,3 +54,15 @@
 	path = tools/yt-dlp
 	url = https://github.com/yt-dlp/yt-dlp.git
 	branch = master
+[submodule "tools/pnpm"]
+	path = tools/pnpm
+	url = https://github.com/pnpm/pnpm.git
+	branch = main
+[submodule "tools/iina"]
+	path = tools/iina
+	url = https://github.com/iina/iina.git
+	branch = develop
+[submodule "tools/pi"]
+	path = tools/pi
+	url = https://github.com/badlogic/pi-mono.git
+	branch = main
