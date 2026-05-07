@@ -104,15 +104,15 @@ if [ ! -d "${STOW_DIR}" ]; then
 fi
 
 PACKAGES=(
-  zsh
-  tmux
-  ssh
-  nvim
   ghostty
-  starship
   lazygit
-  yazi
+  nvim
   opencode
+  ssh
+  starship
+  tmux
+  yazi
+  zsh
 )
 
 echo "Stowing dotfiles..."
@@ -128,21 +128,17 @@ done
 
 echo "Stowing complete!"
 
-# Install Node.js via fnm if available
-if command -v fnm &>/dev/null; then
-  echo "Installing latest LTS Node.js via fnm..."
-  fnm install --lts
-  fnm default lts-latest
+# Install Node.js via vite-plus if available
+if command -v vp &>/dev/null; then
+  vp upgrade
+  echo "Setting up vite-plus Node.js environment..."
+  vp env setup --env-only
+  vp env install lts
+  vp env default lts
+  echo "Installing global packages..."
+  vp i --global trash-cli @earendil-works/pi-coding-agent taze
 else
-  echo "fnm not found. Install it with: brew install fnm"
-fi
-
-# Install global npm packages
-if command -v npm &>/dev/null; then
-  echo "Installing global npm packages..."
-  npm install --global trash-cli @mariozechner/pi-coding-agent @antfu/ni taze
-else
-  echo "npm not found. Skipping global npm packages."
+  echo "vp not found. Could not set up vite-plus Node.js environment."
 fi
 
 echo "Done!"
