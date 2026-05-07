@@ -70,7 +70,3 @@
 	path = tools/taze
 	url = https://github.com/antfu-collective/taze.git
 	branch = main
-[submodule "tools/ni"]
-	path = tools/ni
-	url = https://github.com/antfu-collective/ni.git
-	branch = main
