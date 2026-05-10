@@ -136,7 +136,7 @@ if command -v vp &>/dev/null; then
   vp env install lts
   vp env default lts
   echo "Installing global packages..."
-  vp i --global trash-cli @earendil-works/pi-coding-agent taze
+  vp i --global trash-cli @earendil-works/pi-coding-agent taze chrome-devtools-mcp @openai/codex
 else
   echo "vp not found. Could not set up vite-plus Node.js environment."
 fi
