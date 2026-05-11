@@ -108,6 +108,7 @@ PACKAGES=(
   lazygit
   nvim
   opencode
+  pi
   ssh
   starship
   tmux
