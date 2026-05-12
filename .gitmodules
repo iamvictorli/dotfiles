@@ -70,3 +70,7 @@
 	path = tools/taze
 	url = https://github.com/antfu-collective/taze.git
 	branch = main
+[submodule "tools/fzf"]
+	path = tools/fzf
+	url = https://github.com/junegunn/fzf.git
+	branch = master
