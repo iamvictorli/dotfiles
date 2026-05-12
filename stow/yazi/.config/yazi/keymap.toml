@@ -11,3 +11,21 @@ desc = "Trash selected files"
 on = "D"
 run = "noop"
 desc = "Disabled permanent delete"
+
+[[mgr.prepend_keymap]]
+# Directory-only fzf jump, like the shell fzf cd widget but inside Yazi.
+on = "z"
+run = "plugin dirs-fzf"
+desc = "Jump to directory with fzf"
+
+[[mgr.prepend_keymap]]
+# Move Yazi's default `z` binding to `Z` for file/directory fzf search.
+on = "Z"
+run = "plugin fzf"
+desc = "Jump to file/directory with fzf"
+
+[[mgr.prepend_keymap]]
+# Override Yazi's default `g h` home binding to jump to the workspace root.
+on = [ "g", "h" ]
+run = "cd ~/workspace"
+desc = "Go workspace"
