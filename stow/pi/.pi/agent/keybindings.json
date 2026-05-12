@@ -3,5 +3,7 @@
   "tui.select.down": ["ctrl+n"],
   "app.model.cycleForward": ["ctrl+shift+n"],
   "app.model.cycleBackward": ["ctrl+shift+p"],
-  "app.models.toggleProvider": []
+  "app.models.toggleProvider": [],
+  "app.session.togglePath": [],
+  "app.session.toggleNamedFilter": []
 }
