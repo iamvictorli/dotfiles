@@ -82,3 +82,15 @@
 	path = tools/node
 	url = https://github.com/nodejs/node
 	branch = main
+[submodule "tools/npm"]
+	path = tools/npm
+	url = https://github.com/npm/cli.git
+	branch = latest
+[submodule "tools/yarn"]
+	path = tools/yarn
+	url = https://github.com/yarnpkg/berry.git
+	branch = master
+[submodule "tools/yarn-v1"]
+	path = tools/yarn-v1
+	url = https://github.com/yarnpkg/yarn.git
+	branch = master
