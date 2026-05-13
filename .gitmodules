@@ -78,3 +78,7 @@
 	path = tools/videospeed
 	url = https://github.com/igrigorik/videospeed
 	branch = master
+[submodule "tools/node"]
+	path = tools/node
+	url = https://github.com/nodejs/node
+	branch = main
