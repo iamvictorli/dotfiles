@@ -94,3 +94,7 @@
 	path = tools/yarn-v1
 	url = https://github.com/yarnpkg/yarn.git
 	branch = master
+[submodule "tools/codex"]
+	path = tools/codex
+	url = https://github.com/openai/codex
+	branch = main
