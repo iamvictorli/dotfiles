@@ -203,4 +203,15 @@
   //       "openFolder" : "cmd+o"
   //     }
   //   },
+
+  "shortcuts": {
+    "bindings": {
+      "splitRight": "ctrl+\\",
+      "splitDown": "ctrl+enter",
+      "focusLeft": "ctrl+h",
+      "focusRight": "ctrl+l",
+      "focusUp": "ctrl+k",
+      "focusDown": "ctrl+j"
+    }
+  }
 }
