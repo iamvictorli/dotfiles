@@ -98,3 +98,6 @@
 	path = tools/codex
 	url = https://github.com/openai/codex
 	branch = main
+[submodule "tools/cmux"]
+	path = tools/cmux
+	url = https://github.com/manaflow-ai/cmux
