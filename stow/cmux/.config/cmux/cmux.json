@@ -208,6 +208,7 @@
     "bindings": {
       "splitRight": "ctrl+\\",
       "splitDown": "ctrl+enter",
+      "toggleSplitZoom": "ctrl+m",
       "focusLeft": "ctrl+h",
       "focusRight": "ctrl+l",
       "focusUp": "ctrl+k",
