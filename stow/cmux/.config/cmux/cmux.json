@@ -209,10 +209,12 @@
       "splitRight": "ctrl+\\",
       "splitDown": "ctrl+enter",
       "toggleSplitZoom": "ctrl+m",
-      "focusLeft": "ctrl+h",
-      "focusRight": "ctrl+l",
-      "focusUp": "ctrl+k",
-      "focusDown": "ctrl+j"
+      "triggerFlash": "cmd+shift+plus",
+      "openBrowser": "none",
+      "focusLeft": "cmd+shift+h",
+      "focusRight": "cmd+shift+l",
+      "focusUp": "cmd+shift+k",
+      "focusDown": "cmd+shift+j"
     }
   }
 }
