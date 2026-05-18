@@ -210,8 +210,13 @@
       "splitDown": "ctrl+enter",
       "toggleSplitZoom": "ctrl+m",
       "triggerFlash": "cmd+shift+plus",
+      "markOldestUnreadAndJumpNext": "opt+shift+u",
       "openBrowser": "none",
       "focusLeft": "cmd+shift+h",
+      "prevSurface": "cmd+ctrl+[",
+      "nextSurface": "cmd+ctrl+]",
+      "prevSidebarTab": "cmd+shift+[",
+      "nextSidebarTab": "cmd+shift+]",
       "focusRight": "cmd+shift+l",
       "focusUp": "cmd+shift+k",
       "focusDown": "cmd+shift+j"
