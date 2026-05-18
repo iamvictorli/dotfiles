@@ -82,8 +82,6 @@ I use [Ghostty](https://ghostty.org/) as my terminal emulator.
 
 - [lazydocker](https://github.com/jesseduffield/lazydocker), the lazier way to manage docker, requires docker to be installed first
 
-- [eza](https://github.com/eza-community/eza), replacement for `ls`
-
 - [fd](https://github.com/sharkdp/fd), simple, fast and user-friendly alternative to `find`
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep), fast regex text searching in directories
