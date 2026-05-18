@@ -8,44 +8,43 @@ brew "ast-grep"
 brew "cloc"
 brew "cocoapods"
 brew "curl"
-brew "deno"
-brew "fd"
-brew "ffmpeg"
+brew "deno" # for yt-dlp
+brew "fd" # for yazi
+brew "ffmpeg" # for yazi
 brew "fzf"
 brew "gh"
 brew "git"
-brew "git-delta"
+# A syntax-highlighting pager for git diff, 
+# https://x.com/rauchg/status/1831421759666676165
+# https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
+brew "git-delta" 
 brew "go"
-brew "hyperfine"
-brew "imagemagick"
+brew "hyperfine" # for ./benchmark-zsh
+brew "imagemagick" # for yazi
 brew "jesseduffield/lazydocker/lazydocker"
-brew "jnsahaj/lumen/lumen"
+brew "jnsahaj/lumen/lumen" # TUI diff viewer
 brew "jj"
 brew "jq"
 brew "lazygit"
 brew "lua-language-server"
 brew "mas"
-brew "monolith"
+brew "monolith" # for karakeep
 brew "neovim"
 brew "oven-sh/bun/bun"
 brew "pnpm"
-brew "poppler"
-brew "rbenv"
-brew "resvg"
-brew "ripgrep"
-brew "rsync"
+brew "poppler" # for yazi
+brew "resvg" # for yazi
+brew "ripgrep" # for yazi
+brew "rsync" # for backups
 brew "rust"
-brew "sevenzip"
+brew "sevenzip" # for yazi
 brew "starship"
 brew "stow"
 brew "tmux"
 brew "tree"
-brew "wget"
 brew "yarn"
 brew "yazi"
 brew "yt-dlp"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
 
 # Casks
 cask "1password"
