@@ -101,9 +101,12 @@
 [submodule "tools/cmux"]
 	path = tools/cmux
 	url = https://github.com/manaflow-ai/cmux
+  branch = main
 [submodule "tools/pi-web-access"]
 	path = tools/pi-web-access
 	url = https://github.com/nicobailon/pi-web-access
+  branch = main
 [submodule "tools/ubo-lite"]
 	path = tools/ubo-lite
-	url = https://github.com/uBlockOrigin/uBOL-home.git
+	url = https://github.com/uBlockOrigin/uBOL-home
+  branch = main
