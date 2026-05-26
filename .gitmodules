@@ -110,3 +110,7 @@
 	path = tools/ubo-lite
 	url = https://github.com/uBlockOrigin/uBOL-home
   branch = main
+[submodule "tools/jq"]
+	path = tools/jq
+	url = https://github.com/jqlang/jq
+	branch = master
