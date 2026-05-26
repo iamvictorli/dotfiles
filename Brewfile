@@ -48,6 +48,7 @@ brew "yt-dlp"
 
 # Casks
 cask "1password"
+cask "1password-cli"
 cask "cmux"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
