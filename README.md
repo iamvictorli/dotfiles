@@ -113,7 +113,7 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 
 ## Programs
 
-- [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)
+- [Orb Stack](https://orbstack.dev/), faster and lighter way to run docker containers
 - [IINA](https://iina.io/), modern media player for MacOS
 - [Tailscale](https://tailscale.com/download)
 - [TextSniper](https://textsniper.app/)
