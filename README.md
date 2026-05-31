@@ -130,7 +130,9 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
 - [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
-- [https://github.com/alexpasmantier/television](https://github.com/alexpasmantier/television), similar to fzf, but with more customization?
+- [television](https://github.com/alexpasmantier/television), similar to fzf, but with more customization?
+- [dozzle](https://github.com/amir20/dozzle), real time log viewer for containers
+- [dtop](https://github.com/amir20/dtop), Terminal dashboard for Docker monitoring
 
 ## Interesting Paid Products I may or may not pickup
 
