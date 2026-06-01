@@ -133,6 +133,7 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 - [television](https://github.com/alexpasmantier/television), similar to fzf, but with more customization?
 - [dozzle](https://github.com/amir20/dozzle), real time log viewer for containers
 - [dtop](https://github.com/amir20/dtop), Terminal dashboard for Docker monitoring
+- [herdr](https://github.com/ogulcancelik/herdr), tui for agent orchestration, similar to cmux, inspired by tmux
 
 ## Interesting Paid Products I may or may not pickup
 
