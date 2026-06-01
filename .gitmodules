@@ -10,10 +10,6 @@
 	path = tools/chrome-devtools-mcp
 	url = https://github.com/ChromeDevTools/chrome-devtools-mcp.git
 	branch = main
-[submodule "tools/delta"]
-	path = tools/delta
-	url = https://github.com/dandavison/delta.git
-	branch = main
 [submodule "tools/ghostty"]
 	path = tools/ghostty
 	url = https://github.com/ghostty-org/ghostty
@@ -98,10 +94,6 @@
 	path = tools/codex
 	url = https://github.com/openai/codex
 	branch = main
-[submodule "tools/cmux"]
-	path = tools/cmux
-	url = https://github.com/manaflow-ai/cmux
-  branch = main
 [submodule "tools/pi-web-access"]
 	path = tools/pi-web-access
 	url = https://github.com/nicobailon/pi-web-access
