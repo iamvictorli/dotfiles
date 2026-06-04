@@ -1,6 +1,5 @@
 # Taps
 tap "jesseduffield/lazydocker"
-tap "manaflow-ai/cmux"
 tap "oven-sh/bun"
 
 # Formulae
@@ -49,7 +48,6 @@ brew "yt-dlp"
 # Casks
 cask "1password"
 cask "1password-cli@beta"
-cask "cmux"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
