@@ -27,14 +27,12 @@ brew "jq"
 brew "lazygit"
 brew "lua-language-server"
 brew "mas"
-brew "monolith" # for karakeep
 brew "neovim"
 brew "oven-sh/bun/bun"
 brew "pnpm"
 brew "poppler" # for yazi
 brew "resvg" # for yazi
 brew "ripgrep" # for yazi
-brew "rsync" # for backups
 brew "rust"
 brew "sevenzip" # for yazi
 brew "starship"
@@ -47,7 +45,7 @@ brew "yt-dlp"
 
 # Casks
 cask "1password"
-cask "1password-cli@beta"
+# cask "1password-cli@beta"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
