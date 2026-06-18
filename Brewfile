@@ -1,6 +1,7 @@
 # Formulae
 brew "jesseduffield/lazydocker/lazydocker", trusted: true
 brew "jnsahaj/lumen/lumen", trusted: true # TUI diff viewer
+brew "modem-dev/tap/hunk", trusted: true # Review-first terminal diff viewer
 brew "oven-sh/bun/bun", trusted: true
 brew "ast-grep"
 brew "cloc"
@@ -12,11 +13,8 @@ brew "ffmpeg" # for yazi
 brew "fzf"
 brew "gh"
 brew "git"
-# A syntax-highlighting pager for git diff, 
-# https://x.com/rauchg/status/1831421759666676165
-# https://cpojer.net/posts/the-perfect-development-environment#bat-and-delta
-brew "git-delta" 
 brew "go"
+brew "herdr"
 brew "hyperfine" # for ./benchmark-zsh
 brew "imagemagick" # for yazi
 brew "jj"
@@ -24,6 +22,7 @@ brew "jq"
 brew "lazygit"
 brew "lua-language-server"
 brew "mas"
+brew "mole"
 brew "neovim"
 brew "pnpm"
 brew "poppler" # for yazi
@@ -48,7 +47,9 @@ cask "ghostty"
 cask "iina"
 cask "orbstack"
 cask "raycast"
+cask "sizzy"
 cask "tailscale-app"
+# cask "webtorrent"
 cask "yaak"
 
 # Mac App Store

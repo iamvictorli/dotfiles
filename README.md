@@ -133,7 +133,9 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 - [television](https://github.com/alexpasmantier/television), similar to fzf, but with more customization?
 - [dozzle](https://github.com/amir20/dozzle), real time log viewer for containers
 - [dtop](https://github.com/amir20/dtop), Terminal dashboard for Docker monitoring
-- [herdr](https://github.com/ogulcancelik/herdr), tui for agent orchestration, similar to cmux, inspired by tmux
+- [tuxedo](https://github.com/webstonehq/tuxedo/), A fast, keyboard-driven terminal UI for todo.txt.
+- [Supacode](https://github.com/supabitapp/supacode), Another Terminal, with a focus on coding agents
+- [Bettercmdtab](https://bettercmdtab.app/), A fast, native window switcher and app launcher for macOS.
 
 ## Interesting Paid Products I may or may not pickup
 

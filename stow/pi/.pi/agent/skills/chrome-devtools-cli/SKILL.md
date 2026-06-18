@@ -1,7 +1,6 @@
 ---
 name: chrome-devtools-cli
 description: Use this skill to write shell scripts or run shell commands to automate tasks in the browser or otherwise use Chrome DevTools via CLI.
-disable-model-invocation: true
 ---
 
 The `chrome-devtools-mcp` CLI lets you interact with the browser from your terminal.

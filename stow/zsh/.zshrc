@@ -90,6 +90,13 @@ alias lg="lazygit"
 alias ks='tmux kill-server'
 alias scratch='nvim -c "setlocal buftype=nofile"'
 
+tempd() {
+  local tmpdir
+  tmpdir="$(mktemp -d)" || return
+  cd "$tmpdir" || return
+  echo "$tmpdir"
+}
+
 # vim: open current dir if no args
 vim() {
   if [[ $# -eq 0 ]]; then
