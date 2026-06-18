@@ -106,3 +106,7 @@
 	path = tools/jq
 	url = https://github.com/jqlang/jq
 	branch = master
+[submodule "tools/brew"]
+	path = tools/brew
+	url = https://github.com/Homebrew/brew
+	branch = master

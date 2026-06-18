@@ -1,8 +1,7 @@
-# Taps
-tap "jesseduffield/lazydocker"
-tap "oven-sh/bun"
-
 # Formulae
+brew "jesseduffield/lazydocker/lazydocker", trusted: true
+brew "jnsahaj/lumen/lumen", trusted: true # TUI diff viewer
+brew "oven-sh/bun/bun", trusted: true
 brew "ast-grep"
 brew "cloc"
 brew "cocoapods"
@@ -20,15 +19,12 @@ brew "git-delta"
 brew "go"
 brew "hyperfine" # for ./benchmark-zsh
 brew "imagemagick" # for yazi
-brew "jesseduffield/lazydocker/lazydocker"
-brew "jnsahaj/lumen/lumen" # TUI diff viewer
 brew "jj"
 brew "jq"
 brew "lazygit"
 brew "lua-language-server"
 brew "mas"
 brew "neovim"
-brew "oven-sh/bun/bun"
 brew "pnpm"
 brew "poppler" # for yazi
 brew "resvg" # for yazi
@@ -45,7 +41,7 @@ brew "yt-dlp"
 
 # Casks
 cask "1password"
-# cask "1password-cli@beta"
+cask "1password-cli@beta"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
