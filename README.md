@@ -135,7 +135,8 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 - [dtop](https://github.com/amir20/dtop), Terminal dashboard for Docker monitoring
 - [tuxedo](https://github.com/webstonehq/tuxedo/), A fast, keyboard-driven terminal UI for todo.txt.
 - [Supacode](https://github.com/supabitapp/supacode), Another Terminal, with a focus on coding agents
-- [Bettercmdtab](https://bettercmdtab.app/), A fast, native window switcher and app launcher for macOS.
+- [Bettercmdtab](https://github.com/rokartur/BetterCmdTab), A fast, native window switcher and app launcher for macOS.
+- [Alt Tab MacOS](https://github.com/lwouis/alt-tab-macos), Windows alt-tab on macOS
 
 ## Interesting Paid Products I may or may not pickup
 

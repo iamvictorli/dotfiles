@@ -180,7 +180,7 @@ confirm_close = false
 prompt_new_tab_name = true
 
 # Show detected/reported agent labels in split pane borders when no manual pane name is set.
-# show_agent_labels_on_pane_borders = false
+show_agent_labels_on_pane_borders = true
 
 # Agent panel scope: "current" or "all". Toggling it in the sidebar saves this setting.
 agent_panel_scope = "all"
@@ -195,7 +195,7 @@ agent_panel_scope = "all"
 # herdr = show in-app toasts
 # terminal = ask the outer terminal to show a desktop notification
 # system = ask the OS notification service directly
-delivery = "off"
+delivery = "herdr"
 delay_seconds = 1
 
 [ui.toast.herdr]
@@ -207,7 +207,7 @@ position = "bottom-center"
 
 # Play sounds when agents change state in background workspaces
 [ui.sound]
-enabled = false
+enabled = true
 # Optional custom mp3 sound files. Relative paths are resolved from this config file's directory.
 # path = "sounds/notification.mp3"   # one mp3 file for all sound notifications
 # done_path = "sounds/done.mp3"      # overrides only finished notifications
@@ -215,7 +215,8 @@ enabled = false
 
 # Per-agent overrides: default | on | off
 # By default, droid is muted.
-# [ui.sound.agents]
+[ui.sound.agents]
+pi = "on"
 # droid = "off"
 
 [session]
