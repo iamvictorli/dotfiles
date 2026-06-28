@@ -34,6 +34,7 @@ if [ ! -d "${STOW_DIR}" ]; then
 fi
 
 PACKAGES=(
+  agents
   ghostty
   herdr
   lazygit
@@ -73,9 +74,24 @@ else
   echo "vp not found. Could not set up vite-plus Node.js environment."
 fi
 
+# skills uses ~/.agents/.skill-lock.json for global installs; the agents package is stowed above.
+SKILL_LOCK="${HOME}/.agents/.skill-lock.json"
+if command -v npx &>/dev/null && [ -f "${SKILL_LOCK}" ]; then
+  echo "Updating global agent skills from ${SKILL_LOCK}..."
+  if env -u XDG_STATE_HOME npx --yes skills update --global --yes; then
+    echo "Agent skills updated."
+  else
+    echo "Some skill updates failed; continuing."
+  fi
+else
+  echo "npx not found or ${SKILL_LOCK} missing. Skipping skill updates."
+fi
+
 if command -v opensrc &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
+  echo "Cleaning cached opensrc repos to force fresh source fetch..."
+  opensrc clean --repos || echo "Some opensrc cache cleanup failed; continuing."
   echo "Fetching source repos with opensrc..."
-  grep -vE '^\s*(#|$)' "${BASEDIR}/opensrc-repos" | xargs opensrc fetch
+  grep -vE '^\s*(#|$)' "${BASEDIR}/opensrc-repos" | xargs opensrc fetch || echo "Some opensrc fetches failed; continuing."
 else
   echo "opensrc not found. Skipping source repo fetch."
 fi
