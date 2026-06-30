@@ -84,10 +84,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/tdd/SKILL.md",
-      "skillFolderHash": "7e6fad2aedf8648f6154af32915eebd12c6d51cc",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "0594874449739c280ed6b7878a8ab1252c5ae228",
       "installedAt": "2026-06-27T01:39:20.017Z",
-      "updatedAt": "2026-06-27T01:39:20.017Z"
+      "updatedAt": "2026-06-30T14:50:15.565Z"
     },
     "to-issues": {
       "source": "mattpocock/skills",
@@ -114,9 +113,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/in-progress/review/SKILL.md",
-      "skillFolderHash": "54f63545c8a6d9aaeacc036107b5f32f427c9bc6",
+      "skillFolderHash": "7358042ff9636cf903d3183e1d86744ea7ffda40",
       "installedAt": "2026-06-27T01:39:20.019Z",
-      "updatedAt": "2026-06-27T01:39:20.019Z"
+      "updatedAt": "2026-06-30T14:50:16.991Z"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -173,9 +172,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "a937f7e85bbf8780c6030c57f48dab2168bca932",
+      "skillFolderHash": "b7015f17a49501e99642009ebadabcbefc0fbad0",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-06-28T21:03:30.759Z"
+      "updatedAt": "2026-06-30T14:50:19.508Z"
     },
     "ask-matt": {
       "source": "mattpocock/skills",
