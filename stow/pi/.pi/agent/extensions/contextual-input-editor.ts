@@ -11,15 +11,14 @@
  * tool calls/tool results are omitted from the generated context.
  */
 
-import {
-  CustomEditor,
-  type AppKeybinding,
-  type ExtensionAPI,
-  type ExtensionContext,
-  type KeybindingsManager,
-  type SessionMessageEntry,
+import type {
+  AppKeybinding,
+  ExtensionAPI,
+  ExtensionContext,
+  KeybindingsManager,
+  SessionMessageEntry,
 } from "@earendil-works/pi-coding-agent";
-import type { EditorComponent, EditorTheme, TUI } from "@earendil-works/pi-tui";
+import { Editor, type EditorComponent, type EditorTheme, type TUI } from "@earendil-works/pi-tui";
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync, unlinkSync, writeFileSync } from "node:fs";
@@ -190,18 +189,76 @@ function openContextualInputEditor(
   }
 }
 
-class ContextualInputExternalEditor extends CustomEditor {
+class LocalCustomEditor extends Editor {
+  public actionHandlers: Map<AppKeybinding, () => void> = new Map();
+  public onEscape?: () => void;
+  public onCtrlD?: () => void;
+  public onPasteImage?: () => void;
+  public onExtensionShortcut?: (data: string) => boolean | undefined;
+
   constructor(
     tui: TUI,
     theme: EditorTheme,
-    private readonly contextKeybindings: KeybindingsManager,
-    private readonly ctx: ExtensionContext,
+    protected readonly keybindings: KeybindingsManager,
   ) {
-    super(tui, theme, contextKeybindings);
+    super(tui, theme);
+  }
+
+  onAction(action: AppKeybinding, handler: () => void): void {
+    this.actionHandlers.set(action, handler);
   }
 
   override handleInput(data: string): void {
-    if (this.contextKeybindings.matches(data, "app.editor.external")) {
+    if (this.onExtensionShortcut?.(data)) return;
+
+    if (this.keybindings.matches(data, "app.clipboard.pasteImage")) {
+      this.onPasteImage?.();
+      return;
+    }
+
+    if (this.keybindings.matches(data, "app.interrupt")) {
+      if (!this.isShowingAutocomplete()) {
+        const handler = this.onEscape ?? this.actionHandlers.get("app.interrupt");
+        if (handler) {
+          handler();
+          return;
+        }
+      }
+      super.handleInput(data);
+      return;
+    }
+
+    if (this.keybindings.matches(data, "app.exit")) {
+      if (this.getText().length === 0) {
+        const handler = this.onCtrlD ?? this.actionHandlers.get("app.exit");
+        if (handler) handler();
+        return;
+      }
+    }
+
+    for (const [action, handler] of this.actionHandlers) {
+      if (action !== "app.interrupt" && action !== "app.exit" && this.keybindings.matches(data, action)) {
+        handler();
+        return;
+      }
+    }
+
+    super.handleInput(data);
+  }
+}
+
+class ContextualInputExternalEditor extends LocalCustomEditor {
+  constructor(
+    tui: TUI,
+    theme: EditorTheme,
+    keybindings: KeybindingsManager,
+    private readonly ctx: ExtensionContext,
+  ) {
+    super(tui, theme, keybindings);
+  }
+
+  override handleInput(data: string): void {
+    if (this.keybindings.matches(data, "app.editor.external")) {
       openContextualInputEditor(this.ctx, this.tui, this);
       return;
     }
