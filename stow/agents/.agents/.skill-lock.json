@@ -74,18 +74,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "771dc406a4ed3416ca7c94a214ac2b2dcbdc19eb",
+      "skillFolderHash": "720ff07c579bf9d15e9fe62fd4f81e25aaa9001c",
       "installedAt": "2026-06-27T01:39:20.017Z",
-      "updatedAt": "2026-07-02T16:02:44.668Z"
+      "updatedAt": "2026-07-03T17:23:09.829Z"
     },
     "tdd": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/tdd/SKILL.md",
-      "skillFolderHash": "9d29becb522dcdd0ed73c866a23f7dd40ba08fa4",
+      "skillFolderHash": "57e1bee887816ed2af745e5fd388f224f6e61ada",
       "installedAt": "2026-06-27T01:39:20.017Z",
-      "updatedAt": "2026-07-01T15:54:43.100Z"
+      "updatedAt": "2026-07-03T17:23:10.861Z"
     },
     "to-issues": {
       "source": "mattpocock/skills",
@@ -132,10 +132,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "skillFolderHash": "ab318c66a36253e872b5d0bd271b3df8f6ef816f",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "8b14ca97479f518f3f1ced6a35bf591554d7e0cb",
       "installedAt": "2026-06-27T01:39:20.020Z",
-      "updatedAt": "2026-06-27T01:39:20.020Z"
+      "updatedAt": "2026-07-03T17:23:11.951Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -172,9 +171,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "74a771d12623726983ed2186380f6a216e797a06",
+      "skillFolderHash": "ef67a97047c92e4af6b9d69c7292962426109bc1",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-07-02T16:02:48.275Z"
+      "updatedAt": "2026-07-03T17:23:14.031Z"
     },
     "ask-matt": {
       "source": "mattpocock/skills",
@@ -230,6 +229,15 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-07-02T16:25:20.404Z",
       "updatedAt": "2026-07-02T16:25:20.404Z"
+    },
+    "hunk-review": {
+      "source": "modem-dev/hunk",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/modem-dev/hunk.git",
+      "skillPath": "skills/hunk-review/SKILL.md",
+      "skillFolderHash": "dcdffe55e1a26317d4639174fe2b66ae71686b6c",
+      "installedAt": "2026-07-03T00:04:14.652Z",
+      "updatedAt": "2026-07-03T00:04:14.652Z"
     }
   },
   "dismissed": {}

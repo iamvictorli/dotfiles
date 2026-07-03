@@ -1,4 +1,4 @@
-import type { ExtensionContext, Theme } from "@earendil-works/pi-coding-agent";
+import type { ExtensionContext, KeybindingsManager, Theme } from "@earendil-works/pi-coding-agent";
 import { Key, matchesKey, type TUI } from "@earendil-works/pi-tui";
 import type { SkillInvocationMode, SkillRecord, SkillToggleUiResult } from "../types.ts";
 import { formatSourceKind } from "../inventory/classifier.ts";
@@ -7,7 +7,7 @@ import { filterSkills, modeLabel, toggleMode } from "./view-model.ts";
 
 export async function showSkillToggleUi(ctx: ExtensionContext, skills: SkillRecord[]): Promise<SkillToggleUiResult> {
   return ctx.ui.custom<SkillToggleUiResult>(
-    (tui, theme, _keybindings, done) => new SkillToggleOverlay(tui, theme, skills, done),
+    (tui, theme, keybindings, done) => new SkillToggleOverlay(tui, theme, keybindings, skills, done),
     {
       overlay: true,
       overlayOptions: {
@@ -28,6 +28,7 @@ class SkillToggleOverlay {
   constructor(
     private readonly tui: TUI,
     private readonly theme: Theme,
+    private readonly keybindings: KeybindingsManager,
     private readonly skills: SkillRecord[],
     private readonly done: (result: SkillToggleUiResult) => void,
   ) {
@@ -45,12 +46,12 @@ class SkillToggleOverlay {
       return;
     }
 
-    if (matchesKey(data, Key.up)) {
+    if (this.keybindings.matches(data, "tui.select.up")) {
       this.moveSelection(-1);
       return;
     }
 
-    if (matchesKey(data, Key.down)) {
+    if (this.keybindings.matches(data, "tui.select.down")) {
       this.moveSelection(1);
       return;
     }
@@ -98,7 +99,7 @@ class SkillToggleOverlay {
     ).map((line) => frameLine(this.theme, line, innerWidth));
 
     const footer = [
-      frameLine(this.theme, this.theme.fg("dim", "type search • ↑↓ move • space toggle • ctrl+s apply + reload"), innerWidth),
+      frameLine(this.theme, this.theme.fg("dim", "type search • ↑↓/ctrl+p ctrl+n move • space toggle • ctrl+s apply + reload"), innerWidth),
       frameLine(this.theme, this.theme.fg("dim", "esc cancel"), innerWidth),
     ];
 
