@@ -92,10 +92,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/to-issues/SKILL.md",
-      "skillFolderHash": "8d7393a4127ee678f4b99070f436a2a87014c6e7",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "dd8a83cc54e114c0149e7e2d69e45c01d558ddc2",
       "installedAt": "2026-06-27T01:39:20.018Z",
-      "updatedAt": "2026-06-27T01:39:20.018Z"
+      "updatedAt": "2026-07-06T17:19:29.929Z"
     },
     "to-prd": {
       "source": "mattpocock/skills",
@@ -132,9 +131,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "skillFolderHash": "8b14ca97479f518f3f1ced6a35bf591554d7e0cb",
+      "skillFolderHash": "0ace40ac10f5c0b1534324e4e109ebfa831fb361",
       "installedAt": "2026-06-27T01:39:20.020Z",
-      "updatedAt": "2026-07-03T17:23:11.951Z"
+      "updatedAt": "2026-07-06T17:19:31.124Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -161,19 +160,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
-      "skillFolderHash": "0875ef784dfdf0a3860f1cdc3937c2796b0314a5",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "c84411b360fad91b8756e60fa17fd5b5761422dd",
       "installedAt": "2026-06-27T01:39:20.021Z",
-      "updatedAt": "2026-06-27T01:39:20.021Z"
+      "updatedAt": "2026-07-06T17:19:32.312Z"
     },
     "herdr": {
       "source": "ogulcancelik/herdr",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "ef67a97047c92e4af6b9d69c7292962426109bc1",
+      "skillFolderHash": "ed31632ebf6e63ca87e6d9a57b7eee79df5ae142",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-07-03T17:23:14.031Z"
+      "updatedAt": "2026-07-06T17:19:34.992Z"
     },
     "ask-matt": {
       "source": "mattpocock/skills",
