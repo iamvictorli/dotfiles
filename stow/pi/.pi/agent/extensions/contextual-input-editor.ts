@@ -18,7 +18,7 @@ import type {
   KeybindingsManager,
   SessionMessageEntry,
 } from "@earendil-works/pi-coding-agent";
-import { Editor, type EditorComponent, type EditorTheme, type TUI } from "@earendil-works/pi-tui";
+import { Editor, setKeybindings, type EditorComponent, type EditorTheme, type TUI } from "@earendil-works/pi-tui";
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync, unlinkSync, writeFileSync } from "node:fs";
@@ -417,6 +417,10 @@ export default function (pi: ExtensionAPI) {
     previousFactory = ctx.ui.getEditorComponent();
 
     const factory: EditorFactory = (tui, editorTheme, keybindings) => {
+      // This extension may resolve its own @earendil-works/pi-tui instance from ~/.pi/node_modules.
+      // Keep that instance's global keybinding manager synced so the fallback Editor honors user bindings.
+      setKeybindings(keybindings);
+
       if (!previousFactory) {
         return new ContextualInputExternalEditor(tui, editorTheme, keybindings, ctx);
       }
