@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+set -o pipefail
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASEDIR}"
@@ -88,12 +89,32 @@ else
 fi
 
 if command -v opensrc &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
-  echo "Cleaning cached opensrc repos to force fresh source fetch..."
-  opensrc clean --repos || echo "Some opensrc cache cleanup failed; continuing."
-  echo "Fetching source repos with opensrc..."
-  grep -vE '^\s*(#|$)' "${BASEDIR}/opensrc-repos" | xargs opensrc fetch || echo "Some opensrc fetches failed; continuing."
+  echo "Refreshing source repos with opensrc..."
+  opensrc_failed=0
+
+  while IFS= read -r repo || [ -n "$repo" ]; do
+    # Skip blank lines and comments.
+    [[ "$repo" =~ ^[[:space:]]*(#|$) ]] && continue
+
+    # Trim leading/trailing whitespace.
+    repo="${repo#"${repo%%[![:space:]]*}"}"
+    repo="${repo%"${repo##*[![:space:]]}"}"
+
+    echo "  Cleaning $repo..."
+    opensrc remove "$repo" >/dev/null 2>&1 || true
+
+    echo "  Installing $repo..."
+    if ! opensrc fetch "$repo" | sed '/^[[:space:]]*[0-9][0-9]* fetched[[:space:]]*$/d'; then
+      echo "  Failed to install $repo; continuing."
+      opensrc_failed=1
+    fi
+  done <"${BASEDIR}/opensrc-repos"
+
+  if [ "$opensrc_failed" -ne 0 ]; then
+    echo "Some opensrc repo installs failed; continuing."
+  fi
 else
-  echo "opensrc not found. Skipping source repo fetch."
+  echo "opensrc not found or ${BASEDIR}/opensrc-repos missing. Skipping source repo install."
 fi
 
 echo "Done!"
