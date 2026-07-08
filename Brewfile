@@ -41,16 +41,22 @@ brew "yt-dlp"
 # Casks
 cask "1password"
 cask "1password-cli@beta"
+cask "codex"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
 cask "iina"
+cask "kitlangton-hex"
 cask "orbstack"
-cask "raycast"
+# cask "raycast", on raycast v2 beta
 cask "sizzy"
 cask "tailscale-app"
 # cask "webtorrent"
 cask "yaak"
+
+# TODO: add these apps
+# helium
+# codex app
 
 # Mac App Store
 mas "TextSniper", id: 1528890965

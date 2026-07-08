@@ -6,3 +6,10 @@ stow/zsh/.cache/
 stow/zsh/.zcompdump*
 
 .dotfiles/
+
+# local app state / secrets
+stow/herdr/.config/herdr/
+stow/lazygit/Library/Application Support/lazygit/state.yml
+stow/pi/.pi/agent/auth.json
+stow/pi/.pi/agent/sessions/
+stow/ssh/.ssh/
