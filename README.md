@@ -1,6 +1,6 @@
 # dotfiles
 
-My dotfiles for Neovim, zsh, tmux, and ghostty on macOS. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My macOS dotfiles for Neovim, zsh, tmux, Ghostty, Yazi, LazyGit, Pi, and agent skills. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Installation
 
@@ -29,7 +29,7 @@ cd ~/workspace/dotfiles
 ./install
 ```
 
-This requires Homebrew, `git`, and GNU Stow to already be installed, then stows the packages from `stow/`, installs everything else from `Brewfile`, installs the latest LTS Node.js via `fnm`, and installs `trash-cli`.
+This requires Homebrew, `git`, and GNU Stow to already be installed. It installs Homebrew dependencies from `Brewfile`, restows the configured packages from `stow/`, sets up the vite-plus Node.js environment when `vp` is available, installs global CLI packages, updates agent skills from `~/.agents/.skill-lock.json`, and refreshes `opensrc-repos` when `opensrc` is available.
 
 5. (Optional) Cleanup packages not in Brewfile:
 
@@ -50,16 +50,19 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 
 ### Available packages
 
-| Package    | Description             |
-| ---------- | ----------------------- |
-| `zsh`      | Shell configuration     |
-| `tmux`     | Terminal multiplexer    |
-| `ssh`      | SSH configuration       |
-| `nvim`     | Neovim configuration    |
-| `ghostty`  | Ghostty terminal        |
-| `starship` | Starship prompt         |
-| `lazygit`  | Lazygit configuration   |
-| `yazi`     | Yazi file manager theme |
+| Package    | Description                                      |
+| ---------- | ------------------------------------------------ |
+| `agents`   | Global agent skills and `.skill-lock.json`       |
+| `ghostty`  | Ghostty terminal configuration                   |
+| `herdr`    | Herdr configuration                              |
+| `lazygit`  | Lazygit configuration                            |
+| `nvim`     | LazyVim-based Neovim configuration               |
+| `pi`       | Pi agent settings, keybindings, and extensions   |
+| `ssh`      | SSH configuration                                |
+| `starship` | Starship prompt                                  |
+| `tmux`     | Terminal multiplexer                             |
+| `yazi`     | Yazi file manager configuration and plugins      |
+| `zsh`      | Shell configuration                              |
 
 
 ## Mac Settings
