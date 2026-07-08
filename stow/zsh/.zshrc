@@ -37,9 +37,6 @@ zle -N expand-or-complete _lazy_compinit  # override Tab
 
 export EDITOR='nvim'
 
-# OpenCode experimental features
-export OPENCODE_EXPERIMENTAL=true
-
 # https://yazi-rs.github.io/docs/quick-start
 # y shell wrapper that provides the ability to change the current working directory when exiting Yazi
 function y() {
@@ -78,13 +75,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 # https://github.com/sindresorhus/trash-cli?tab=readme-ov-file#tip
 alias rm=trash
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-
-# View staged files with delta
-alias gds="git diff --staged --color=always | delta --paging=always"
-# View unstaged files with delta
-alias gdu="git diff --color=always | delta --paging=always"
-
 alias lzd="lazydocker"
 alias lg="lazygit"
 alias ks='tmux kill-server'
@@ -114,47 +104,6 @@ _cache_init fzf "$(which fzf)" 'fzf --zsh'
 bindkey '^F' fzf-cd-widget
 
 source "${${(%):-%x}:A:h}/tmux.zsh"
-
-opencode-built() {
-  local repo="$HOME/workspace/dotfiles/tools/opencode"
-  local os arch folder bin
-
-  os="$(uname -s | tr '[:upper:]' '[:lower:]')"
-  case "$os" in
-    darwin) os="darwin" ;;
-    linux) os="linux" ;;
-    msys*|mingw*|cygwin*) os="windows" ;;
-  esac
-
-  arch="$(uname -m)"
-  case "$arch" in
-    arm64|aarch64) arch="arm64" ;;
-    x86_64|amd64) arch="x64" ;;
-  esac
-
-  folder="opencode-${os}-${arch}"
-  bin="${repo}/packages/opencode/dist/${folder}/bin/opencode"
-
-  if [ -x "$bin" ] && ! "$bin" --version 2>/dev/null | grep -q '^0\.0\.0-local-'; then
-    rm -f "$bin"
-  fi
-
-  if [ ! -x "$bin" ]; then
-    OPENCODE_CHANNEL=local bun run --cwd "${repo}/packages/opencode" build -- --single || return $?
-  fi
-
-  "$bin" "$@"
-}
-
-alias oc='opencode-built'
-
-oc-clean-cli() {
-  local repo="$HOME/workspace/dotfiles/tools/opencode"
-  command rm -rf "$repo/packages/opencode/dist"
-}
-
-alias occ='oc-clean-cli'
-
 
 # Vite+ bin (https://viteplus.dev)
 [ -f "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
