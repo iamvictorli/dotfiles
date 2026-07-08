@@ -60,7 +60,6 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 | `starship` | Starship prompt         |
 | `lazygit`  | Lazygit configuration   |
 | `yazi`     | Yazi file manager theme |
-| `opencode` | OpenCode configuration  |
 
 
 ## Mac Settings

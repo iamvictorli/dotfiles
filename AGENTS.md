@@ -13,7 +13,6 @@ dotfiles/
 ├── install              # Bootstrap: Homebrew deps + stow packages + fnm/trash-cli
 ├── Brewfile             # Homebrew bundle
 ├── benchmark-zsh        # zsh startup benchmark via hyperfine
-├── task-loop            # OpenCode task loop runner
 ├── assets/              # Keyboard/reference images
 ├── tools/               # Submodules of tools being used
 └── stow/
@@ -25,9 +24,7 @@ dotfiles/
     ├── lazygit/         # Lazygit config
     ├── yazi/            # File manager theme/config
     ├── ssh/             # SSH config
-    ├── opencode/        # OpenCode agents, skills, tools
-    ├── pi/              # Pi agent skills/extensions/keybindings
-    └── claude/          # Claude agents/commands; intentionally not installed by default
+    └── pi/              # Pi agent skills/extensions/keybindings
 ```
 
 ## WHERE TO LOOK
@@ -60,7 +57,6 @@ brew bundle                       # Install Brewfile deps
 ./benchmark-zsh                   # Measure shell startup
 stow -v -d stow -t ~ zsh          # Stow one package
 stow -v -d stow -t ~ -D zsh       # Unstow one package
-./task-loop                       # Run OpenCode task loop
 ```
 
 ## VALIDATION

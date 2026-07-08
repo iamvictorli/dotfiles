@@ -40,7 +40,6 @@ PACKAGES=(
   herdr
   lazygit
   nvim
-  opencode
   pi
   ssh
   starship
