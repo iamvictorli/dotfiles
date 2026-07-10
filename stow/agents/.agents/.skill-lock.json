@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/ask-matt/SKILL.md",
-      "skillFolderHash": "affab2673308aa529084e8cfe19b8f335b8a1bce",
+      "skillFolderHash": "a8673d3dac18d59cf4b05c6ae64ebc7d82042d02",
       "installedAt": "2026-06-27T02:14:50.303Z",
-      "updatedAt": "2026-07-08T17:41:46.945Z"
+      "updatedAt": "2026-07-10T17:02:58.504Z"
     },
     "code-review": {
       "source": "mattpocock/skills",
@@ -84,9 +84,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/prototype/SKILL.md",
-      "skillFolderHash": "046ef7c3aae3ec1934b075b26dba1cf87c9b1d5a",
+      "skillFolderHash": "e50d76191bf197e3d947eb8c780c7009269ba589",
       "installedAt": "2026-06-27T01:39:20.016Z",
-      "updatedAt": "2026-06-29T14:52:32.445Z"
+      "updatedAt": "2026-07-10T17:03:00.014Z"
     },
     "research": {
       "source": "mattpocock/skills",
@@ -112,9 +112,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "3676b312e22e6b615c24e575cf9382a6da3016dd",
+      "skillFolderHash": "ed1bbe6a06bb049aaa95bfe2c487bdb7a8300838",
       "installedAt": "2026-06-27T01:39:20.017Z",
-      "updatedAt": "2026-07-08T17:41:44.812Z"
+      "updatedAt": "2026-07-10T17:03:01.595Z"
     },
     "tdd": {
       "source": "mattpocock/skills",
@@ -177,9 +177,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "552aa8ca223908a2ee3b1058587d4b5a84828e71",
+      "skillFolderHash": "66be0b655fe922867f1eed100a41d67038b6ffd6",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-07-08T17:41:49.148Z"
+      "updatedAt": "2026-07-10T17:03:04.971Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
@@ -223,10 +223,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/to-tickets/SKILL.md",
-      "skillFolderHash": "b62245172caa8bcc75b490c665566e9ec999cda8",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "c0bc0e58663eec76e769c1496fe124be4545a2ff",
       "installedAt": "2026-07-08T19:03:22.676Z",
-      "updatedAt": "2026-07-08T19:03:22.676Z"
+      "updatedAt": "2026-07-10T17:03:02.886Z"
     },
     "wayfinder": {
       "source": "mattpocock/skills",

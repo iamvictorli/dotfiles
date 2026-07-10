@@ -87,7 +87,63 @@ else
   echo "npx not found or ${SKILL_LOCK} missing. Skipping skill updates."
 fi
 
-if command -v opensrc &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
+refresh_opensrc_repo() {
+  local repo="$1"
+  local opensrc_home="${OPENSRC_HOME:-${HOME}/.opensrc}"
+  local tmp_home tmp_sources tmp_repo_rel tmp_repo_root_rel tmp_repo_name real_sources now
+
+  tmp_home="$(mktemp -d)"
+
+  # `opensrc fetch owner/repo` does not refresh an existing cached checkout; if
+  # the expected cache path already exists, opensrc reports it as cached and
+  # leaves it alone. To force a current clone without risking the only local
+  # copy, fetch into a brand-new temporary opensrc cache first.
+  if ! OPENSRC_HOME="$tmp_home" opensrc fetch "$repo" | sed '/^[[:space:]]*[0-9][0-9]* fetched[[:space:]]*$/d'; then
+    rm -rf "$tmp_home"
+    return 1
+  fi
+
+  # The temporary cache writes the canonical repo name/ref/path to sources.json.
+  # Read that metadata instead of guessing branch names like main vs master.
+  tmp_sources="${tmp_home}/sources.json"
+  tmp_repo_rel="$(jq -r '.repos[0].path // empty' "$tmp_sources")"
+  tmp_repo_name="$(jq -r '.repos[0].name // empty' "$tmp_sources")"
+
+  if [ -z "$tmp_repo_rel" ] || [ -z "$tmp_repo_name" ]; then
+    echo "  Could not locate fetched repo metadata for $repo."
+    rm -rf "$tmp_home"
+    return 1
+  fi
+
+  # opensrc stores refs under repos/<host>/<owner>/<repo>/<ref>. Remove the
+  # whole repo directory before copying so stale branch/ref directories do not
+  # linger after the refresh.
+  tmp_repo_root_rel="$(dirname "$tmp_repo_rel")"
+  real_sources="${opensrc_home}/sources.json"
+  now="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+  mkdir -p "$(dirname "${opensrc_home}/${tmp_repo_root_rel}")"
+  rm -rf "${opensrc_home:?}/${tmp_repo_root_rel}"
+  cp -a "${tmp_home}/${tmp_repo_root_rel}" "$(dirname "${opensrc_home}/${tmp_repo_root_rel}")/"
+
+  # Finally, merge the freshly fetched repo metadata into the real opensrc
+  # index. Package entries are preserved; the matching repo entry is replaced.
+  mkdir -p "$opensrc_home"
+  if [ -f "$real_sources" ]; then
+    jq --argjson entry "$(jq -c '.repos[0]' "$tmp_sources")" --arg now "$now" '
+      .updatedAt = $now
+      | .packages = (.packages // [])
+      | .repos = ((.repos // []) | map(select(.name != $entry.name)) + [$entry])
+    ' "$real_sources" >"${real_sources}.tmp"
+  else
+    jq --arg now "$now" '{updatedAt: $now, packages: [], repos: [.repos[0]]}' "$tmp_sources" >"${real_sources}.tmp"
+  fi
+  mv "${real_sources}.tmp" "$real_sources"
+
+  rm -rf "$tmp_home"
+}
+
+if command -v opensrc &>/dev/null && command -v jq &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
   echo "Refreshing source repos with opensrc..."
   opensrc_failed=0
 
@@ -99,12 +155,9 @@ if command -v opensrc &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
     repo="${repo#"${repo%%[![:space:]]*}"}"
     repo="${repo%"${repo##*[![:space:]]}"}"
 
-    echo "  Cleaning $repo..."
-    opensrc remove "$repo" >/dev/null 2>&1 || true
-
-    echo "  Installing $repo..."
-    if ! opensrc fetch "$repo" | sed '/^[[:space:]]*[0-9][0-9]* fetched[[:space:]]*$/d'; then
-      echo "  Failed to install $repo; continuing."
+    echo "  Updating $repo..."
+    if ! refresh_opensrc_repo "$repo"; then
+      echo "  Failed to update $repo; leaving any existing cached copy in place."
       opensrc_failed=1
     fi
   done <"${BASEDIR}/opensrc-repos"
@@ -113,7 +166,7 @@ if command -v opensrc &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
     echo "Some opensrc repo installs failed; continuing."
   fi
 else
-  echo "opensrc not found or ${BASEDIR}/opensrc-repos missing. Skipping source repo install."
+  echo "opensrc, jq, or ${BASEDIR}/opensrc-repos missing. Skipping source repo install."
 fi
 
 echo "Done!"
