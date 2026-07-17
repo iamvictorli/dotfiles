@@ -170,9 +170,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "3a8490f6515dfea13292ae28e34f1174d2f68af1",
+      "skillFolderHash": "040956531f673c8fb7720037494ed4e61b123c6c",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-07-13T14:29:36.344Z"
+      "updatedAt": "2026-07-17T15:32:27.052Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
@@ -197,9 +197,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
       "skillPath": "skills/hunk-review/SKILL.md",
-      "skillFolderHash": "dcdffe55e1a26317d4639174fe2b66ae71686b6c",
+      "skillFolderHash": "f955a7b7c2808b57cb72c5facd3fa9579af1ca1c",
       "installedAt": "2026-07-03T00:04:14.652Z",
-      "updatedAt": "2026-07-03T00:04:14.652Z"
+      "updatedAt": "2026-07-15T23:19:40.572Z"
     },
     "to-spec": {
       "source": "mattpocock/skills",
