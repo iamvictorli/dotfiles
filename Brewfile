@@ -1,6 +1,7 @@
 # Formulae
 brew "jesseduffield/lazydocker/lazydocker", trusted: true
 brew "jnsahaj/lumen/lumen", trusted: true # TUI diff viewer
+brew "kitlangton/tap/ghui", trusted: true # GitHub pull request and issue TUI
 brew "modem-dev/tap/hunk", trusted: true # Review-first terminal diff viewer
 brew "oven-sh/bun/bun", trusted: true
 brew "ast-grep"
