@@ -1,0 +1,24 @@
+# Hunk defaults. Options with environment-dependent defaults remain unset below.
+mode = "auto"
+theme = "github-dark-default"
+watch = false
+exclude_untracked = false
+line_numbers = false
+tab_width = 4
+wrap_lines = true
+hunk_headers = true
+menu_bar = true
+agent_notes = true
+copy_decorations = false
+prompt_save_view_preferences = true
+transparent_background = false
+
+# vcs has no fixed default: Hunk detects the checkout and falls back to Git.
+# vcs = "git"
+
+# color_moved has no fixed default; when unset, Hunk honors Git's diff.colorMoved.
+# color_moved = false
+
+[extensions]
+enabled = true
+paths = []
