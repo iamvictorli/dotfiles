@@ -1,0 +1,5 @@
+interface:
+  display_name: "Chrome DevTools CLI"
+  short_description: "Automate Chrome through the CLI"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Herdr"
+  short_description: "Control Herdr terminal workspaces"
+policy:
+  allow_implicit_invocation: false

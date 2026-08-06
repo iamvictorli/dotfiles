@@ -1,0 +1,5 @@
+interface:
+  display_name: "Init Deep"
+  short_description: "Generate hierarchical AGENTS.md files"
+policy:
+  allow_implicit_invocation: false

@@ -16,9 +16,9 @@
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "ref": "main",
       "skillPath": "skills/engineering/code-review/SKILL.md",
-      "skillFolderHash": "956ad60120cc6e88a9a879a8eaa26e19026b974d",
+      "skillFolderHash": "7a2057dcc514dc024d4e6bf8ad78021b97f229ae",
       "installedAt": "2026-07-01T17:02:03.135Z",
-      "updatedAt": "2026-08-05T12:47:33.370Z"
+      "updatedAt": "2026-08-06T14:43:09.307Z"
     },
     "codebase-design": {
       "source": "mattpocock/skills",
@@ -26,18 +26,18 @@
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "ref": "main",
       "skillPath": "skills/engineering/codebase-design/SKILL.md",
-      "skillFolderHash": "7347168e8de2de105e2e55f07ecb33d25fd56f44",
+      "skillFolderHash": "20b7cd1dd1fe5b0bd37ba72649f3a29375574b5b",
       "installedAt": "2026-06-27T01:34:32.821Z",
-      "updatedAt": "2026-07-13T14:29:10.410Z"
+      "updatedAt": "2026-08-06T14:43:10.327Z"
     },
     "diagnosing-bugs": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
-      "skillFolderHash": "27bf00e3ccc53491e938e8b5602be39238ce68f3",
+      "skillFolderHash": "463c81def888fefa77b894837d301d9ed70e0994",
       "installedAt": "2026-06-27T01:39:20.012Z",
-      "updatedAt": "2026-07-13T14:29:11.560Z"
+      "updatedAt": "2026-08-06T14:43:11.441Z"
     },
     "domain-modeling": {
       "source": "mattpocock/skills",
@@ -71,9 +71,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
-      "skillFolderHash": "bce229692e60dff3462e49bc5e774e83bef348e6",
+      "skillFolderHash": "6a971d1f5b109ac817e18c0f0419c2a32d60f26a",
       "installedAt": "2026-06-27T01:39:20.016Z",
-      "updatedAt": "2026-07-13T14:29:16.268Z"
+      "updatedAt": "2026-08-06T14:43:12.479Z"
     },
     "prototype": {
       "source": "mattpocock/skills",

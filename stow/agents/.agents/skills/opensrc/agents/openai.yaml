@@ -1,0 +1,5 @@
+interface:
+  display_name: "OpenSrc"
+  short_description: "Fetch dependency source code"
+policy:
+  allow_implicit_invocation: false

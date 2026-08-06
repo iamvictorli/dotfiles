@@ -1,0 +1,5 @@
+interface:
+  display_name: "Hunk Review"
+  short_description: "Control live Hunk review sessions"
+policy:
+  allow_implicit_invocation: false
