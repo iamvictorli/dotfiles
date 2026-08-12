@@ -46,7 +46,6 @@ PACKAGES=(
   pi
   ssh
   starship
-  tmux
   yazi
   zsh
 )
