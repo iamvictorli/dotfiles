@@ -44,9 +44,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/domain-modeling/SKILL.md",
-      "skillFolderHash": "959e63161ff78b4b1cd553b2c0e09e0c68418e5f",
+      "skillFolderHash": "05c3244ec75b7548bbc2b635b0624bb9f70369c3",
       "installedAt": "2026-06-27T01:39:20.014Z",
-      "updatedAt": "2026-07-13T14:29:12.493Z"
+      "updatedAt": "2026-08-13T13:32:35.073Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -161,9 +161,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "skills/herdr/SKILL.md",
-      "skillFolderHash": "4821f1d39ccae24b9b274b03184edaaf198a3994",
+      "skillFolderHash": "9ea7b409135fc1be2ff7bc3e3e69764961536dd4",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-07-31T16:33:24.459Z"
+      "updatedAt": "2026-08-14T13:16:24.618Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
@@ -179,18 +179,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
       "skillPath": "skills/chrome-devtools-cli/SKILL.md",
-      "skillFolderHash": "1d333eff605093c8f3e507d4ad0cd0d30be25c57",
+      "skillFolderHash": "f10110e8ba5d558598517397c2d92a67c34ae210",
       "installedAt": "2026-06-27T02:17:49.871Z",
-      "updatedAt": "2026-06-27T02:17:49.871Z"
+      "updatedAt": "2026-08-13T13:32:37.117Z"
     },
     "hunk-review": {
       "source": "modem-dev/hunk",
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
       "skillPath": "skills/hunk-review/SKILL.md",
-      "skillFolderHash": "dd9938367f3e6c6bce3a3873059106041cd7a005",
+      "skillFolderHash": "8c78e66fe408c6a9ca156be8d4b109668e1fe690",
       "installedAt": "2026-07-03T00:04:14.652Z",
-      "updatedAt": "2026-07-27T15:58:52.541Z"
+      "updatedAt": "2026-08-15T20:36:43.224Z"
     },
     "to-questionnaire": {
       "source": "mattpocock/skills",
