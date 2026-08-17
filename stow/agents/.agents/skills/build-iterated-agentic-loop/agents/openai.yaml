@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build Iterated Agentic Loop"
+  short_description: "Build a scheduled agentic workflow"
+policy:
+  allow_implicit_invocation: false

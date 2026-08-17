@@ -1,0 +1,5 @@
+interface:
+  display_name: "Design Control Loop"
+  short_description: "Design an agentic control loop"
+policy:
+  allow_implicit_invocation: false
