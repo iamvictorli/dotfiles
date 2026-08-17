@@ -77,7 +77,6 @@ alias rm=trash
 
 alias lzd="lazydocker"
 alias lg="lazygit"
-alias ks='tmux kill-server'
 alias scratch='nvim -c "setlocal buftype=nofile"'
 
 tempd() {
@@ -102,8 +101,6 @@ _cache_init starship "$(which starship)" 'starship init zsh'
 
 _cache_init fzf "$(which fzf)" 'fzf --zsh'
 bindkey '^F' fzf-cd-widget
-
-source "${${(%):-%x}:A:h}/tmux.zsh"
 
 # Vite+ bin (https://viteplus.dev)
 [ -f "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
