@@ -302,11 +302,10 @@
       "source": "modem-dev/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/skills.git",
-      "ref": "main",
       "skillPath": "write-discoverable-code/SKILL.md",
       "skillFolderHash": "209109d21718bff6da3ebd65dfee8de582ced0ab",
       "installedAt": "2026-07-25T16:29:39.293Z",
-      "updatedAt": "2026-07-25T16:29:39.293Z"
+      "updatedAt": "2026-08-17T16:30:01.420Z"
     },
     "build-iterated-agentic-loop": {
       "source": "humanlayer/skills",
@@ -334,6 +333,15 @@
       "skillFolderHash": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
       "installedAt": "2026-08-15T21:01:24.850Z",
       "updatedAt": "2026-08-15T21:01:28.224Z"
+    },
+    "narrow-react-prop-types": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/narrow-react-prop-types/skills/narrow-react-prop-types/SKILL.md",
+      "skillFolderHash": "172dfb205f5f1419354b431cbb903e1afd55ad87",
+      "installedAt": "2026-08-17T16:33:08.159Z",
+      "updatedAt": "2026-08-17T16:33:08.159Z"
     }
   },
   "dismissed": {}

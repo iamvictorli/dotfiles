@@ -1,6 +1,5 @@
 # Formulae
 brew "jesseduffield/lazydocker/lazydocker", trusted: true
-brew "jnsahaj/lumen/lumen", trusted: true # TUI diff viewer
 brew "kitlangton/tap/ghui", trusted: true # GitHub pull request and issue TUI
 brew "oven-sh/bun/bun", trusted: true
 brew "hunk" # Review-first terminal diff viewer
@@ -18,7 +17,6 @@ brew "go"
 brew "herdr"
 brew "hyperfine" # for ./benchmark-zsh
 brew "imagemagick" # for yazi
-brew "jj"
 brew "jq"
 brew "lazygit"
 brew "lua-language-server"
@@ -49,15 +47,15 @@ cask "ghostty"
 cask "iina"
 cask "kitlangton-hex"
 cask "orbstack"
-# cask "raycast", on raycast v2 beta
-cask "sizzy"
 cask "tailscale-app"
-# cask "webtorrent"
 cask "yaak"
 
-# TODO: add these apps
+# TODO: add these apps or not
 # helium
 # codex app
+# cask "raycast", on raycast v2 beta
+# cask "sizzy"
+# cask "webtorrent"
 
 # Mac App Store
 mas "TextSniper", id: 1528890965

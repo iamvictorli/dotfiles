@@ -1,0 +1,5 @@
+interface:
+  display_name: "Narrow React Prop Types"
+  short_description: "Align React prop types with live code paths"
+policy:
+  allow_implicit_invocation: false
