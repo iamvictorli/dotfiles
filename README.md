@@ -1,6 +1,6 @@
 # dotfiles
 
-My macOS dotfiles for Neovim, zsh, tmux, Ghostty, Yazi, LazyGit, Pi, and agent skills. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Installation
 
@@ -55,12 +55,12 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 | `agents`   | Global agent skills and `.skill-lock.json`       |
 | `ghostty`  | Ghostty terminal configuration                   |
 | `herdr`    | Herdr configuration                              |
+| `hunk`     | Hunk diff viewer configuration                   |
 | `lazygit`  | Lazygit configuration                            |
 | `nvim`     | LazyVim-based Neovim configuration               |
 | `pi`       | Pi agent settings, keybindings, and extensions   |
 | `ssh`      | SSH configuration                                |
 | `starship` | Starship prompt                                  |
-| `tmux`     | Terminal multiplexer                             |
 | `yazi`     | Yazi file manager configuration and plugins      |
 | `zsh`      | Shell configuration                              |
 
@@ -130,7 +130,6 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 
 - [vimium c](https://github.com/gdh1995/vimium-c) vim key bindings for the browser
 - [helix](https://github.com/helix-editor/helix) text editor inspired by neovim and kakoune
-- [zellij](https://github.com/zellij-org/zellij) a terminal workspace, alternative to tmux
 - [mise](https://github.com/jdx/mise), better tool management for dev environments
 - [television](https://github.com/alexpasmantier/television), similar to fzf, but with more customization?
 - [dozzle](https://github.com/amir20/dozzle), real time log viewer for containers
