@@ -134,9 +134,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "skillFolderHash": "0d40d978f1a588971a11ea7ae85b208e78102dc3",
+      "skillFolderHash": "f0732035b8b1b60ae39454e4191caef32fa91903",
       "installedAt": "2026-06-27T01:39:20.020Z",
-      "updatedAt": "2026-08-15T21:01:54.379Z"
+      "updatedAt": "2026-08-20T18:19:58.992Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -161,9 +161,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ogulcancelik/herdr.git",
       "skillPath": "skills/herdr/SKILL.md",
-      "skillFolderHash": "427cc06d9e296acc89aa5644832ffaf6254bf354",
+      "skillFolderHash": "f8bb649bb92ddc99e6af463ab9a635da98c7b129",
       "installedAt": "2026-06-27T01:43:26.886Z",
-      "updatedAt": "2026-08-19T14:33:53.761Z"
+      "updatedAt": "2026-08-20T18:20:01.751Z"
     },
     "opensrc": {
       "source": "vercel-labs/opensrc",
