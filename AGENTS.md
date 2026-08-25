@@ -1,116 +1,116 @@
 # DOTFILES KNOWLEDGE BASE
 
-**Generated:** 2026-07-08T19:13:40Z
-**Commit:** 9a60a9e
+**Generated:** 2026-08-25T22:21:44Z
+**Commit:** a78eb84
 
-GNU Stow-managed macOS dotfiles. Stow packages live under `stow/` and symlink into `$HOME`.
+GNU Stow-managed macOS dotfiles. Each package under `stow/` mirrors paths below `$HOME`.
 
 ## STRUCTURE
 
 ```
 dotfiles/
-├── install              # Homebrew bundle, stow restow, vite-plus Node, agent skills, opensrc repos
-├── Brewfile             # Homebrew formulae/casks/MAS apps
+├── install              # Homebrew, stow, vite-plus, skills, opensrc bootstrap
+├── Brewfile             # Homebrew formulae, casks, and MAS apps
 ├── benchmark-zsh        # hyperfine wrapper for interactive/login zsh startup
-├── opensrc-repos        # repos refreshed by ./install when opensrc exists
+├── opensrc-repos        # repositories force-refreshed by ./install
 ├── assets/              # keyboard modifier reference images
 └── stow/
-    ├── agents/          # ~/.agents skills + .skill-lock.json
-    ├── ghostty/         # ~/.config/ghostty/config
-    ├── herdr/           # ~/.config/herdr/config.toml
-    ├── lazygit/         # ~/Library/Application Support/lazygit/config.yml
-    ├── nvim/            # LazyVim config under ~/.config/nvim
-    ├── pi/              # ~/.pi config, keybindings, Pi extensions
+    ├── agents/          # ~/.agents skill inventory and lock
+    ├── ghostty/         # ~/.config/ghostty
+    ├── herdr/           # ~/.config/herdr
+    ├── hunk/            # ~/.config/hunk
+    ├── lazygit/         # ~/Library/Application Support/lazygit
+    ├── nvim/            # LazyVim under ~/.config/nvim
+    ├── pi/              # ~/.pi settings, keybindings, extensions, workspace
     ├── ssh/             # ~/.ssh/config
     ├── starship/        # ~/.config/starship.toml
-    ├── tmux/            # ~/.tmux.conf
-    ├── yazi/            # ~/.config/yazi config + plugins
-    └── zsh/             # ~/.zshrc, tmux helper, generated cache dir
+    ├── yazi/            # ~/.config/yazi
+    └── zsh/             # ~/.zshrc; generated cache is ignored
 ```
 
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
 |------|----------|-------|
-| Bootstrap machine | `./install` | Requires Homebrew, `git`, `stow`; restows `PACKAGES` list |
-| Add/remove Homebrew deps | `Brewfile` | `brew bundle install --file=Brewfile`; cleanup manually with `brew bundle cleanup --force` |
-| Add/remove stow package | `stow/<package>/` + `install` | Add package dir and update `PACKAGES=(...)` |
-| Shell aliases/startup | `stow/zsh/.zshrc` | `_cache_init()` caches expensive init scripts |
-| Shell tmux helpers | `stow/zsh/tmux.zsh` | sourced from `.zshrc` |
-| zsh startup regression | `./benchmark-zsh` | flags: `-r`, `-w`, `-l`, `-c`, `-f` |
-| Neovim behavior | `stow/nvim/.config/nvim/lua/config/` | LazyVim-style config split |
-| Neovim plugins | `stow/nvim/.config/nvim/lua/plugins/plugins.lua` | lockfile: `lazy-lock.json` |
-| Agent skill inventory | `stow/agents/.agents/skills/` | global skills installed into `~/.agents/skills` |
-| Agent skill lock | `stow/agents/.agents/.skill-lock.json` | `./install` runs `npx skills update --global --yes` when present |
-| Pi settings/keybindings | `stow/pi/.pi/agent/settings.json`, `keybindings.json` | stowed into `~/.pi/agent/` |
-| Pi extensions | `stow/pi/.pi/agent/extensions/` | standalone `.ts` extensions + workspace packages |
-| Pi skill toggle extension | `stow/pi/.pi/agent/extensions/pi-skill-toggle/` | TypeScript package with tests/typecheck |
-| File manager config | `stow/yazi/.config/yazi/` | TOML config + Lua plugins |
-| SSH config | `stow/ssh/.ssh/config` | secrets/keys are not tracked |
+| Bootstrap or restow everything | `install` | Also upgrades Brew bundle and refreshes external sources |
+| Add/remove a stow package | `stow/<package>/`, `PACKAGES` in `install` | Both must change |
+| Add/remove Homebrew dependencies | `Brewfile` | Cleanup is a separate destructive command |
+| Change shell startup or aliases | `stow/zsh/.zshrc` | `_cache_init` owns generated init snippets |
+| Measure shell startup | `benchmark-zsh` | Supports interactive/login and cache controls |
+| Change Neovim behavior | `stow/nvim/.config/nvim/lua/config/` | LazyVim-style config split |
+| Change Neovim plugins | `stow/nvim/.config/nvim/lua/plugins/plugins.lua` | Lockfile: `lazy-lock.json` |
+| Update global agent skills | `stow/agents/.agents/.skill-lock.json`, `stow/agents/.agents/skills/` | Keep lock metadata and installed content aligned |
+| Change Pi defaults or keys | `stow/pi/.pi/agent/settings.json`, `keybindings.json` | Product configuration, not local runtime state |
+| Change Pi extensions | `stow/pi/.pi/agent/extensions/` | Standalone extensions plus workspace packages |
+| Change skill toggle behavior | `stow/pi/.pi/agent/extensions/pi-skill-toggle/src/` | Tests colocated by domain |
+| Change diff review defaults | `stow/hunk/.config/hunk/config.toml` | Hunk configuration |
+| Change file manager behavior | `stow/yazi/.config/yazi/` | Lua plugin directories end in `.yazi/` |
+| Change refreshed source inventory | `opensrc-repos`, `refresh_opensrc_repo()` in `install` | One repository slug per line |
+| Find ignored local state | `.gitignore` | Pi auth/sessions, SSH material, Herdr/Lazygit state |
 
 ## CONVENTIONS
 
-- Theme: Tokyo Night Storm across Ghostty, tmux, lazygit, yazi, fzf, Neovim-adjacent tooling.
-- Font: JetBrainsMono Nerd Font Mono; Symbols Nerd Font installed for icon coverage.
-- Editor: `nvim`; `vim()` opens `nvim .` with no args; `c` aliases to `vim`.
-- Safe delete: `rm` aliases to `trash` from `trash-cli`.
-- Stow target: `$HOME`; package roots stay exactly under `stow/<package>/`.
-- macOS paths are intentional: `Library/Application Support/lazygit/`, `.ssh/`, `.config/`, `.pi/`, `.agents/`.
-- Node tooling comes from vite-plus when available: `vp env setup/install/default lts`, then global npm packages.
-- Pi extension workspace root is `stow/pi/.pi`; extension workspaces live under `agent/extensions/*`.
-- Hidden paths are product paths, not noise: inspect `stow/*/.config`, `stow/pi/.pi`, `stow/agents/.agents`.
+- Stow from repository root with `stow -d stow -t ~ <package>`; package roots mirror `$HOME` exactly.
+- Hidden paths are product paths: inspect `.config`, `.pi`, `.agents`, `.ssh`, and macOS `Library/` trees.
+- Tokyo Night Storm spans terminal, prompt, fzf, Neovim-adjacent tools, and file manager themes.
+- JetBrainsMono Nerd Font Mono is primary; Symbols Nerd Font supplies icon coverage.
+- `nvim` is the editor; `vim()` opens `nvim .` with no arguments; `c` aliases to it.
+- `rm` aliases to `trash`; use the underlying command explicitly only when permanent deletion is intended.
+- Node setup uses vite-plus when available; `stow/pi/.pi` is an npm workspace for `agent/extensions/*`.
+- `install` may skip unavailable optional tools and continue after skill or opensrc refresh failures.
 
 ## ANTI-PATTERNS
 
-- Do not edit `stow/zsh/.cache/*.zsh`; generated by `_cache_init()`.
-- Do not commit local state/secrets: `stow/pi/.pi/agent/auth.json`, `stow/pi/.pi/agent/sessions/`, `stow/ssh/.ssh/`, Herdr local state, lazygit `state.yml`.
-- Do not commit `stow/pi/.pi/node_modules/`; install from `stow/pi/.pi/package-lock.json` when needed.
-- Do not add a stow package without adding it to `PACKAGES` in `./install`.
-- Do not restow from inside a package root; use `stow -d stow -t ~ <package>` from repo root.
-- Do not replace `_cache_init` calls with raw `eval "$(...)"`; `benchmark-zsh` flags uncached evals.
+- Treat every file under `stow/<package>/` as deployable payload; an `AGENTS.md` there would also be linked into `$HOME`.
+- Leave `stow/zsh/.cache/` generated; change `_cache_init` calls in `.zshrc`, then regenerate through shell startup.
+- Keep local state and secrets untracked: Pi auth/models/trust/sessions/package checkouts, SSH keys, Herdr state, and Lazygit state.
+- Keep `stow/pi/.pi/node_modules/` untracked; restore it from `package-lock.json`.
+- Update `PACKAGES` when adding or removing a directory under `stow/`; otherwise bootstrap silently skips it.
+- Run stow from repository root, not from inside a package, so source and target roots remain explicit.
+- Preserve cached shell initialization; raw `eval "$(...)"` calls create startup regressions measured by `benchmark-zsh`.
+- Review ignored local state before broad restows; tracked config and untracked runtime files share directories.
 
 ## COMMANDS
 
 ```bash
-./install                                      # full bootstrap/restow/update path
-brew bundle install --file=Brewfile            # Homebrew only
-brew bundle cleanup --force                    # remove Homebrew deps not in Brewfile
+./install                                      # broad bootstrap: upgrades, restows, refreshes
+brew bundle install --file=Brewfile            # install declared Homebrew dependencies
+brew bundle cleanup --force                    # remove dependencies absent from Brewfile
 ./benchmark-zsh                                # interactive shell startup benchmark
 ./benchmark-zsh -l                             # login shell benchmark
 stow -v -d stow -t ~ zsh                       # stow one package
 stow -v -d stow -t ~ -D zsh                    # unstow one package
-(cd stow/pi/.pi && npm install)                # restore Pi extension deps
+(cd stow/pi/.pi && npm install)                # restore Pi workspace dependencies
 (cd stow/pi/.pi/agent/extensions/pi-skill-toggle && npm test)
 (cd stow/pi/.pi/agent/extensions/pi-skill-toggle && npm run typecheck)
+env -u XDG_STATE_HOME npx skills update --global --yes
 ```
 
 ## KEY CONFIGS
 
 | Tool | Entry | Notes |
 |------|-------|-------|
+| Bootstrap | `install` | `PACKAGES`, vite-plus globals, skill update, opensrc refresh |
 | Homebrew | `Brewfile` | Formulae, casks, MAS apps |
-| Stow bootstrap | `install` | package order + post-stow setup |
-| zsh | `stow/zsh/.zshrc` | fzf theme, yazi wrapper, aliases, cached init |
-| Starship | `stow/starship/.config/starship.toml` | prompt theme |
-| tmux | `stow/tmux/.tmux.conf` | terminal multiplexer defaults |
-| Ghostty | `stow/ghostty/.config/ghostty/config` | terminal theme/font |
-| LazyVim | `stow/nvim/.config/nvim/` | `stylua.toml`, `lazyvim.json`, `lazy-lock.json` |
-| Yazi | `stow/yazi/.config/yazi/*.toml` | plugin dirs end in `.yazi/` |
-| Pi | `stow/pi/.pi/package.json` | workspace root for extension packages |
-| Pi agent | `stow/pi/.pi/agent/` | settings, keybindings, extensions |
-| Agent skills | `stow/agents/.agents/.skill-lock.json` | global skill sources and hashes |
+| zsh | `stow/zsh/.zshrc` | Lazy completion, cached init, aliases, fzf theme |
+| Neovim | `stow/nvim/.config/nvim/` | LazyVim config and lockfile |
+| Pi workspace | `stow/pi/.pi/package.json` | npm workspaces and shared Pi dependencies |
+| Pi agent | `stow/pi/.pi/agent/` | Settings, keybindings, extensions |
+| Agent skills | `stow/agents/.agents/.skill-lock.json` | Sources, hashes, install/update metadata |
+| Hunk | `stow/hunk/.config/hunk/config.toml` | Diff viewer defaults |
+| Yazi | `stow/yazi/.config/yazi/*.toml` | Behavior, keymap, theme |
 
 ## VALIDATION
 
 - Shell changes: run `./benchmark-zsh`; open a fresh interactive zsh when practical.
-- Stow layout changes: run `stow -v -d stow -t ~ <pkg>` before broad `./install`.
-- Neovim changes: start `nvim`; check LazyVim startup/load errors.
-- Pi extension changes: run package `npm test` and `npm run typecheck` from the extension dir.
-- Bootstrap changes: run `./install` only after checking ignored local state will not be restowed unexpectedly.
+- Stow layout changes: run `stow -v -d stow -t ~ <package>` before `./install`.
+- Pi skill toggle changes: run its `npm test` and `npm run typecheck` scripts.
+- Neovim changes: start `nvim` and check LazyVim startup/load errors.
+- Bootstrap changes: inspect ignored local state before running `./install`.
 
 ## NOTES
 
-- `./install` is tolerant: missing `vp`, `npx`, or `opensrc` skips those phases instead of failing.
-- `opensrc-repos` is consumed only when `opensrc` exists; entries are cleaned then fetched.
-- `stow/pi/.pi/package-lock.json` is tracked; dependency tree is not.
-- `stow/agents/.agents/skills/` contains installed third-party skill content; preserve `.skill-lock.json` context when updating.
+- `./install` runs `brew update`, bundle install, and bundle upgrade before restowing packages.
+- Opensrc refreshes use a temporary cache, replace the repository checkout, then merge metadata into the real index.
+- Pi package sources under `stow/pi/.pi/agent/git/` are runtime checkouts, not repository source.
+- Tracked third-party skills are refreshed from `.skill-lock.json`; preserve source/hash context when updating them.
