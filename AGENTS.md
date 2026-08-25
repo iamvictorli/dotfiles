@@ -12,7 +12,7 @@ dotfiles/
 ├── install              # Homebrew, stow, vite-plus, skills, opensrc bootstrap
 ├── Brewfile             # Homebrew formulae, casks, and MAS apps
 ├── benchmark-zsh        # hyperfine wrapper for interactive/login zsh startup
-├── opensrc-repos        # repositories force-refreshed by ./install
+├── opensrc-repos        # repositories commit-checked by ./install
 ├── assets/              # keyboard modifier reference images
 └── stow/
     ├── agents/          # ~/.agents skill inventory and lock
@@ -45,7 +45,7 @@ dotfiles/
 | Change skill toggle behavior | `stow/pi/.pi/agent/extensions/pi-skill-toggle/src/` | Tests colocated by domain |
 | Change diff review defaults | `stow/hunk/.config/hunk/config.toml` | Hunk configuration |
 | Change file manager behavior | `stow/yazi/.config/yazi/` | Lua plugin directories end in `.yazi/` |
-| Change refreshed source inventory | `opensrc-repos`, `refresh_opensrc_repo()` in `install` | One repository slug per line |
+| Change refreshed source inventory | `opensrc-repos`, `refresh_opensrc_repo_if_commit_changed()` in `install` | One repository slug per line |
 | Find ignored local state | `.gitignore` | Pi auth/sessions, SSH material, Herdr/Lazygit state |
 
 ## CONVENTIONS
@@ -111,6 +111,6 @@ env -u XDG_STATE_HOME npx skills update --global --yes
 ## NOTES
 
 - `./install` runs `brew update`, bundle install, and bundle upgrade before restowing packages.
-- Opensrc refreshes use a temporary cache, replace the repository checkout, then merge metadata into the real index.
+- Opensrc repo refreshes track remote HEAD in `~/.opensrc/repo-commits.json`; pre-state checkouts are tree-verified, while changed or missing checkouts install through a temporary cache.
 - Pi package sources under `stow/pi/.pi/agent/git/` are runtime checkouts, not repository source.
 - Tracked third-party skills are refreshed from `.skill-lock.json`; preserve source/hash context when updating them.

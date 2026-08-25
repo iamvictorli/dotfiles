@@ -89,17 +89,124 @@ else
   echo "npx not found or ${SKILL_LOCK} missing. Skipping skill updates."
 fi
 
-refresh_opensrc_repo() {
+cached_opensrc_checkout_matches_remote_commit() {
+  local checkout="$1"
+  local repo="$2"
+  local remote_commit="$3"
+  local git_dir remote_tree local_tree
+
+  if ! git_dir="$(mktemp -d)"; then
+    return 2
+  fi
+
+  # opensrc removes .git from cached repos. Fetch only commit/tree metadata,
+  # then reconstruct the cached checkout's Git tree without modifying it.
+  if ! git init --bare -q "$git_dir" ||
+    ! git --git-dir="$git_dir" -c protocol.version=2 fetch -q --depth=1 \
+      --filter=blob:none "https://github.com/${repo}.git" "$remote_commit" ||
+    ! remote_tree="$(git --git-dir="$git_dir" rev-parse 'FETCH_HEAD^{tree}')" ||
+    ! GIT_DIR="$git_dir" GIT_WORK_TREE="$checkout" git read-tree --empty ||
+    ! GIT_DIR="$git_dir" GIT_WORK_TREE="$checkout" \
+      git -c core.excludesFile=/dev/null add -A -f -- . ||
+    ! local_tree="$(GIT_DIR="$git_dir" GIT_WORK_TREE="$checkout" git write-tree)"; then
+    rm -rf "$git_dir"
+    return 2
+  fi
+
+  rm -rf "$git_dir"
+  [ "$local_tree" = "$remote_tree" ]
+}
+
+record_opensrc_repo_commit() {
+  local commit_state="$1"
+  local repo_name="$2"
+  local commit="$3"
+
+  if [ -f "$commit_state" ] && jq -e 'type == "object"' "$commit_state" &>/dev/null; then
+    jq --arg name "$repo_name" --arg commit "$commit" \
+      '.[$name] = $commit' "$commit_state" >"${commit_state}.tmp"
+  else
+    jq -n --arg name "$repo_name" --arg commit "$commit" \
+      '{($name): $commit}' >"${commit_state}.tmp"
+  fi && mv "${commit_state}.tmp" "$commit_state"
+}
+
+refresh_opensrc_repo_if_commit_changed() {
   local repo="$1"
   local opensrc_home="${OPENSRC_HOME:-${HOME}/.opensrc}"
-  local tmp_home tmp_sources tmp_repo_rel tmp_repo_root_rel tmp_repo_name real_sources now
+  local commit_state="${opensrc_home}/repo-commits.json"
+  local repo_name="github.com/${repo}"
+  local cached_commit=""
+  local cached_repo_rel=""
+  local remote_commit verify_status
+  local tmp_home tmp_sources tmp_repo_rel tmp_repo_root_rel tmp_repo_name
+  local real_repo_root staged_repo_root real_sources now
 
-  tmp_home="$(mktemp -d)"
+  if ! remote_commit="$(git ls-remote "https://github.com/${repo}.git" HEAD | awk 'NR == 1 { print $1 }')"; then
+    echo "  Could not read the remote commit for $repo."
+    return 1
+  fi
+  if [[ ! "$remote_commit" =~ ^[0-9a-fA-F]{40,64}$ ]]; then
+    echo "  Remote commit for $repo was missing or invalid."
+    return 1
+  fi
+
+  if [ -f "$commit_state" ]; then
+    cached_commit="$(jq -r --arg name "$repo_name" '.[$name] // empty' "$commit_state" 2>/dev/null || true)"
+  fi
+  if [ -f "${opensrc_home}/sources.json" ]; then
+    cached_repo_rel="$(jq -r --arg name "$repo_name" 'first((.repos // [])[] | select(.name == $name) | .path) // empty' "${opensrc_home}/sources.json" 2>/dev/null || true)"
+  fi
+
+  # opensrc removes .git after cloning, so retain the remote commit associated
+  # with each successful install separately from its source index.
+  if [ "$cached_commit" = "$remote_commit" ] &&
+    [ -n "$cached_repo_rel" ] &&
+    [ -d "${opensrc_home}/${cached_repo_rel}" ]; then
+    echo "  Skipping $repo (${remote_commit:0:12} is already installed)."
+    return 0
+  fi
+
+  # Migrate checkouts installed before commit tracking was added. Comparing Git
+  # tree IDs establishes their actual commit without asking opensrc to re-clone.
+  if [ -z "$cached_commit" ] &&
+    [ -n "$cached_repo_rel" ] &&
+    [ -d "${opensrc_home}/${cached_repo_rel}" ]; then
+    echo "  Verifying existing $repo checkout..."
+    if cached_opensrc_checkout_matches_remote_commit \
+      "${opensrc_home}/${cached_repo_rel}" "$repo" "$remote_commit"; then
+      if ! record_opensrc_repo_commit "$commit_state" "$repo_name" "$remote_commit"; then
+        echo "  Could not record the verified commit for $repo."
+        rm -f "${commit_state}.tmp"
+        return 1
+      fi
+      echo "  Skipping $repo (${remote_commit:0:12} is already installed)."
+      return 0
+    else
+      verify_status=$?
+      if [ "$verify_status" -eq 1 ]; then
+        echo "  Existing $repo checkout differs from ${remote_commit:0:12}."
+      else
+        echo "  Could not verify the existing $repo checkout."
+      fi
+    fi
+  fi
+
+  if [ -n "$cached_commit" ]; then
+    echo "  Installing $repo (${cached_commit:0:12} -> ${remote_commit:0:12})..."
+  else
+    echo "  Installing $repo (no cached commit)..."
+  fi
+
+  if ! tmp_home="$(mktemp -d)"; then
+    echo "  Could not create a temporary opensrc cache for $repo."
+    return 1
+  fi
 
   # `opensrc fetch owner/repo` does not refresh an existing cached checkout; if
   # the expected cache path already exists, opensrc reports it as cached and
-  # leaves it alone. To force a current clone without risking the only local
-  # copy, fetch into a brand-new temporary opensrc cache first.
+  # leaves it alone. Fetch changed repos into a brand-new temporary cache first
+  # so a failed clone cannot destroy the existing source.
   if ! OPENSRC_HOME="$tmp_home" opensrc fetch "$repo" | sed '/^[[:space:]]*[0-9][0-9]* fetched[[:space:]]*$/d'; then
     rm -rf "$tmp_home"
     return 1
@@ -121,32 +228,60 @@ refresh_opensrc_repo() {
   # whole repo directory before copying so stale branch/ref directories do not
   # linger after the refresh.
   tmp_repo_root_rel="$(dirname "$tmp_repo_rel")"
+  real_repo_root="${opensrc_home}/${tmp_repo_root_rel}"
+  staged_repo_root="${real_repo_root}.tmp"
   real_sources="${opensrc_home}/sources.json"
   now="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
-  mkdir -p "$(dirname "${opensrc_home}/${tmp_repo_root_rel}")"
-  rm -rf "${opensrc_home:?}/${tmp_repo_root_rel}"
-  cp -a "${tmp_home}/${tmp_repo_root_rel}" "$(dirname "${opensrc_home}/${tmp_repo_root_rel}")/"
+  mkdir -p "$(dirname "$real_repo_root")"
+  rm -rf "$staged_repo_root"
+  if ! cp -a "${tmp_home}/${tmp_repo_root_rel}" "$staged_repo_root"; then
+    echo "  Could not stage the fetched source for $repo."
+    rm -rf "$tmp_home" "$staged_repo_root"
+    return 1
+  fi
+  if ! rm -rf "${real_repo_root:?}" || ! mv "$staged_repo_root" "$real_repo_root"; then
+    echo "  Could not replace the cached source for $repo."
+    rm -rf "$tmp_home" "$staged_repo_root"
+    return 1
+  fi
 
-  # Finally, merge the freshly fetched repo metadata into the real opensrc
-  # index. Package entries are preserved; the matching repo entry is replaced.
+  # Merge the freshly fetched repo metadata into the real opensrc index.
+  # Package entries are preserved; the matching repo entry is replaced.
   mkdir -p "$opensrc_home"
   if [ -f "$real_sources" ]; then
-    jq --argjson entry "$(jq -c '.repos[0]' "$tmp_sources")" --arg now "$now" '
+    if ! jq --argjson entry "$(jq -c '.repos[0]' "$tmp_sources")" --arg now "$now" '
       .updatedAt = $now
       | .packages = (.packages // [])
       | .repos = ((.repos // []) | map(select(.name != $entry.name)) + [$entry])
-    ' "$real_sources" >"${real_sources}.tmp"
-  else
-    jq --arg now "$now" '{updatedAt: $now, packages: [], repos: [.repos[0]]}' "$tmp_sources" >"${real_sources}.tmp"
+    ' "$real_sources" >"${real_sources}.tmp"; then
+      echo "  Could not update opensrc metadata for $repo."
+      rm -rf "$tmp_home" "${real_sources}.tmp"
+      return 1
+    fi
+  elif ! jq --arg now "$now" '{updatedAt: $now, packages: [], repos: [.repos[0]]}' \
+    "$tmp_sources" >"${real_sources}.tmp"; then
+    echo "  Could not create opensrc metadata for $repo."
+    rm -rf "$tmp_home" "${real_sources}.tmp"
+    return 1
   fi
-  mv "${real_sources}.tmp" "$real_sources"
+  if ! mv "${real_sources}.tmp" "$real_sources"; then
+    echo "  Could not activate opensrc metadata for $repo."
+    rm -rf "$tmp_home" "${real_sources}.tmp"
+    return 1
+  fi
+
+  if ! record_opensrc_repo_commit "$commit_state" "$tmp_repo_name" "$remote_commit"; then
+    echo "  Could not record the installed commit for $repo."
+    rm -rf "$tmp_home" "${commit_state}.tmp"
+    return 1
+  fi
 
   rm -rf "$tmp_home"
 }
 
-if command -v opensrc &>/dev/null && command -v jq &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
-  echo "Refreshing source repos with opensrc..."
+if command -v opensrc &>/dev/null && command -v jq &>/dev/null && command -v git &>/dev/null && [ -f "${BASEDIR}/opensrc-repos" ]; then
+  echo "Checking source repos with opensrc..."
   opensrc_failed=0
 
   while IFS= read -r repo || [ -n "$repo" ]; do
@@ -157,9 +292,8 @@ if command -v opensrc &>/dev/null && command -v jq &>/dev/null && [ -f "${BASEDI
     repo="${repo#"${repo%%[![:space:]]*}"}"
     repo="${repo%"${repo##*[![:space:]]}"}"
 
-    echo "  Updating $repo..."
-    if ! refresh_opensrc_repo "$repo"; then
-      echo "  Failed to update $repo; leaving any existing cached copy in place."
+    if ! refresh_opensrc_repo_if_commit_changed "$repo"; then
+      echo "  Failed to install $repo; continuing."
       opensrc_failed=1
     fi
   done <"${BASEDIR}/opensrc-repos"
@@ -168,7 +302,7 @@ if command -v opensrc &>/dev/null && command -v jq &>/dev/null && [ -f "${BASEDI
     echo "Some opensrc repo installs failed; continuing."
   fi
 else
-  echo "opensrc, jq, or ${BASEDIR}/opensrc-repos missing. Skipping source repo install."
+  echo "opensrc, jq, git, or ${BASEDIR}/opensrc-repos missing. Skipping source repo install."
 fi
 
 echo "Done!"
