@@ -179,18 +179,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
       "skillPath": "skills/chrome-devtools-cli/SKILL.md",
-      "skillFolderHash": "f9ae0351783a83ef7df7292d086a833b296279e7",
+      "skillFolderHash": "329d7da47b9e0589199bf164bf26ce0855cd57c9",
       "installedAt": "2026-06-27T02:17:49.871Z",
-      "updatedAt": "2026-08-25T15:54:17.495Z"
+      "updatedAt": "2026-08-27T14:30:09.109Z"
     },
     "hunk-review": {
       "source": "modem-dev/hunk",
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
-      "skillPath": "skills/hunk-review/SKILL.md",
-      "skillFolderHash": "8c78e66fe408c6a9ca156be8d4b109668e1fe690",
+      "skillPath": "packages/hunk/skills/hunk-review/SKILL.md",
+      "skillFolderHash": "e4d154cec8bca19c256a3894c254f449aaedcf62",
       "installedAt": "2026-07-03T00:04:14.652Z",
-      "updatedAt": "2026-08-15T20:36:43.224Z"
+      "updatedAt": "2026-09-07T06:53:20.987Z"
     },
     "to-questionnaire": {
       "source": "mattpocock/skills",
