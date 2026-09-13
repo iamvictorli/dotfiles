@@ -45,7 +45,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty"
 cask "iina"
-cask "kitlangton-hex"
+cask "anomalyco/tap/hex", trusted: true
 cask "orbstack"
 cask "tailscale-app"
 cask "yaak"
