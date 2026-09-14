@@ -31,14 +31,35 @@ vim.keymap.set("n", "H", "^", { desc = "Jump to beginning of line" })
 vim.keymap.set("v", "L", "$<left>", { desc = "Move to end of line in visual mode" })
 vim.keymap.set("v", "H", "^", { desc = "Move to beginning of line in visual mode" })
 
--- nvim-tmux-navigation
-local nvim_tmux_nav = require("nvim-tmux-navigation")
-vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft, { desc = "Navigate Left" })
-vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown, { desc = "Navigate Down" })
-vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp, { desc = "Navigate Up" })
-vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight, { desc = "Navigate Right" })
-vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive, { desc = "Navigate Last Active" })
-vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext, { desc = "Navigate Next" })
+-- from https://github.com/paulbkim-dev/vim-herdr-navigation
+-- Seamless navigation between Neovim splits and Herdr panes. This config loads
+-- after LazyVim's default keymaps, so these mappings win.
+local function navigate_neovim_or_herdr(wincmd, direction)
+  local previous_window = vim.api.nvim_get_current_win()
+  vim.cmd("wincmd " .. wincmd)
+  if vim.api.nvim_get_current_win() ~= previous_window then
+    return
+  end
+
+  if vim.env.HERDR_PANE_ID and vim.env.HERDR_PANE_ID ~= "" then
+    local herdr = vim.env.HERDR_BIN_PATH
+    if herdr == nil or herdr == "" then
+      herdr = "herdr"
+    end
+    vim.fn.system({ herdr, "pane", "focus", "--direction", direction, "--pane", vim.env.HERDR_PANE_ID })
+  end
+end
+
+local function map_neovim_or_herdr_navigation(lhs, wincmd, direction, description)
+  vim.keymap.set("n", lhs, function()
+    navigate_neovim_or_herdr(wincmd, direction)
+  end, { silent = true, noremap = true, desc = description })
+end
+
+map_neovim_or_herdr_navigation("<C-h>", "h", "left", "Navigate left (Vim/Herdr)")
+map_neovim_or_herdr_navigation("<C-j>", "j", "down", "Navigate down (Vim/Herdr)")
+map_neovim_or_herdr_navigation("<C-k>", "k", "up", "Navigate up (Vim/Herdr)")
+map_neovim_or_herdr_navigation("<C-l>", "l", "right", "Navigate right (Vim/Herdr)")
 
 -- Remap wrap toggle to <leader>uu
 local snacks = require("snacks")

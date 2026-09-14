@@ -8,7 +8,9 @@ stow/zsh/.zcompdump*
 .dotfiles/
 
 # local app state / secrets
-stow/herdr/.config/herdr/
+stow/herdr/.config/herdr/*
+!stow/herdr/.config/herdr/config.toml
+!stow/herdr/.config/herdr/plugins.txt
 stow/lazygit/Library/Application Support/lazygit/state.yml
 stow/lazygit/Library/Application Support/lazygit/github_pull_requests.json
 stow/pi/.pi/agent/auth.json

@@ -1,0 +1,3 @@
+# GitHub plugin sources installed and refreshed by ./install.
+# One Herdr owner/repository[/subdirectory] source per line.
+paulbkim-dev/vim-herdr-navigation

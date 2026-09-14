@@ -63,6 +63,30 @@ done
 
 echo "Stowing complete!"
 
+HERDR_PLUGIN_SOURCES_FILE="${HOME}/.config/herdr/plugins.txt"
+if command -v herdr &>/dev/null && [ -f "${HERDR_PLUGIN_SOURCES_FILE}" ]; then
+  echo "Installing and updating Herdr plugins..."
+  herdr_plugins_failed=0
+
+  while IFS= read -r plugin_source || [ -n "$plugin_source" ]; do
+    plugin_source="${plugin_source%%#*}"
+    plugin_source="${plugin_source//[[:space:]]/}"
+    [ -z "$plugin_source" ] && continue
+
+    echo "  Syncing Herdr plugin: $plugin_source"
+    if ! herdr plugin install "$plugin_source" --yes; then
+      echo "  Failed to sync Herdr plugin: $plugin_source"
+      herdr_plugins_failed=1
+    fi
+  done <"${HERDR_PLUGIN_SOURCES_FILE}"
+
+  if [ "$herdr_plugins_failed" -ne 0 ]; then
+    echo "Some Herdr plugin installs failed; continuing."
+  fi
+else
+  echo "herdr or ${HERDR_PLUGIN_SOURCES_FILE} missing. Skipping Herdr plugin install."
+fi
+
 # Install Node.js via vite-plus if available
 if command -v vp &>/dev/null; then
   vp upgrade
