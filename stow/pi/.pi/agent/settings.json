@@ -1,16 +1,22 @@
 {
   "lastChangelogVersion": "0.85.1",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-astra",
+  "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "medium",
   "theme": "dark",
   "quietStartup": false,
   "treeFilterMode": "no-tools",
-  "hideThinkingBlock": false,
-  "autocompleteMaxVisible": 10,
+  "hideThinkingBlock": true,
+  "autocompleteMaxVisible": 5,
   "showHardwareCursor": false,
   "showCacheMissNotices": true,
   "collapseChangelog": true,
+  "defaultProjectTrust": "always",
+  "fullscreenScrollbar": "always",
   "steeringMode": "all",
-  "followUpMode": "all"
+  "followUpMode": "all",
+  "packages": [
+    "git:github.com/dmmulroy/pi-web-tools",
+    "npm:@plannotator/pi-extension"
+  ]
 }

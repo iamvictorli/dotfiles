@@ -4,6 +4,8 @@ setopt EXTENDED_HISTORY
 setopt autocd
 
 export PATH="$HOME/dotfiles:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PI_WEB_TOOLS_EXA_ENDPOINT="https://mcp.exa.ai/mcp"
 
 # Cache init scripts - regenerate only when binary changes
 _cache_init() {

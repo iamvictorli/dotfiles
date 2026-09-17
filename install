@@ -44,6 +44,7 @@ PACKAGES=(
   lazygit
   nvim
   pi
+  plannotator
   ssh
   starship
   yazi
