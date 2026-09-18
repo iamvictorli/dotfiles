@@ -2336,6 +2336,7 @@ window-padding-color = background
 # macOS: To hide the titlebar without removing the native window borders
 #        or rounded corners, use `macos-titlebar-style = hidden` instead.
 # window-decoration = auto
+window-decoration = none
 
 # The font that will be used for the application's window and tab titles.
 #
@@ -3565,6 +3566,7 @@ shell-integration-features = no-cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,
 #
 # Changing this option at runtime only applies to new windows.
 # macos-titlebar-style = transparent
+macos-titlebar-style = hidden
 
 # Whether the proxy icon in the macOS titlebar is visible. The proxy icon
 # is the icon that represents the folder of the current working directory.
