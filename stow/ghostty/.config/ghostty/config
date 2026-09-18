@@ -165,8 +165,7 @@ font-style-bold-italic = Bold Italic
 # On Linux with GTK, font size is scaled according to both display-wide and
 # text-specific scaling factors, which are often managed by your desktop
 # environment (e.g. the GNOME display scale and large text settings).
-# font-size = 13
-font-size = 15
+font-size = 14
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -3082,7 +3081,7 @@ shell-integration = zsh
 # when both `ssh-env` and `ssh-terminfo` are enabled, Ghostty will install its
 # terminfo on remote hosts and use `xterm-ghostty` as TERM, falling back to
 # `xterm-256color` with environment variables if terminfo installation fails.
-shell-integration-features = cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
+shell-integration-features = no-cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
 
 # Custom entries into the command palette.
 #
@@ -4109,5 +4108,5 @@ macos-option-as-alt = true
 #
 # This only works on macOS since only macOS has an auto-update feature.
 # auto-update-channel =
-auto-update-channel = stable
+auto-update-channel = tip
 

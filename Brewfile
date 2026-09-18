@@ -44,7 +44,7 @@ cask "1password-cli@beta"
 cask "codex"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
-cask "ghostty"
+cask "ghostty@tip"
 cask "iina"
 cask "anomalyco/tap/hex", trusted: true
 cask "orbstack"
