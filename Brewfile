@@ -53,8 +53,7 @@ cask "yaak"
 
 # TODO: add these apps or not
 # helium
-# codex app
-# cask "raycast", on raycast v2 beta
+# cask "raycast"
 # cask "sizzy"
 # cask "webtorrent"
 

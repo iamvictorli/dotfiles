@@ -101,6 +101,17 @@ else
   echo "vp not found. Could not set up vite-plus Node.js environment."
 fi
 
+if command -v pi &>/dev/null; then
+  echo "Updating Pi extensions..."
+  if pi update --extensions; then
+    echo "Pi extensions updated."
+  else
+    echo "Pi extension updates failed; continuing."
+  fi
+else
+  echo "pi not found. Skipping Pi extension updates."
+fi
+
 # skills uses ~/.agents/.skill-lock.json for global installs; the agents package is stowed above.
 SKILL_LOCK="${HOME}/.agents/.skill-lock.json"
 if command -v npx &>/dev/null && [ -f "${SKILL_LOCK}" ]; then
