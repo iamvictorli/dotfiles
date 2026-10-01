@@ -170,9 +170,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
       "skillPath": "skills/chrome-devtools-cli/SKILL.md",
-      "skillFolderHash": "4ac8a702cf327162e3f0a34eb1439bf8b9a0e214",
+      "skillFolderHash": "a72fdbf2f748e21b5d586d5a616654af585d6b07",
       "installedAt": "2026-06-27T02:17:49.871Z",
-      "updatedAt": "2026-09-24T16:22:00.197Z"
+      "updatedAt": "2026-10-01T16:56:29.541Z"
     },
     "hunk-review": {
       "source": "modem-dev/hunk",
@@ -324,42 +324,35 @@
       "installedAt": "2026-08-15T21:01:24.850Z",
       "updatedAt": "2026-09-17T14:38:36.796Z"
     },
-    "narrow-react-prop-types": {
-      "source": "humanlayer/skills",
+    "implement-spec": {
+      "source": "mattpocock/skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/humanlayer/skills.git",
-      "skillPath": "plugins/narrow-react-prop-types/skills/narrow-react-prop-types/SKILL.md",
-      "skillFolderHash": "172dfb205f5f1419354b431cbb903e1afd55ad87",
-      "installedAt": "2026-08-17T16:33:08.159Z",
-      "updatedAt": "2026-08-17T16:33:08.159Z"
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/implement-spec/SKILL.md",
+      "skillFolderHash": "0cfefc751d0cb64f0c948ffcb17e13b94e778f08",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-09-30T01:46:11.076Z",
+      "updatedAt": "2026-09-30T01:46:11.076Z"
     },
-    "plannotator-guide": {
-      "source": "plannotator/guides",
+    "pr": {
+      "source": "mattpocock/skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/plannotator/guides.git",
-      "skillPath": "skills/plannotator-guide/SKILL.md",
-      "skillFolderHash": "302bff15517e83d5091fb5a140bab1dedea151a2",
-      "installedAt": "2026-08-25T22:39:15.047Z",
-      "updatedAt": "2026-08-25T22:39:15.047Z"
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/pr/SKILL.md",
+      "skillFolderHash": "00b896d811adffad747c7ca30078d909d60c7f93",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-09-30T01:46:11.079Z",
+      "updatedAt": "2026-09-30T01:46:11.079Z"
     },
-    "plannotator-visual-explainer": {
-      "source": "backnotprop/plannotator",
+    "retro": {
+      "source": "mattpocock/skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/backnotprop/plannotator.git",
-      "skillPath": "apps/skills/extra/plannotator-visual-explainer/SKILL.md",
-      "skillFolderHash": "060525d9a83760cc7cbc3004217c596a76a3e39a",
-      "installedAt": "2026-09-15T04:37:11.737Z",
-      "updatedAt": "2026-09-18T15:55:10.312Z"
-    },
-    "plannotator-review": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/backnotprop/plannotator.git",
-      "ref": "main",
-      "skillPath": "apps/skills/core/plannotator-review/SKILL.md",
-      "skillFolderHash": "1ffd86e325cc66fd6f597d27068b911bc8c477e9",
-      "installedAt": "2026-09-15T04:54:31.222Z",
-      "updatedAt": "2026-09-15T04:54:31.222Z"
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/retro/SKILL.md",
+      "skillFolderHash": "335c1862a43da9d629abafdb79ca0c0de118be08",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-09-30T01:46:11.080Z",
+      "updatedAt": "2026-09-30T01:46:11.080Z"
     }
   },
   "dismissed": {}
