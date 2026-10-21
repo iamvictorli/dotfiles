@@ -32,7 +32,6 @@ brew "rust"
 brew "sevenzip" # for yazi
 brew "starship"
 brew "stow"
-brew "tmux"
 brew "tree"
 brew "yarn"
 brew "yazi"
