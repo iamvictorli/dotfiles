@@ -25,6 +25,7 @@ dotfiles/
     ├── ssh/             # ~/.ssh/config
     ├── starship/        # ~/.config/starship.toml
     ├── yazi/            # ~/.config/yazi
+    ├── yt-dlp/          # ~/.config/yt-dlp
     └── zsh/             # ~/.zshrc; generated cache is ignored
 ```
 
@@ -45,6 +46,7 @@ dotfiles/
 | Change skill toggle behavior | `stow/pi/.pi/agent/extensions/pi-skill-toggle/src/` | Tests colocated by domain |
 | Change diff review defaults | `stow/hunk/.config/hunk/config.toml` | Hunk configuration |
 | Change file manager behavior | `stow/yazi/.config/yazi/` | Lua plugin directories end in `.yazi/` |
+| Inspect third-party source | `~/.opensrc/repos/github.com/<owner>/<repo>/<ref>/` | Consult local source for implementation questions; e.g. `yt-dlp/yt-dlp/master/` |
 | Change refreshed source inventory | `opensrc-repos`, `refresh_opensrc_repo_if_commit_changed()` in `install` | One repository slug per line |
 | Find ignored local state | `.gitignore` | Pi auth/sessions, SSH material, Herdr/Lazygit state |
 
@@ -99,6 +101,7 @@ env -u XDG_STATE_HOME npx skills update --global --yes
 | Agent skills | `stow/agents/.agents/.skill-lock.json` | Sources, hashes, install/update metadata |
 | Hunk | `stow/hunk/.config/hunk/config.toml` | Diff viewer defaults |
 | Yazi | `stow/yazi/.config/yazi/*.toml` | Behavior, keymap, theme |
+| yt-dlp | `stow/yt-dlp/.config/yt-dlp/config` | Clears default JS runtimes and enables only Node; Homebrew may still install Deno as a dependency |
 
 ## VALIDATION
 

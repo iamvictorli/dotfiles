@@ -19,8 +19,8 @@ fi
 
 echo "Updating Homebrew and installing packages from Brewfile..."
 brew update
-brew bundle install --file="${BASEDIR}/Brewfile"
-brew bundle upgrade --file="${BASEDIR}/Brewfile"
+brew bundle install --verbose --file="${BASEDIR}/Brewfile"
+brew bundle upgrade --verbose --file="${BASEDIR}/Brewfile"
 echo "Homebrew packages installed and upgraded."
 
 if ! command -v stow &>/dev/null; then
@@ -48,6 +48,7 @@ PACKAGES=(
   ssh
   starship
   yazi
+  yt-dlp
   zsh
 )
 
