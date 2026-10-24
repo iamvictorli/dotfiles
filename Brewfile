@@ -1,14 +1,14 @@
-# Formulae
+tap "plannotator/tap", trusted: true
+brew "plannotator-tui", trusted: true
+tap "abue-ammar/tinycast"
+cask "abue-ammar/tinycast/tinycast"
+
 brew "jesseduffield/lazydocker/lazydocker", trusted: true
-brew "kitlangton/tap/ghui", trusted: true # GitHub pull request and issue TUI
+brew "kitlangton/tap/ghui", trusted: true
 brew "makisuo/tap/maple", trusted: true
-brew "oven-sh/bun/bun", trusted: true
 brew "hunk" # Review-first terminal diff viewer
 brew "ast-grep"
-brew "cloc"
-brew "cocoapods"
 brew "curl"
-brew "deno" # for yt-dlp
 brew "fd" # for yazi
 brew "ffmpeg" # for yazi
 brew "fzf"
@@ -20,7 +20,6 @@ brew "hyperfine" # for ./benchmark-zsh
 brew "imagemagick" # for yazi
 brew "jq"
 brew "lazygit"
-brew "lua-language-server"
 brew "mas"
 brew "mole"
 brew "neovim"
@@ -32,14 +31,12 @@ brew "rust"
 brew "sevenzip" # for yazi
 brew "starship"
 brew "stow"
-brew "tree"
 brew "yarn"
 brew "yazi"
 brew "yt-dlp"
 
-# Casks
 cask "1password"
-cask "1password-cli@beta"
+cask "claude-code@latest"
 cask "codex"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
@@ -48,10 +45,11 @@ cask "iina"
 cask "anomalyco/tap/hex", trusted: true
 cask "orbstack"
 cask "tailscale-app"
+cask "t3-code@nightly"
 cask "yaak"
 
 # TODO: add these apps or not
-# helium
+# cask "helium"
 # cask "raycast"
 # cask "sizzy"
 # cask "webtorrent"

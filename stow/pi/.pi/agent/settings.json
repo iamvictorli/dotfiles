@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "1.3.0",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
-  "defaultThinkingLevel": "medium",
+  "lastChangelogVersion": "1.4.0",
+  "defaultProvider": "claude-bridge",
+  "defaultModel": "claude-opus-5-5",
+  "defaultThinkingLevel": "high",
   "defaultTools": [
     "+codemode"
   ],
@@ -21,6 +21,7 @@
   "followUpMode": "all",
   "packages": [
     "git:github.com/dmmulroy/pi-web-tools",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:pi-claude-bridge"
   ]
 }

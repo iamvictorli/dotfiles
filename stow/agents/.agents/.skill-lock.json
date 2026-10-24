@@ -353,6 +353,16 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-09-30T01:46:11.080Z",
       "updatedAt": "2026-09-30T01:46:11.080Z"
+    },
+    "cua-driver": {
+      "source": "trycua/cua",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/trycua/cua.git",
+      "ref": "main",
+      "skillPath": "libs/cua/skills/cua-driver/SKILL.md",
+      "skillFolderHash": "1677893b676e4fe6ed4812695ccc69e4503b4260",
+      "installedAt": "2026-10-22T21:24:42.996Z",
+      "updatedAt": "2026-10-22T21:24:42.996Z"
     }
   },
   "dismissed": {}

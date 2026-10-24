@@ -47,6 +47,7 @@ PACKAGES=(
   plannotator
   ssh
   starship
+  tinycast
   yazi
   yt-dlp
   zsh
