@@ -38,6 +38,7 @@ brew "yt-dlp"
 cask "1password"
 cask "claude-code@latest"
 cask "codex"
+cask "cuadriver"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty@tip"
@@ -50,7 +51,6 @@ cask "yaak"
 
 # TODO: add these apps or not
 # cask "helium"
-# cask "raycast"
 # cask "sizzy"
 # cask "webtorrent"
 
