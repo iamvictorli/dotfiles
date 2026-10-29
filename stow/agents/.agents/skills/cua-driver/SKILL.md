@@ -27,6 +27,7 @@ metadata:
         required: false
         description: Required host-generated bearer token when the local MCP HTTP endpoint is enabled.
     homepage: https://cua.ai/docs/cua-driver
+disable-model-invocation: true
 ---
 
 # cua-driver

@@ -1,19 +1,13 @@
 {
   "lastChangelogVersion": "1.4.0",
-  "defaultProvider": "claude-bridge",
+  "defaultProvider": "pi-claude-cli",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "defaultTools": [
-    "+codemode"
-  ],
+  "defaultTools": ["+codemode"],
   "theme": "dark",
-  "quietStartup": false,
   "treeFilterMode": "no-tools",
-  "hideThinkingBlock": true,
-  "autocompleteMaxVisible": 5,
   "showHardwareCursor": false,
   "showCacheMissNotices": true,
-  "collapseChangelog": true,
   "defaultProjectTrust": "always",
   "tuiMode": "regular",
   "fullscreenScrollbar": "always",
@@ -22,6 +16,12 @@
   "packages": [
     "git:github.com/dmmulroy/pi-web-tools",
     "npm:@plannotator/pi-extension",
-    "npm:pi-claude-bridge"
+    "git:github.com/dmmulroy/pi-claude-cli"
+  ],
+  "enabledModels": [
+    "pi-claude-cli/claude-opus-5-5",
+    "openai/gpt-6-luna",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-astra"
   ]
 }

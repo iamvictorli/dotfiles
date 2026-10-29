@@ -20,7 +20,6 @@ brew "hyperfine" # for ./benchmark-zsh
 brew "imagemagick" # for yazi
 brew "jq"
 brew "lazygit"
-brew "mas"
 brew "mole"
 brew "neovim"
 brew "pnpm"
@@ -44,15 +43,14 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty@tip"
 cask "iina"
 cask "anomalyco/tap/hex", trusted: true
-cask "orbstack"
+cask "nkzw-tech/tap/codiff", trusted: true
 cask "tailscale-app"
 cask "t3-code@nightly"
+cask "vorssaint"
 cask "yaak"
 
 # TODO: add these apps or not
 # cask "helium"
 # cask "sizzy"
 # cask "webtorrent"
-
-# Mac App Store
-mas "TextSniper", id: 1528890965
+# cask "orbstack"

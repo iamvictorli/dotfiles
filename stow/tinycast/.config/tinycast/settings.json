@@ -63,8 +63,33 @@
         "alias": null,
         "showInLauncher": true
       },
-      "net.imput.helium": {
-        "shortcut": "hyper+2",
+      "com.pake.a12efdf": {
+        "shortcut": "hyper+p",
+        "alias": null,
+        "showInLauncher": true
+      },
+      "com.pake.a2756f8": {
+        "shortcut": "hyper+d",
+        "alias": null,
+        "showInLauncher": true
+      },
+      "com.pake.a6463fa": {
+        "shortcut": "hyper+f",
+        "alias": null,
+        "showInLauncher": true
+      },
+      "com.pake.a74fa01": {
+        "shortcut": "hyper+b",
+        "alias": null,
+        "showInLauncher": true
+      },
+      "com.pake.a8fce84": {
+        "shortcut": "hyper+g",
+        "alias": null,
+        "showInLauncher": true
+      },
+      "com.pake.aa90813": {
+        "shortcut": "hyper+m",
         "alias": null,
         "showInLauncher": true
       }
@@ -96,7 +121,7 @@
     "enabled": false
   },
   "ai": {
-    "enabled": true,
+    "enabled": false,
     "webSearch": true,
     "choices": true,
     "systemPrompt": "",
