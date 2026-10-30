@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cua Driver"
+  short_description: "Drive native GUI apps via cua-driver"
+policy:
+  allow_implicit_invocation: false

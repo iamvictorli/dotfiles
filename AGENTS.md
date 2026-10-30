@@ -16,6 +16,7 @@ dotfiles/
 ├── assets/              # keyboard modifier reference images
 └── stow/
     ├── agents/          # ~/.agents skill inventory and lock
+    ├── bin/             # ~/.local/bin wrapper scripts (e.g. tailscale CLI)
     ├── ghostty/         # ~/.config/ghostty
     ├── herdr/           # ~/.config/herdr
     ├── hunk/            # ~/.config/hunk
