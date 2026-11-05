@@ -23,6 +23,7 @@ dotfiles/
     ├── lazygit/         # ~/Library/Application Support/lazygit
     ├── nvim/            # LazyVim under ~/.config/nvim
     ├── pi/              # ~/.pi settings, keybindings, extensions, workspace
+    ├── rex/             # ~/.config/rex/init.lua (Rex keybindings)
     ├── ssh/             # ~/.ssh/config
     ├── starship/        # ~/.config/starship.toml
     ├── yazi/            # ~/.config/yazi
@@ -49,7 +50,7 @@ dotfiles/
 | Change file manager behavior | `stow/yazi/.config/yazi/` | Lua plugin directories end in `.yazi/` |
 | Inspect third-party source | `~/.opensrc/repos/github.com/<owner>/<repo>/<ref>/` | Consult local source for implementation questions; e.g. `yt-dlp/yt-dlp/master/` |
 | Change refreshed source inventory | `opensrc-repos`, `refresh_opensrc_repo_if_commit_changed()` in `install` | One repository slug per line |
-| Find ignored local state | `.gitignore` | Pi auth/sessions, SSH material, Herdr/Lazygit state |
+| Find ignored local state | `.gitignore` | Pi auth/sessions, SSH material, Herdr/Rex/Lazygit state |
 
 ## CONVENTIONS
 

@@ -1,7 +1,5 @@
 tap "plannotator/tap", trusted: true
 brew "plannotator-tui", trusted: true
-tap "abue-ammar/tinycast"
-cask "abue-ammar/tinycast/tinycast"
 
 brew "jesseduffield/lazydocker/lazydocker", trusted: true
 brew "kitlangton/tap/ghui", trusted: true
@@ -43,14 +41,14 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty@tip"
 cask "iina"
 cask "anomalyco/tap/hex", trusted: true
-cask "nkzw-tech/tap/codiff", trusted: true
 cask "tailscale-app"
+cask "tinycast"
 cask "t3-code@nightly"
 cask "vorssaint"
 cask "yaak"
 
 # TODO: add these apps or not
-# cask "helium"
+# cask "helium-browser"
 # cask "sizzy"
 # cask "webtorrent"
 # cask "orbstack"

@@ -1,9 +1,11 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "defaultProvider": "pi-claude-cli",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "defaultTools": ["+codemode"],
+  "defaultTools": [
+    "+codemode"
+  ],
   "theme": "dark",
   "treeFilterMode": "no-tools",
   "showHardwareCursor": false,

@@ -359,9 +359,29 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua/skills/cua-driver/SKILL.md",
-      "skillFolderHash": "1677893b676e4fe6ed4812695ccc69e4503b4260",
+      "skillFolderHash": "a12611634e9102e10b461a20d1cbe924291e5886",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-10-22T21:24:42.996Z"
+      "updatedAt": "2026-11-03T19:38:00.166Z"
+    },
+    "bro": {
+      "source": "backnotprop/bro",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/backnotprop/bro.git",
+      "skillPath": "skills/bro/SKILL.md",
+      "skillFolderHash": "19def6229f89686253063fb9d795a6d45a246046",
+      "pluginName": "bro",
+      "installedAt": "2026-11-02T19:23:37.793Z",
+      "updatedAt": "2026-11-02T19:23:37.793Z"
+    },
+    "init-deep": {
+      "source": "dmmulroy/.dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dmmulroy/.dotfiles.git",
+      "ref": "c1715fb1515e2a85cf493b0c7fa0ade53550cbe0",
+      "skillPath": "home/.pi/agent/skills/init-deep/SKILL.md",
+      "skillFolderHash": "09f83582d2ce6aa404f78586c35837b3782e5e0a",
+      "installedAt": "2026-11-02T19:23:40.143Z",
+      "updatedAt": "2026-11-02T19:23:40.143Z"
     }
   },
   "dismissed": {}

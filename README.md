@@ -59,6 +59,7 @@ stow -d stow -t ~ -D zsh  # Unstow (remove symlinks)
 | `lazygit`  | Lazygit configuration                            |
 | `nvim`     | LazyVim-based Neovim configuration               |
 | `pi`       | Pi agent settings, keybindings, and extensions   |
+| `rex`      | Rex terminal keybindings (`init.lua`)            |
 | `ssh`      | SSH configuration                                |
 | `starship` | Starship prompt                                  |
 | `yazi`     | Yazi file manager configuration and plugins      |
