@@ -170,9 +170,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
       "skillPath": "skills/chrome-devtools-cli/SKILL.md",
-      "skillFolderHash": "8ce53280599242b9dddcdb450cecb2e1da7f7847",
+      "skillFolderHash": "c8e5dd28220d34b5293aea8772410951d3fe1026",
       "installedAt": "2026-06-27T02:17:49.871Z",
-      "updatedAt": "2026-11-10T17:45:44.529Z"
+      "updatedAt": "2026-11-11T17:16:48.774Z"
     },
     "hunk-review": {
       "source": "modem-dev/hunk",
