@@ -20,3 +20,7 @@ stow/pi/.pi/agent/models-store.json
 stow/pi/.pi/agent/trust.json
 stow/pi/.pi/agent/sessions/
 stow/ssh/.ssh/
+
+# homelab-install run logs and status
+logs/*
+!logs/.gitkeep

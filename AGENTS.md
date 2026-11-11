@@ -1,8 +1,5 @@
 # DOTFILES KNOWLEDGE BASE
 
-**Generated:** 2026-08-25T22:21:44Z
-**Commit:** a78eb84
-
 GNU Stow-managed macOS dotfiles. Each package under `stow/` mirrors paths below `$HOME`.
 
 ## STRUCTURE
@@ -11,7 +8,9 @@ GNU Stow-managed macOS dotfiles. Each package under `stow/` mirrors paths below 
 dotfiles/
 ├── install              # Homebrew, stow, vite-plus, skills, opensrc bootstrap
 ├── Brewfile             # Homebrew formulae, casks, and MAS apps
+├── homelab-install      # unattended install on the homelab
 ├── benchmark-zsh        # hyperfine wrapper for interactive/login zsh startup
+├── logs/                # homelab-install run logs and last-run.json (ignored)
 ├── opensrc-repos        # repositories commit-checked by ./install
 ├── assets/              # keyboard modifier reference images
 └── stow/
@@ -39,6 +38,7 @@ dotfiles/
 | Add/remove a stow package | `stow/<package>/`, `PACKAGES` in `install` | Both must change |
 | Add/remove Homebrew dependencies | `Brewfile` | Cleanup is a separate destructive command |
 | Change shell startup or aliases | `stow/zsh/.zshrc` | `_cache_init` owns generated init snippets |
+| Change homelab install | `homelab-install` | Skips Homebrew via `SKIP_BREW=1`; pause with `logs/paused` |
 | Measure shell startup | `benchmark-zsh` | Supports interactive/login and cache controls |
 | Change Neovim behavior | `stow/nvim/.config/nvim/lua/config/` | LazyVim-style config split |
 | Change Neovim plugins | `stow/nvim/.config/nvim/lua/plugins/plugins.lua` | Lockfile: `lazy-lock.json` |

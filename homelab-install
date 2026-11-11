@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+#
+# homelab-install - Unattended ./install for the homelab Mac.
+#
+# Run by a T3 Code scheduled task. Pulls the repo when it is safe, runs
+# ./install without Homebrew, and records the result in logs/:
+#   logs/run-<timestamp>.log   full output of one run
+#   logs/last-run.json         summary of the latest run
+#   logs/paused                create this file to pause scheduled runs
+#
+
+set -uo pipefail
+
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_DIR="${BASEDIR}/logs"
+STATUS_FILE="${LOG_DIR}/last-run.json"
+PAUSE_FILE="${LOG_DIR}/paused"
+LOCK_DIR="${LOG_DIR}/.lock"
+HOMELAB_HOSTNAME="homelab"
+LOG_RETENTION_DAYS=30
+
+# Scheduled runs may start with a minimal PATH; add Homebrew, ~/.local/bin, and vite-plus.
+export PATH="/opt/homebrew/bin:/usr/local/bin:${HOME}/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+if [ -f "${HOME}/.vite-plus/env" ]; then
+  # shellcheck disable=SC1091
+  . "${HOME}/.vite-plus/env"
+fi
+
+utc_now() {
+  date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
+
+# The repo is cloned on every Mac; only the homelab runs the job.
+if [ "$(scutil --get LocalHostName 2>/dev/null)" != "${HOMELAB_HOSTNAME}" ]; then
+  echo "homelab-install: not ${HOMELAB_HOSTNAME}; skipping."
+  exit 0
+fi
+
+mkdir -p "${LOG_DIR}"
+
+if [ -e "${PAUSE_FILE}" ]; then
+  jq -n --arg checkedAt "$(utc_now)" \
+    '{status: "paused", checkedAt: $checkedAt}' >"${STATUS_FILE}.tmp" &&
+    mv "${STATUS_FILE}.tmp" "${STATUS_FILE}"
+  echo "homelab-install: ${PAUSE_FILE} exists; skipping."
+  exit 0
+fi
+
+# One run at a time. A lock left by a killed run is reclaimed when its PID is gone.
+if ! mkdir "${LOCK_DIR}" 2>/dev/null; then
+  lock_pid="$(cat "${LOCK_DIR}/pid" 2>/dev/null || true)"
+  if [ -n "${lock_pid}" ] && kill -0 "${lock_pid}" 2>/dev/null; then
+    echo "homelab-install: already running (pid ${lock_pid}); skipping."
+    exit 0
+  fi
+  rm -rf "${LOCK_DIR}"
+  mkdir "${LOCK_DIR}" || exit 1
+fi
+echo "$$" >"${LOCK_DIR}/pid"
+trap 'rm -rf "${LOCK_DIR}"' EXIT
+
+started_at="$(utc_now)"
+log_name="run-$(date -u +"%Y%m%dT%H%M%SZ").log"
+log_file="${LOG_DIR}/${log_name}"
+
+cd "${BASEDIR}" || exit 1
+commit_before="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
+
+# Pull only into a clean tree so local edits are never merged or stashed unattended.
+if [ -n "$(git status --porcelain 2>>"${log_file}")" ]; then
+  pull_result="skipped-dirty"
+  echo "==> Working tree has local changes; skipping git pull." >>"${log_file}"
+else
+  echo "==> git pull --ff-only" >>"${log_file}"
+  if git pull --ff-only >>"${log_file}" 2>&1; then
+    pull_result="ok"
+  else
+    pull_result="failed"
+  fi
+fi
+commit_after="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
+
+echo "==> SKIP_BREW=1 ./install" >>"${log_file}"
+SKIP_BREW=1 "${BASEDIR}/install" >>"${log_file}" 2>&1
+install_exit_code=$?
+
+finished_at="$(utc_now)"
+
+# ./install keeps going after partial failures and prints "...; continuing.",
+# so its exit code alone can report success while something broke.
+jq -n \
+  --arg startedAt "${started_at}" \
+  --arg finishedAt "${finished_at}" \
+  --argjson exitCode "${install_exit_code}" \
+  --arg pull "${pull_result}" \
+  --arg commitBefore "${commit_before}" \
+  --arg commitAfter "${commit_after}" \
+  --arg log "${log_name}" \
+  --rawfile output "${log_file}" \
+  '{
+    status: "completed",
+    startedAt: $startedAt,
+    finishedAt: $finishedAt,
+    exitCode: $exitCode,
+    pull: $pull,
+    commitBefore: $commitBefore,
+    commitAfter: $commitAfter,
+    warnings: ($output | split("\n") | map(select(test("continuing\\.$")))),
+    log: $log
+  }' >"${STATUS_FILE}.tmp" && mv "${STATUS_FILE}.tmp" "${STATUS_FILE}"
+
+find "${LOG_DIR}" -maxdepth 1 -name 'run-*.log' -mtime +"${LOG_RETENTION_DAYS}" -delete
+
+exit "${install_exit_code}"

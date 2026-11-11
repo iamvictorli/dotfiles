@@ -17,11 +17,16 @@ if ! command -v brew &>/dev/null; then
   fi
 fi
 
-echo "Updating Homebrew and installing packages from Brewfile..."
-brew update
-brew bundle install --verbose --file="${BASEDIR}/Brewfile"
-brew bundle upgrade --verbose --file="${BASEDIR}/Brewfile"
-echo "Homebrew packages installed and upgraded."
+# homelab-install sets SKIP_BREW=1 so unattended runs never touch Homebrew.
+if [ -n "${SKIP_BREW:-}" ]; then
+  echo "SKIP_BREW set; skipping Homebrew update."
+else
+  echo "Updating Homebrew and installing packages from Brewfile..."
+  brew update
+  brew bundle install --verbose --file="${BASEDIR}/Brewfile"
+  brew bundle upgrade --verbose --file="${BASEDIR}/Brewfile"
+  echo "Homebrew packages installed and upgraded."
+fi
 
 if [ -z "${GITHUB_TOKEN:-}" ] && command -v gh &>/dev/null; then
   if GITHUB_TOKEN="$(gh auth token 2>/dev/null)" && [ -n "${GITHUB_TOKEN}" ]; then
