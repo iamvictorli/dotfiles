@@ -359,9 +359,9 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua/skills/cua-driver/SKILL.md",
-      "skillFolderHash": "7fdf82d15b5fe34b12883aaa225c46e0e2dfe2f9",
+      "skillFolderHash": "97ab0afc206bfb9edc8d305cfabb3a5e2d981501",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-12T17:42:28.453Z"
+      "updatedAt": "2026-11-13T17:39:46.802Z"
     },
     "bro": {
       "source": "backnotprop/bro",
