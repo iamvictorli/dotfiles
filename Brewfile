@@ -40,6 +40,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "ghostty@tip"
 cask "iina"
+cask "jellyfin"
 cask "anomalyco/tap/hex", trusted: true
 cask "tailscale-app"
 cask "tinycast"
