@@ -6,11 +6,13 @@ GNU Stow-managed macOS dotfiles. Each package under `stow/` mirrors paths below 
 
 ```
 dotfiles/
-├── install              # Homebrew, stow, vite-plus, skills, opensrc bootstrap
-├── Brewfile             # Homebrew formulae, casks, and MAS apps
-├── homelab-install      # unattended install on the homelab
+├── install-laptop       # entry point on laptop: ./install with Brewfile.laptop
+├── install-homelab      # entry point on homelab: checks, pull, ./install with Brewfile.homelab, logs
+├── install              # shared steps: Homebrew, stow, vite-plus, skills, opensrc bootstrap
+├── Brewfile.laptop      # Homebrew packages for laptop
+├── Brewfile.homelab     # Homebrew packages for homelab
 ├── benchmark-zsh        # hyperfine wrapper for interactive/login zsh startup
-├── logs/                # homelab-install run logs and last-run.json (ignored)
+├── logs/                # install-homelab run logs and last-run.json (ignored)
 ├── opensrc-repos        # repositories commit-checked by ./install
 ├── assets/              # keyboard modifier reference images
 └── stow/
@@ -34,11 +36,11 @@ dotfiles/
 
 | Task | Location | Notes |
 |------|----------|-------|
-| Bootstrap or restow everything | `install` | Also upgrades Brew bundle and refreshes external sources |
+| Bootstrap or restow everything | `install-laptop`, `install-homelab` | Both run shared `install` with their Brewfile; also upgrades Brew bundle and refreshes external sources |
 | Add/remove a stow package | `stow/<package>/`, `PACKAGES` in `install` | Both must change |
-| Add/remove Homebrew dependencies | `Brewfile` | Cleanup is a separate destructive command |
+| Add/remove Homebrew dependencies | `Brewfile.homelab`, `Brewfile.laptop` | No shared base; each `install-<machine>` passes its own file to `install`. Cleanup is a separate destructive command |
 | Change shell startup or aliases | `stow/zsh/.zshrc` | `_cache_init` owns generated init snippets |
-| Change homelab install | `homelab-install` | Skips Homebrew via `SKIP_BREW=1`; pause with `logs/paused` |
+| Change homelab install | `install-homelab` | Scheduled run uses `SKIP_BREW=1 ./install-homelab`; pause with `logs/paused` |
 | Measure shell startup | `benchmark-zsh` | Supports interactive/login and cache controls |
 | Change Neovim behavior | `stow/nvim/.config/nvim/lua/config/` | LazyVim-style config split |
 | Change Neovim plugins | `stow/nvim/.config/nvim/lua/plugins/plugins.lua` | Lockfile: `lazy-lock.json` |
@@ -77,9 +79,10 @@ dotfiles/
 ## COMMANDS
 
 ```bash
-./install                                      # broad bootstrap: upgrades, restows, refreshes
-brew bundle install --file=Brewfile            # install declared Homebrew dependencies
-brew bundle cleanup --force                    # remove dependencies absent from Brewfile
+./install-laptop                               # broad bootstrap on the laptop: upgrades, restows, refreshes
+./install-homelab                              # same on the homelab, with Brewfile.homelab
+brew bundle install --file=Brewfile.laptop     # install declared Homebrew dependencies (Brewfile.homelab on the homelab)
+brew bundle cleanup --force --file=Brewfile.laptop  # remove dependencies absent from that Brewfile
 ./benchmark-zsh                                # interactive shell startup benchmark
 ./benchmark-zsh -l                             # login shell benchmark
 stow -v -d stow -t ~ zsh                       # stow one package
@@ -94,8 +97,8 @@ env -u XDG_STATE_HOME npx skills update --global --yes
 
 | Tool | Entry | Notes |
 |------|-------|-------|
-| Bootstrap | `install` | `PACKAGES`, vite-plus globals, skill update, opensrc refresh |
-| Homebrew | `Brewfile` | Formulae, casks, MAS apps |
+| Bootstrap | `install-laptop`, `install-homelab`, `install` | Wrappers pick the Brewfile; `install` holds `PACKAGES`, vite-plus globals, skill update, opensrc refresh |
+| Homebrew | `Brewfile.homelab`, `Brewfile.laptop` | One full Brewfile per machine, chosen by the install script you run |
 | zsh | `stow/zsh/.zshrc` | Lazy completion, cached init, aliases, fzf theme |
 | Neovim | `stow/nvim/.config/nvim/` | LazyVim config and lockfile |
 | Pi workspace | `stow/pi/.pi/package.json` | npm workspaces and shared Pi dependencies |
@@ -108,14 +111,14 @@ env -u XDG_STATE_HOME npx skills update --global --yes
 ## VALIDATION
 
 - Shell changes: run `./benchmark-zsh`; open a fresh interactive zsh when practical.
-- Stow layout changes: run `stow -v -d stow -t ~ <package>` before `./install`.
+- Stow layout changes: run `stow -v -d stow -t ~ <package>` before `./install-laptop` or `./install-homelab`.
 - Pi skill toggle changes: run its `npm test` and `npm run typecheck` scripts.
 - Neovim changes: start `nvim` and check LazyVim startup/load errors.
-- Bootstrap changes: inspect ignored local state before running `./install`.
+- Bootstrap changes: inspect ignored local state before running `./install-laptop` or `./install-homelab`.
 
 ## NOTES
 
-- `./install` runs `brew update`, bundle install, and bundle upgrade before restowing packages.
+- `./install` (via either wrapper) runs `brew update`, bundle install, and bundle upgrade before restowing packages.
 - Opensrc repo refreshes track remote HEAD in `~/.opensrc/repo-commits.json`; pre-state checkouts are tree-verified, while changed or missing checkouts install through a temporary cache.
 - Pi package sources under `stow/pi/.pi/agent/git/` are runtime checkouts, not repository source.
 - Tracked third-party skills are refreshed from `.skill-lock.json`; preserve source/hash context when updating them.

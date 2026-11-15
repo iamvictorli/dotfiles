@@ -6,25 +6,33 @@ set -o pipefail
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BASEDIR}"
 
+# Shared install steps. Run ./install-laptop or ./install-homelab, which pass
+# their machine's Brewfile as the first argument.
+BREWFILE="${1:-}"
+if [ -z "${BREWFILE}" ] || [ ! -f "${BREWFILE}" ]; then
+  echo "Brewfile not found: '${BREWFILE}'. Run ./install-laptop or ./install-homelab instead of ./install."
+  exit 1
+fi
+
 if ! command -v brew &>/dev/null; then
   if [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x /usr/local/bin/brew ]; then
     eval "$(/usr/local/bin/brew shellenv)"
   else
-    echo "Homebrew is not installed. Install it first, then rerun ./install."
+    echo "Homebrew is not installed. Install it first, then rerun ./install-laptop or ./install-homelab."
     exit 1
   fi
 fi
 
-# homelab-install sets SKIP_BREW=1 so unattended runs never touch Homebrew.
+# The scheduled homelab run sets SKIP_BREW=1 so unattended runs never touch Homebrew.
 if [ -n "${SKIP_BREW:-}" ]; then
   echo "SKIP_BREW set; skipping Homebrew update."
 else
-  echo "Updating Homebrew and installing packages from Brewfile..."
+  echo "Updating Homebrew and installing packages from $(basename "${BREWFILE}")..."
   brew update
-  brew bundle install --verbose --file="${BASEDIR}/Brewfile"
-  brew bundle upgrade --verbose --file="${BASEDIR}/Brewfile"
+  brew bundle install --verbose --file="${BREWFILE}"
+  brew bundle upgrade --verbose --file="${BREWFILE}"
   echo "Homebrew packages installed and upgraded."
 fi
 
@@ -39,7 +47,7 @@ if [ -z "${GITHUB_TOKEN:-}" ] && command -v gh &>/dev/null; then
 fi
 
 if ! command -v stow &>/dev/null; then
-  echo "GNU Stow is not installed after brew bundle install. Check Brewfile and rerun ./install."
+  echo "GNU Stow is not installed after brew bundle install. Check $(basename "${BREWFILE}") and rerun ./install-laptop or ./install-homelab."
   exit 1
 fi
 

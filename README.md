@@ -23,18 +23,19 @@ git clone git@github.com:iamvictorli/dotfiles.git ~/workspace/dotfiles
 cd ~/workspace/dotfiles
 ```
 
-4. Run the install script:
+4. Run the install script for this Mac:
 
 ```bash
-./install
+./install-laptop    # laptop: installs Brewfile.laptop
+./install-homelab   # homelab: installs Brewfile.homelab
 ```
 
-This requires Homebrew, `git`, and GNU Stow to already be installed. It installs Homebrew dependencies from `Brewfile`, restows the configured packages from `stow/`, sets up the vite-plus Node.js environment when `vp` is available, installs global CLI packages, updates agent skills from `~/.agents/.skill-lock.json`, and refreshes `opensrc-repos` when `opensrc` is available.
+This requires Homebrew, `git`, and GNU Stow to already be installed. It installs Homebrew dependencies from that script's Brewfile, then runs the shared `install` steps: restows the configured packages from `stow/`, sets up the vite-plus Node.js environment when `vp` is available, installs global CLI packages, updates agent skills from `~/.agents/.skill-lock.json`, and refreshes `opensrc-repos` when `opensrc` is available.
 
-5. (Optional) Cleanup packages not in Brewfile:
+5. (Optional) Cleanup packages not in this Mac's Brewfile:
 
 ```bash
-brew bundle cleanup --force
+brew bundle cleanup --force --file=Brewfile.laptop   # or Brewfile.homelab on the homelab
 ```
 
 ### Stow individual packages

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# install-laptop - Install Brewfile.laptop, then run the shared ./install steps.
+#
+
+set -e
+
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec "${BASEDIR}/install" "${BASEDIR}/Brewfile.laptop"

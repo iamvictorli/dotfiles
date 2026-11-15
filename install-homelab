@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
-#
-# homelab-install - Unattended ./install for the homelab Mac.
-#
-# Run by a T3 Code scheduled task. Pulls the repo when it is safe, runs
-# ./install without Homebrew, and records the result in logs/:
-#   logs/run-<timestamp>.log   full output of one run
-#   logs/last-run.json         summary of the latest run
-#   logs/paused                create this file to pause scheduled runs
-#
 
 set -uo pipefail
 
@@ -32,7 +23,7 @@ utc_now() {
 
 # The repo is cloned on every Mac; only the homelab runs the job.
 if [ "$(scutil --get LocalHostName 2>/dev/null)" != "${HOMELAB_HOSTNAME}" ]; then
-  echo "homelab-install: not ${HOMELAB_HOSTNAME}; skipping."
+  echo "install-homelab: not ${HOMELAB_HOSTNAME}; skipping."
   exit 0
 fi
 
@@ -42,7 +33,7 @@ if [ -e "${PAUSE_FILE}" ]; then
   jq -n --arg checkedAt "$(utc_now)" \
     '{status: "paused", checkedAt: $checkedAt}' >"${STATUS_FILE}.tmp" &&
     mv "${STATUS_FILE}.tmp" "${STATUS_FILE}"
-  echo "homelab-install: ${PAUSE_FILE} exists; skipping."
+  echo "install-homelab: ${PAUSE_FILE} exists; skipping."
   exit 0
 fi
 
@@ -50,7 +41,7 @@ fi
 if ! mkdir "${LOCK_DIR}" 2>/dev/null; then
   lock_pid="$(cat "${LOCK_DIR}/pid" 2>/dev/null || true)"
   if [ -n "${lock_pid}" ] && kill -0 "${lock_pid}" 2>/dev/null; then
-    echo "homelab-install: already running (pid ${lock_pid}); skipping."
+    echo "install-homelab: already running (pid ${lock_pid}); skipping."
     exit 0
   fi
   rm -rf "${LOCK_DIR}"
@@ -80,9 +71,10 @@ else
 fi
 commit_after="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-echo "==> SKIP_BREW=1 ./install" >>"${log_file}"
-SKIP_BREW=1 "${BASEDIR}/install" >>"${log_file}" 2>&1
-install_exit_code=$?
+# Output goes to the terminal and the log, so manual runs stay visible.
+echo "==> ${SKIP_BREW:+SKIP_BREW=1 }./install Brewfile.homelab" | tee -a "${log_file}"
+"${BASEDIR}/install" "${BASEDIR}/Brewfile.homelab" 2>&1 | tee -a "${log_file}"
+install_exit_code="${PIPESTATUS[0]}"
 
 finished_at="$(utc_now)"
 
