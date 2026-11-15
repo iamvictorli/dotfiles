@@ -33,6 +33,7 @@ brew "yazi"
 brew "yt-dlp"
 
 cask "1password"
+cask "1password-cli@beta"
 cask "claude-code@latest"
 cask "codex"
 cask "cuadriver"
