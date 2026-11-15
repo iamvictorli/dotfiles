@@ -372,11 +372,16 @@ When a cua-driver surprises you, diagnose cua-driver first:
   point.
 - **`stale_element_token` / `No cached UIA state`?** You either
   skipped `get_window_state` this turn or used a token from an older
-  snapshot. Snapshots are keyed on `(pid, window_id)`: tokens don't carry across windows of
+  snapshot. Snapshots are keyed on `(session, pid, window_id)`: tokens don't carry across windows of
   the same app. Re-snapshot with the same window_id you're about to
   click in.
 - **`Invalid window handle (0x80070578)`?** The HWND you passed is
   stale (window closed, recreated). Re-resolve via `list_windows`.
+- **Large tree or repeated reads?** `get_window_state` returns one compact
+  markdown tree capped at 250 nodes (`full_output:true` restores 5 000 nodes
+  and both forms). Pass `since:<snapshot_id>` for added/changed/removed rows;
+  the focused element is not reported on Windows yet, so an unchanged read
+  says only `no change since …`.
 - **Empty `tree_markdown` / sparse UIA tree?** Some apps populate
   their UIA tree lazily on first call; retry `get_window_state`
   once. If still empty, the app has no UIA provider: fall back to an
@@ -517,7 +522,7 @@ Do not assume the window array is populated immediately on a cold launch.
 - **Before**: the pre-action snapshot resolves the `element_token`
   you're about to use. Targets from previous turns are stale; the
   server replaces the snapshot on every read, keyed on
-  `(pid, window_id)`, and lists the replaced ids in
+  `(session, pid, window_id)`, and lists the replaced ids in
   `invalidated_snapshot_ids`. Tokens from turn N don't resolve in turn
   N+1, and targets from window A don't resolve against window B of
   the same app. Skip this and element actions fail with
