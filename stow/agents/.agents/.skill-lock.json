@@ -179,9 +179,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
       "skillPath": "packages/hunk/skills/hunk-review/SKILL.md",
-      "skillFolderHash": "c84cbed929ee6e148f9cf086997414915a9b6965",
+      "skillFolderHash": "2eda33b07d86495897d18d73641202bc85d1fbb8",
       "installedAt": "2026-07-03T00:04:14.652Z",
-      "updatedAt": "2026-11-10T17:45:44.600Z"
+      "updatedAt": "2026-11-16T16:48:26.854Z",
+      "commit": "0cdf207e159e54cf6a0a1499615672b3a4449b98"
     },
     "to-questionnaire": {
       "source": "mattpocock/skills",
@@ -359,9 +360,10 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua-driver/rust/Skills/cua-driver/SKILL.md",
-      "skillFolderHash": "f9f4c4afbff19ba9e1d1302490a26f4566f3846f",
+      "skillFolderHash": "d6b09fedfc7af6862f7ea95177322943d5b8448a",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-15T16:16:19.875Z"
+      "updatedAt": "2026-11-16T16:48:27.323Z",
+      "commit": "91b39fb16c6241539697cabc16377236b271bd23"
     },
     "bro": {
       "source": "backnotprop/bro",
