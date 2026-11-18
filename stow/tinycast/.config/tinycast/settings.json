@@ -82,7 +82,7 @@
         "alias": null,
         "showInLauncher": true
       },
-      "com.pake.a74fa01": {
+      "com.pake.a5d52e7": {
         "shortcut": "hyper+b",
         "alias": null,
         "showInLauncher": true
@@ -185,6 +185,7 @@
   "snippets": {
     "showInLauncher": true,
     "folder": null,
+    "defaultAction": "paste",
     "commands": {}
   },
   "navigation": {
