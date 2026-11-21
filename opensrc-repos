@@ -107,3 +107,5 @@ jellyfin/jellyfin-tizen
 jellyfin/jellyfin-mpv-shim
 driceroland/Search
 vercel-labs/screen-relay
+vercel-labs/deepsec
+cloudflare/oxlint-config
