@@ -170,9 +170,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
       "skillPath": "skills/chrome-devtools-cli/SKILL.md",
-      "skillFolderHash": "c8e5dd28220d34b5293aea8772410951d3fe1026",
+      "skillFolderHash": "755dc4c99be3b058aaa8acfca9f997e507ca9d58",
       "installedAt": "2026-06-27T02:17:49.871Z",
-      "updatedAt": "2026-11-11T17:16:48.774Z"
+      "updatedAt": "2026-11-24T17:26:06.676Z",
+      "commit": "7fcebb2b0392bb623ee50383a8e1ef680975b4aa"
     },
     "hunk-review": {
       "source": "modem-dev/hunk",
@@ -360,10 +361,10 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua-driver/rust/Skills/cua-driver/SKILL.md",
-      "skillFolderHash": "2f315c01d6acdb92c43a63632cd9479ffbdc971b",
+      "skillFolderHash": "b2492cdbd4403aa3a8d80bf21c68c1f35c44a581",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-23T18:50:04.499Z",
-      "commit": "7ebe6a662ea380d0b7a340a33ee59feaf8f56f43"
+      "updatedAt": "2026-11-24T17:26:07.128Z",
+      "commit": "6feb735385f8d9ef5e347129ce9f2d0256caedce"
     },
     "bro": {
       "source": "backnotprop/bro",
