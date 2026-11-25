@@ -44,9 +44,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/domain-modeling/SKILL.md",
-      "skillFolderHash": "ea30ee454ba264543dbe40737973b1a5afb9f0e6",
+      "skillFolderHash": "db8ef024fb9a7b2022d57289359ae96cff0d8483",
       "installedAt": "2026-06-27T01:39:20.014Z",
-      "updatedAt": "2026-09-29T15:29:48.284Z"
+      "updatedAt": "2026-11-25T17:24:09.794Z",
+      "commit": "6f7f7831a625f040a8e06a0e7954826b87ce775a"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -361,10 +362,10 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua-driver/rust/Skills/cua-driver/SKILL.md",
-      "skillFolderHash": "b2492cdbd4403aa3a8d80bf21c68c1f35c44a581",
+      "skillFolderHash": "61c0b9c4fab3bd04b922f7a7eaa7483168ada134",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-24T17:26:07.128Z",
-      "commit": "6feb735385f8d9ef5e347129ce9f2d0256caedce"
+      "updatedAt": "2026-11-25T17:24:10.274Z",
+      "commit": "848e2a561a5f8b01286d855afb58bc1ac19a150c"
     },
     "bro": {
       "source": "backnotprop/bro",
