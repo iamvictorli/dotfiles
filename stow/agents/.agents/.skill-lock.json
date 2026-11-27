@@ -209,9 +209,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/to-tickets/SKILL.md",
-      "skillFolderHash": "2dee20ad722a31c04ededf9f2d83842473573045",
+      "skillFolderHash": "f0d279fd436cfd2630f2b612cbb3068f3a745e20",
       "installedAt": "2026-07-08T19:03:22.676Z",
-      "updatedAt": "2026-10-07T15:11:12.049Z"
+      "updatedAt": "2026-11-27T18:36:35.273Z",
+      "commit": "bbadaa631c37af594e5a05c9cefacd9956136b18"
     },
     "wayfinder": {
       "source": "mattpocock/skills",
@@ -362,10 +363,10 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua-driver/rust/Skills/cua-driver/SKILL.md",
-      "skillFolderHash": "d5c50c1f89be056ef1b15ab562989480de0c8004",
+      "skillFolderHash": "c47d12cc45f27a99256156d5d02cce2c9c630036",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-26T20:47:35.449Z",
-      "commit": "ae3caac7efd46d80490e84023bd6713aa09c8027"
+      "updatedAt": "2026-11-27T18:36:35.731Z",
+      "commit": "163d84d2c974b207ac741ab5ef63a60008975cc7"
     },
     "bro": {
       "source": "backnotprop/bro",
