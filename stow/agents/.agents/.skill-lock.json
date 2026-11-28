@@ -363,10 +363,10 @@
       "sourceUrl": "https://github.com/trycua/cua.git",
       "ref": "main",
       "skillPath": "libs/cua-driver/rust/Skills/cua-driver/SKILL.md",
-      "skillFolderHash": "c47d12cc45f27a99256156d5d02cce2c9c630036",
+      "skillFolderHash": "f2ee83667da0aecb43ec26c95aaa21fd3767aad1",
       "installedAt": "2026-10-22T21:24:42.996Z",
-      "updatedAt": "2026-11-27T18:36:35.731Z",
-      "commit": "163d84d2c974b207ac741ab5ef63a60008975cc7"
+      "updatedAt": "2026-11-28T18:51:34.365Z",
+      "commit": "390a5f6db186fdbb79dafd5cf48474656c6bef88"
     },
     "bro": {
       "source": "backnotprop/bro",

@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.6.0",
+  "lastChangelogVersion": "1.7.0",
   "defaultProvider": "pi-claude-cli",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
@@ -9,7 +9,6 @@
   "theme": "dark",
   "treeFilterMode": "no-tools",
   "showHardwareCursor": false,
-  "showCacheMissNotices": true,
   "defaultProjectTrust": "always",
   "tuiMode": "regular",
   "fullscreenScrollbar": "always",
@@ -25,5 +24,11 @@
     "openai/gpt-6-luna",
     "openai/gpt-6.1-sol",
     "openai/gpt-6-astra"
-  ]
+  ],
+  "notices": {
+    "cacheMisses": true,
+    "cacheWarming": true,
+    "compactionCosts": true,
+    "reasoningDrops": true
+  }
 }
